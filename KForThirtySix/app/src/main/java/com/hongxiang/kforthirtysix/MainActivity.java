@@ -1,5 +1,6 @@
 package com.hongxiang.kforthirtysix;
 
+import android.net.Uri;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -9,6 +10,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ListView;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.google.android.gms.appindexing.Action;
+import com.google.android.gms.appindexing.AppIndex;
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.hongxiang.kforthirtysix.fragment.FoundFragment;
 import com.hongxiang.kforthirtysix.fragment.InvestFragment;
 import com.hongxiang.kforthirtysix.fragment.MineFragment;
@@ -22,8 +31,7 @@ public class MainActivity extends FragmentActivity {
     private TabLayout tabLayout;
     private MainAdapter mainAdapter;
     private List<Fragment> fragmentList;
-    private DrawerLayout drawerLayout;
-    private ListView menuListView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,14 +39,14 @@ public class MainActivity extends FragmentActivity {
         setContentView(R.layout.activity_main);
         viewPager = (ViewPager) findViewById(R.id.main_viewpager);
         tabLayout = (TabLayout) findViewById(R.id.main_tablayout);
-        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        menuListView = (ListView) findViewById(R.id.menu_listview);
         initFragment();
         mainAdapter = new MainAdapter(getSupportFragmentManager());
         mainAdapter.setFragmentList(fragmentList);
         viewPager.setAdapter(mainAdapter);
         tabLayout.setupWithViewPager(viewPager);
         initTab();
+
+
     }
 
     private void initFragment() {

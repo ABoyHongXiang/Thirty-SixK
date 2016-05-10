@@ -1,9 +1,31 @@
 <resources>
     <string name="app_name">36氪</string>
-   <string-array name="menu_array">
-        <item>Menu 1</item>
-        <item>Menu 2</item>
-        <item>Menu 3</item>
-        <item>Menu 4</item>
-    </string-array>
+    <string name="search">搜索</string>
+    <string name="theDeepOfTheervices">深度服务项目</string>
+    <string name="startup">创业公司</string>
+    <string name="found_title_one">最具爆发力</string>
+    <string name="found_title_two">最新涌现</string>
+    <string name="found_title_three">项目动态</string>
+    <string name="found_title_four">投资人再看</string>
+    <string name="found_sv_one">36氪指数</string>
+    <string name="found_sv_two">近期活动</string>
+    <string name="found_sv_three">36氪研究所</string>
+    <string name="found_sv_four">寻找投资人</string>
+    <string name="found_sv_five">申请融资</string>
+    <string name="found_sv_six">氪空气报名</string>
+    <string name="mine_sv_one">账号信息</string>
+    <string name="mine_sv_two">跟投人认证</string>
+    <string name="mine_sv_two_a">新人专享500元</string>
+    <string name="mine_sv_three">我收藏的文章</string>
+    <string name="mine_sv_four">我投资的公司</string>
+    <string name="mine_sv_five">我的投资券</string>
+    <string name="mine_sv_six">了解股权投资</string>
+    <string name="mine_sv_seven">客服热线</string>
+    <string name="mine_sv_seven_a">400-955-3636</string>
+    <string name="mine_first">我的消息</string>
+    <string name="mine_seconnd">我的订单</string>
+    <string name="aty_search_search">取消</string>
+    <string name="aty_search_content">搜索新闻/用户/公司</string>
+    <string name="fragment_invest_title">股权投资</string>
+
 </resources>
