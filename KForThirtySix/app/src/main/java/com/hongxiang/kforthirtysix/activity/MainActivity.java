@@ -1,23 +1,13 @@
-package com.hongxiang.kforthirtysix;
+package com.hongxiang.kforthirtysix.activity;
 
-import android.net.Uri;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.widget.ListView;
 
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
-import com.google.android.gms.appindexing.Action;
-import com.google.android.gms.appindexing.AppIndex;
-import com.google.android.gms.common.api.GoogleApiClient;
+import com.hongxiang.kforthirtysix.adapter.MainAdapter;
+import com.hongxiang.kforthirtysix.R;
 import com.hongxiang.kforthirtysix.fragment.FoundFragment;
 import com.hongxiang.kforthirtysix.fragment.InvestFragment;
 import com.hongxiang.kforthirtysix.fragment.MineFragment;

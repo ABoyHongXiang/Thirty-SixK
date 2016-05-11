@@ -10,31 +10,40 @@
         android:layout_height="wrap_content">
 
         <ImageView
-            android:id="@+id/image"
+            android:id="@+id/news_image"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+
             android:src="@mipmap/ic_launcher" />
 
         <TextView
-            android:id="@+id/context"
+            android:id="@+id/news_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/image"
-            android:layout_alignTop="@+id/image"
+            android:layout_alignTop="@+id/news_image"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_toRightOf="@+id/news_image"
             android:text="context" />
 
         <TextView
+            android:id="@+id/news_type"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/news_image"
             android:layout_alignParentRight="true"
-            android:layout_alignBottom="@+id/image"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
             android:text="type" />
 
         <TextView
+            android:id="@+id/news_writer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/image"
-            android:layout_toRightOf="@+id/image"
+            android:layout_alignBottom="@+id/news_image"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_toRightOf="@+id/news_image"
             android:text="1" />
     </RelativeLayout>
 

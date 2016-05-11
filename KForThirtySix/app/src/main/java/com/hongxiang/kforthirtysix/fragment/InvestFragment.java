@@ -1,20 +1,15 @@
 package com.hongxiang.kforthirtysix.fragment;
 
 import android.content.Intent;
-import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.hongxiang.kforthirtysix.BaseFragment;
-import com.hongxiang.kforthirtysix.InvestAdapter;
+import com.hongxiang.kforthirtysix.adapter.InvestAdapter;
 import com.hongxiang.kforthirtysix.R;
-import com.hongxiang.kforthirtysix.SearchActivity;
+import com.hongxiang.kforthirtysix.activity.SearchActivity;
 import com.hongxiang.kforthirtysix.investfragment.AllFragment;
 import com.hongxiang.kforthirtysix.investfragment.FinanceFragment;
 import com.hongxiang.kforthirtysix.investfragment.FundraisedFragment;
@@ -71,6 +66,7 @@ public class InvestFragment extends BaseFragment implements View.OnClickListener
             case R.id.investfragment_search:
                 Intent intent = new Intent(getActivity(), SearchActivity.class);
                 startActivity(intent);
+
                 break;
         }
     }

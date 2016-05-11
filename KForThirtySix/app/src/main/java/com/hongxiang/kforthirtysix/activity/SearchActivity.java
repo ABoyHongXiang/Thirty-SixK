@@ -1,10 +1,11 @@
-package com.hongxiang.kforthirtysix;
+package com.hongxiang.kforthirtysix.activity;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
 
+import com.hongxiang.kforthirtysix.R;
 import com.hongxiang.kforthirtysix.fragment.NewsFragment;
 
 /**
@@ -28,6 +29,12 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
 
     @Override
     public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.search_exit:
 
+                finish();
+
+                break;
+        }
     }
 }

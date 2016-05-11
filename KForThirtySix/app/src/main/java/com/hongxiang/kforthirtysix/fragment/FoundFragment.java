@@ -4,9 +4,8 @@ import android.content.Intent;
 import android.view.View;
 import android.widget.TextView;
 
-import com.hongxiang.kforthirtysix.BaseFragment;
 import com.hongxiang.kforthirtysix.R;
-import com.hongxiang.kforthirtysix.SearchActivity;
+import com.hongxiang.kforthirtysix.activity.SearchActivity;
 
 /**
  * Created by dllo on 16/5/9.

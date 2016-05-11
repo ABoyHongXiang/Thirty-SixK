@@ -1,4 +1,4 @@
-package com.hongxiang.kforthirtysix;
+package com.hongxiang.kforthirtysix.fragment;
 
 import android.content.Context;
 import android.os.Bundle;

@@ -2,7 +2,6 @@ package com.hongxiang.kforthirtysix.fragment;
 
 import android.view.View;
 
-import com.hongxiang.kforthirtysix.BaseFragment;
 import com.hongxiang.kforthirtysix.R;
 
 /**

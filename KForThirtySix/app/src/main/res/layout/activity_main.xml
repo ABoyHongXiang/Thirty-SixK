@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@mipmap/mine_bg_about"
-    tools:context="com.hongxiang.kforthirtysix.MainActivity">
+    tools:context=".activity.MainActivity">
 
 
     <android.support.design.widget.TabLayout
