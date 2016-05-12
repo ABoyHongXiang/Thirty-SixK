@@ -2,32 +2,27 @@ package com.hongxiang.kforthirtysix.adapter;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.support.annotation.ColorInt;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.ImageRequest;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.google.gson.Gson;
 import com.hongxiang.kforthirtysix.NewsBean;
 import com.hongxiang.kforthirtysix.R;
 
-import org.json.JSONObject;
-
-import java.util.List;
+import it.sephiroth.android.library.picasso.Picasso;
 
 /**
  * Created by dllo on 16/5/11.
+ * 新闻Fragment RecyclerView的适配器
  */
 public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.MyViewHolder> {
 
@@ -35,6 +30,8 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.MyViewHolder> 
     private String title, writer, type, imageurl;
     private NewsBean newsBean;
 
+
+    //向Fragment索要解析好的数据类
     public void setNewsBean(NewsBean newsBean) {
         this.newsBean = newsBean;
         notifyDataSetChanged();
@@ -46,7 +43,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.MyViewHolder> 
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.item_newslistview, null);
+        View view = LayoutInflater.from(context).inflate(R.layout.item_news_resyslerview, null);
         MyViewHolder holder = new MyViewHolder(view);
 
 
@@ -55,20 +52,43 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.MyViewHolder> 
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
+
+        //获取想要的数据
         title = newsBean.getData().getData().get(position).getTitle();
         writer = newsBean.getData().getData().get(position).getUser().getName();
         type = newsBean.getData().getData().get(position).getColumnName();
         imageurl = newsBean.getData().getData().get(position).getFeatureImg();
+        //改变type的字体颜色 不一样的type的字体是不一样的颜色
+        if (type != null) {
+            switch (type) {
+                case "深度":
+                    holder.type.setTextColor(0xffbb322d);
+                    break;
+                case "早期项目":
+                    holder.type.setTextColor(0xff80be42);
+                    break;
+                case "大公司":
+                    holder.type.setTextColor(0xff4397f6);
+                    break;
+                case "B轮后":
+                    holder.type.setTextColor(0xFFa1ccf5);
+                    break;
+            }
+
+
+        }
+  //设置数据,把上面获取的数据设置在指定的位置上
         holder.title.setText(title);
         holder.writer.setText(writer);
         holder.type.setText(type);
-        setImage(holder.imageView);
+        //通过毕加索 传入自己的图片组件,传入图片的网址 即可完成替换
+        Picasso.with(context).load(imageurl).into(holder.imageView);
     }
 
     @Override
     public int getItemCount() {
         return newsBean == null ? 0 : newsBean.getData().getData().size();
-    }
+}
 
     class MyViewHolder extends RecyclerView.ViewHolder {
         private TextView title, writer, type;
@@ -83,23 +103,8 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.MyViewHolder> 
         }
     }
 
-    public void setImage(final ImageView imageView ) {
-        RequestQueue requestQueue = Volley.newRequestQueue(context);
-        ImageRequest imageRequest = new ImageRequest(imageurl,
-                new com.android.volley.Response.Listener<Bitmap>() {
-                    @Override
-                    public void onResponse(Bitmap response) {
-                        imageView.setImageBitmap(response);
-                    }
-                }, 0, 0, Bitmap.Config.ALPHA_8, new com.android.volley.Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                imageView.setImageResource(R.mipmap.ic_launcher);
-            }
 
-        });
 
-        requestQueue.add(imageRequest);
-}}
+}
 
 

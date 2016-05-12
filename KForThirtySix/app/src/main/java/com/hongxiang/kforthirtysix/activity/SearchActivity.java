@@ -10,6 +10,7 @@ import com.hongxiang.kforthirtysix.fragment.NewsFragment;
 
 /**
  * Created by dllo on 16/5/10.
+ * 搜索界面  点击放大镜就会跳转的页面
  */
 public class SearchActivity extends AppCompatActivity implements View.OnClickListener {
     private TextView exitTextview;
@@ -30,10 +31,9 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
     @Override
     public void onClick(View v) {
         switch (v.getId()){
+            //搜索按钮
             case R.id.search_exit:
-
                 finish();
-
                 break;
         }
     }

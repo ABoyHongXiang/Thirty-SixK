@@ -8,6 +8,7 @@ import java.util.List;
 
 /**
  * Created by dllo on 16/5/9.
+ * viewpager的适配器
  */
 public class MainAdapter extends FragmentPagerAdapter {
     private String[] tab = {"新闻", "股权投资", "发现", "我的"};

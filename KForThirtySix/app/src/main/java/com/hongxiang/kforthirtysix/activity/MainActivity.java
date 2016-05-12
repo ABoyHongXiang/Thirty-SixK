@@ -15,6 +15,10 @@ import com.hongxiang.kforthirtysix.fragment.NewsFragment;
 
 import java.util.ArrayList;
 import java.util.List;
+/*
+* 主Activity
+*
+* */
 
 public class MainActivity extends FragmentActivity {
     private ViewPager viewPager;
