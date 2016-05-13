@@ -16,6 +16,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageRequest;
 import com.android.volley.toolbox.Volley;
 import com.hongxiang.kforthirtysix.NewsBean;
+import com.hongxiang.kforthirtysix.NewsRvListener;
 import com.hongxiang.kforthirtysix.R;
 
 import it.sephiroth.android.library.picasso.Picasso;
@@ -29,7 +30,11 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.MyViewHolder> 
     private Context context;
     private String title, writer, type, imageurl;
     private NewsBean newsBean;
+    private NewsRvListener newsRvListener;
 
+    public void setNewsRvListener(NewsRvListener newsRvListener) {
+        this.newsRvListener = newsRvListener;
+    }
 
     //向Fragment索要解析好的数据类
     public void setNewsBean(NewsBean newsBean) {
@@ -51,7 +56,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.MyViewHolder> 
     }
 
     @Override
-    public void onBindViewHolder(MyViewHolder holder, int position) {
+    public void onBindViewHolder(final MyViewHolder holder, int position) {
 
         //获取想要的数据
         title = newsBean.getData().getData().get(position).getTitle();
@@ -77,18 +82,28 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.MyViewHolder> 
 
 
         }
-  //设置数据,把上面获取的数据设置在指定的位置上
+        //设置数据,把上面获取的数据设置在指定的位置上
         holder.title.setText(title);
         holder.writer.setText(writer);
         holder.type.setText(type);
         //通过毕加索 传入自己的图片组件,传入图片的网址 即可完成替换
         Picasso.with(context).load(imageurl).into(holder.imageView);
+        if(newsRvListener!=null){
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int pos = holder.getLayoutPosition();
+                    newsRvListener.Onclick(pos);
+                }
+            });
+
+        }
     }
 
     @Override
     public int getItemCount() {
         return newsBean == null ? 0 : newsBean.getData().getData().size();
-}
+    }
 
     class MyViewHolder extends RecyclerView.ViewHolder {
         private TextView title, writer, type;
@@ -102,7 +117,6 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.MyViewHolder> 
             imageView = (ImageView) itemView.findViewById(R.id.news_image);
         }
     }
-
 
 
 }
