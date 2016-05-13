@@ -14,7 +14,7 @@ import android.view.ViewGroup.LayoutParams;
  */
 public class MyPopWindow extends PopupWindow {
     private View mMenuView;
-    private Button  recent,tv,exit,all;
+    private Button  recent,tv;
 
     public MyPopWindow(Context context,View.OnClickListener itemsOnClick) {
         super(context);
@@ -22,19 +22,8 @@ public class MyPopWindow extends PopupWindow {
         mMenuView = inflater.inflate(R.layout.menu_popwindow, null);
         tv = (Button) mMenuView.findViewById(R.id.pop_tv);
         tv.setOnClickListener(itemsOnClick);
-        all = (Button) mMenuView.findViewById(R.id.pop_all);
-        all.setOnClickListener(itemsOnClick);
         recent = (Button) mMenuView.findViewById(R.id.pop_recent);
         recent.setOnClickListener(itemsOnClick);
-        exit = (Button) mMenuView.findViewById(R.id.pop_exit);
-        //取消按钮
-        exit.setOnClickListener(new View.OnClickListener() {
-
-            public void onClick(View v) {
-                //销毁弹出框
-                dismiss();
-            }
-        });
         //设置SelectPicPopupWindow的View
         this.setContentView(mMenuView);
         //设置SelectPicPopupWindow弹出窗体的宽

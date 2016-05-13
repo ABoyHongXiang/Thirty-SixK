@@ -19,7 +19,6 @@
             android:src="@mipmap/menu" />
 
         <TextView
-            android:id="@+id/news_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
@@ -39,14 +38,15 @@
     </RelativeLayout>
 
 
-    <FrameLayout
-        android:id="@+id/news_fragment"
+
+    <android.support.v7.widget.RecyclerView
+
+        android:id="@+id/news_RecyclerView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/title">
-    </FrameLayout>
 
-
+    </android.support.v7.widget.RecyclerView>
 
 
 </RelativeLayout>

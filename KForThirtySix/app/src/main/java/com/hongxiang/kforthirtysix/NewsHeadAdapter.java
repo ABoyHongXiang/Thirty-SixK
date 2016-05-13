@@ -1,4 +1,4 @@
-package com.hongxiang.kforthirtysix.adapter;
+package com.hongxiang.kforthirtysix;
 
 import android.content.Context;
 import android.support.v4.app.FragmentManager;
@@ -15,10 +15,14 @@ import it.sephiroth.android.library.picasso.Picasso;
 /**
  * Created by dllo on 16/5/12.
  */
-
 public class NewsHeadAdapter extends PagerAdapter {
-
     private List<ImageView> imageViews;
+    private Context context;
+
+    public NewsHeadAdapter(Context context) {
+        this.context = context;
+    }
+
 
     public void setImageViews(List<ImageView> imageViews) {
         this.imageViews = imageViews;
@@ -26,23 +30,27 @@ public class NewsHeadAdapter extends PagerAdapter {
 
     @Override
     public int getCount() {
-        return imageViews.size();
+
+        return imageViews == null ? 0 : imageViews.size();
+
     }
 
     @Override
-    public boolean isViewFromObject(View arg0, Object arg1) {
-        return arg0 == arg1;
+    public boolean isViewFromObject(View view, Object object) {
+        return view == object;
     }
 
     @Override
     public void destroyItem(ViewGroup container, int position, Object object) {
         container.removeView(imageViews.get(position));
+
+
     }
 
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
+        Picasso.with(context).load("http://img0.imgtn.bdimg.com/it/u=74719899,2873390829&fm=23&gp=0.jpg").error(R.mipmap.ic_launcher).into(imageViews.get(position));
         container.addView(imageViews.get(position));
         return imageViews.get(position);
-
     }
 }
