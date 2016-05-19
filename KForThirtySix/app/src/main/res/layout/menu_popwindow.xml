@@ -8,6 +8,7 @@
         android:id="@+id/pop_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:padding="10dp"
         android:orientation="vertical">
 
 
@@ -18,6 +19,8 @@
             android:layout_gravity="center"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
+            android:layout_marginTop="7dp"
+            android:background="@drawable/pop_button"
             android:text="早期项目" />
 
         <Button
@@ -27,6 +30,8 @@
             android:layout_gravity="center"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
+            android:layout_marginTop="7dp"
+            android:background="@drawable/pop_button"
             android:text="氪TV" />
 
         <Button
@@ -35,6 +40,8 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
+            android:layout_marginTop="7dp"
+            android:background="@drawable/pop_button"
             android:text="全部" />
 
         <Button
@@ -44,6 +51,9 @@
             android:layout_gravity="center"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
+            android:layout_marginTop="7dp"
+            android:layout_marginBottom="7dp"
+            android:background="@drawable/pop_exit_button"
             android:text="取消" />
     </LinearLayout>
 

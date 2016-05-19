@@ -18,6 +18,7 @@ import it.sephiroth.android.library.picasso.Picasso;
 
 /**
  * Created by dllo on 16/5/13.
+ * 氪TV
  */
 public class TvAdapter extends BaseAdapter {
     private TvBean tvBean;
@@ -65,9 +66,11 @@ public class TvAdapter extends BaseAdapter {
         holder.videoView.setVideoURI(Uri.parse(videoUri));
         holder.videoView.setMediaController(new android.widget.MediaController(context));
         final ViewHolder finalHolder = holder;
+        //图片的点击事件
         holder.imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //如果点击就让图片文字消失,播放视频
                 finalHolder.title.setVisibility(v.INVISIBLE);
                 finalHolder.imageView.setVisibility(v.INVISIBLE);
                 finalHolder.videoView.setVisibility(v.VISIBLE);

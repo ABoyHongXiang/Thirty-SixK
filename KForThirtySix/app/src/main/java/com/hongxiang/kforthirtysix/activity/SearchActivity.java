@@ -25,12 +25,11 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
         exitTextview.setOnClickListener(this);
 
 
-
     }
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             //搜索按钮
             case R.id.search_exit:
                 finish();

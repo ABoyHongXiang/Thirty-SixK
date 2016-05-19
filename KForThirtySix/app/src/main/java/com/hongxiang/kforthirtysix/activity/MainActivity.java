@@ -33,11 +33,13 @@ public class MainActivity extends FragmentActivity {
         setContentView(R.layout.activity_main);
         viewPager = (ViewPager) findViewById(R.id.main_viewpager);
         tabLayout = (TabLayout) findViewById(R.id.main_tablayout);
+        //添加四个Fragment的方法
         initFragment();
         mainAdapter = new MainAdapter(getSupportFragmentManager());
         mainAdapter.setFragmentList(fragmentList);
         viewPager.setAdapter(mainAdapter);
         tabLayout.setupWithViewPager(viewPager);
+        //设置Tablayout的方法
         initTab();
 
 

@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@mipmap/all_bg"
     android:orientation="vertical">
 
     <ScrollView
@@ -10,15 +11,46 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                >
+
+                <ImageView
+                    android:id="@+id/writer_img"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/ic_launcher" />
+
+
+
+                    <TextView
+                        android:id="@+id/details_writer_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@+id/writer_img"
+                        android:layout_centerVertical="true"
+                        android:text="111111" />
+
+
+
+
+
+            </RelativeLayout>
+
 
             <TextView
                 android:id="@+id/details_bigtitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="details_bigtitle" />
+                android:textSize="20dp"
+                android:padding="20dp"
+                android:text="details_bigtitle11111111111111111111111111111111111111111111111111111" />
 
             <TextView
                 android:id="@+id/details_smalltitle"
@@ -32,7 +64,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="details_context" />
+                android:text="details_context"
+                android:padding="10dp"/>
         </LinearLayout>
 
     </ScrollView>

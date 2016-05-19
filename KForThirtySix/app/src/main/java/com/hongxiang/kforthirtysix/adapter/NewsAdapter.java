@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.hongxiang.kforthirtysix.PicassoCirclTransform;
 import com.hongxiang.kforthirtysix.util.NewRvListener;
 import com.hongxiang.kforthirtysix.bean.NewsBean;
 import com.hongxiang.kforthirtysix.R;
@@ -50,7 +51,6 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.MyViewHolder> 
 
     @Override
     public void onBindViewHolder(final MyViewHolder holder, int position) {
-
         //获取想要的数据
         title = newsBean.getData().getData().get(position).getTitle();
         writer = newsBean.getData().getData().get(position).getUser().getName();

@@ -1,7 +1,9 @@
 package com.hongxiang.kforthirtysix.fragment;
 
+import android.content.Intent;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.android.volley.Request;
@@ -10,6 +12,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.Volley;
 import com.hongxiang.kforthirtysix.R;
+import com.hongxiang.kforthirtysix.activity.DetailsActivity;
 import com.hongxiang.kforthirtysix.adapter.RecentAdapter;
 import com.hongxiang.kforthirtysix.bean.NewsBean;
 import com.hongxiang.kforthirtysix.bean.RecentBean;
@@ -53,6 +56,14 @@ public class RecentFragment extends BaseFragment {
         }, RecentBean.class);
         requestQueue.add(gsonRequest);
         listView.setAdapter(recentAdapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent  = new Intent(getActivity(), DetailsActivity.class);
+                intent.putExtra("url",recentBean.getData().getData().get(position).getFeedId());
+                startActivity(intent);
+            }
+        });
     }
 
     @Override

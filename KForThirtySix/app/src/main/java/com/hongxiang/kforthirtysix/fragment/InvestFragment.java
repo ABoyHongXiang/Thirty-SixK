@@ -57,12 +57,12 @@ public class InvestFragment extends BaseFragment implements View.OnClickListener
         fragmentList.add(new FundraisedFragment());
         fragmentList.add(new FundraisingFragment());
 
-
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            //搜索按钮
             case R.id.investfragment_search:
                 Intent intent = new Intent(getActivity(), SearchActivity.class);
                 startActivity(intent);

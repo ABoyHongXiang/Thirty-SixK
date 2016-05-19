@@ -16,6 +16,7 @@ import it.sephiroth.android.library.picasso.Picasso;
 
 /**
  * Created by dllo on 16/5/14.
+ * 早期项目
  */
 public class RecentAdapter extends BaseAdapter {
     private Context context;

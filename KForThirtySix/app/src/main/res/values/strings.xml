@@ -27,5 +27,6 @@
     <string name="aty_search_search">取消</string>
     <string name="aty_search_content">搜索新闻/用户/公司</string>
     <string name="fragment_invest_title">股权投资</string>
+    <string name="log_title">注册成为36氪用户,即享一站式创业服务</string>
 
 </resources>
