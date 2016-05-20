@@ -8,6 +8,7 @@ import android.widget.Toast;
 import com.hongxiang.kforthirtysix.R;
 import com.hongxiang.kforthirtysix.activity.FoundPeopleActivity;
 import com.hongxiang.kforthirtysix.activity.LogActivity;
+import com.hongxiang.kforthirtysix.activity.NearPlayActivity;
 import com.hongxiang.kforthirtysix.activity.SearchActivity;
 
 /**
@@ -95,7 +96,8 @@ public class FoundFragment extends BaseFragment implements View.OnClickListener 
                 break;
             //近期活动
             case R.id.found_sv_two:
-                Toast.makeText(getActivity(), "敬请期待", Toast.LENGTH_SHORT).show();
+                Intent intent2 = new Intent(getActivity(), NearPlayActivity.class);
+                startActivity(intent2);
                 break;
             //36氪研究所
             case R.id.found_sv_three:

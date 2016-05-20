@@ -8,15 +8,14 @@ import it.sephiroth.android.library.picasso.Transformation;
 
 /**
  * Created by dllo on 16/5/18.
+ * 自己封装的毕加索类
  */
 public class PicassoCirclTransform implements Transformation {
     @Override
     public Bitmap transform(Bitmap source) {
         int size = Math.min(source.getWidth(), source.getHeight());
-
         int x = (source.getWidth() - size) / 2;
         int y = (source.getHeight() - size) / 2;
-
         Bitmap squaredBitmap = Bitmap
                 .createBitmap(source, x, y, size, size);
         if (squaredBitmap != source) {

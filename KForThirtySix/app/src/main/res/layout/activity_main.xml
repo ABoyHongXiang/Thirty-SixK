@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@mipmap/all_bg"
     tools:context=".activity.MainActivity">
 
@@ -11,8 +11,8 @@
         android:id="@+id/main_tablayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:tabIndicatorHeight="0dp"
-        android:layout_alignParentBottom="true" />
+        android:layout_alignParentBottom="true"
+        app:tabIndicatorHeight="0dp" />
 
     <android.support.v4.view.ViewPager
         android:id="@+id/main_viewpager"

@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
+import android.view.View;
 
 import com.hongxiang.kforthirtysix.adapter.MainAdapter;
 import com.hongxiang.kforthirtysix.R;
@@ -12,9 +13,12 @@ import com.hongxiang.kforthirtysix.fragment.FoundFragment;
 import com.hongxiang.kforthirtysix.fragment.InvestFragment;
 import com.hongxiang.kforthirtysix.fragment.MineFragment;
 import com.hongxiang.kforthirtysix.fragment.NewsFragment;
+import com.slidingmenu.lib.SlidingMenu;
+
 
 import java.util.ArrayList;
 import java.util.List;
+
 /*
 * 主Activity
 *
@@ -25,7 +29,7 @@ public class MainActivity extends FragmentActivity {
     private TabLayout tabLayout;
     private MainAdapter mainAdapter;
     private List<Fragment> fragmentList;
-
+    private SlidingMenu mLeftMenu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +45,11 @@ public class MainActivity extends FragmentActivity {
         tabLayout.setupWithViewPager(viewPager);
         //设置Tablayout的方法
         initTab();
+
+
+
+
+
 
 
     }
@@ -61,5 +70,6 @@ public class MainActivity extends FragmentActivity {
         tabLayout.getTabAt(3).setIcon(R.drawable.table_selsetor_mine);
 
     }
+
 
 }

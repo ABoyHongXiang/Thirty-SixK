@@ -14,6 +14,9 @@ import android.widget.VideoView;
 import com.hongxiang.kforthirtysix.R;
 import com.hongxiang.kforthirtysix.bean.TvBean;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import it.sephiroth.android.library.picasso.Picasso;
 
 /**
@@ -23,6 +26,7 @@ import it.sephiroth.android.library.picasso.Picasso;
 public class TvAdapter extends BaseAdapter {
     private TvBean tvBean;
     private Context context;
+    private List<Boolean> flag;
 
     public TvAdapter(Context context) {
         this.context = context;
@@ -31,6 +35,10 @@ public class TvAdapter extends BaseAdapter {
     public void setTvBean(TvBean tvBean) {
         this.tvBean = tvBean;
         notifyDataSetChanged();
+        flag = new ArrayList<>();
+        for (int i  = 0 ;i<=tvBean.getData().getData().size();i++){
+            flag.add(false);
+        }
     }
 
     @Override
@@ -60,7 +68,7 @@ public class TvAdapter extends BaseAdapter {
         }
         String imageurl = tvBean.getData().getData().get(position).getTv().getFeatureImg();
         String videoUri = tvBean.getData().getData().get(position).getTv().getVideoSource();
-        String title =  tvBean.getData().getData().get(position).getTv().getTitle();
+        String title = tvBean.getData().getData().get(position).getTv().getTitle();
         Picasso.with(context).load(imageurl).into(holder.imageView);
         holder.title.setText(title);
         holder.videoView.setVideoURI(Uri.parse(videoUri));
@@ -70,6 +78,7 @@ public class TvAdapter extends BaseAdapter {
         holder.imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 //如果点击就让图片文字消失,播放视频
                 finalHolder.title.setVisibility(v.INVISIBLE);
                 finalHolder.imageView.setVisibility(v.INVISIBLE);
@@ -93,7 +102,6 @@ public class TvAdapter extends BaseAdapter {
             videoView = (VideoView) itemView.findViewById(R.id.videoview);
             imageView = (ImageView) itemView.findViewById(R.id.tv_imageview);
             title = (TextView) itemView.findViewById(R.id.tv_title);
-
 
 
         }

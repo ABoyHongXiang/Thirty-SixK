@@ -1,0 +1,8 @@
+<resources>
+    <string-array name="spingarr2">
+        <item>全部</item>
+        <item>本周末</item>
+        <item>本周</item>
+        <item>下周</item>
+    </string-array>
+</resources>

@@ -67,7 +67,7 @@ public class DetailsActivity extends AppCompatActivity {
             @Override
             public void onResponse(DetailsBean response) {
                 detailsBean = response;
-                String url = detailsBean.getData().getUser().getAvatar();
+                String ur8l = detailsBean.getData().getUser().getAvatar();
                 writer.setText(detailsBean.getData().getUser().getName());
                 Picasso.with(getApplication()).load(url).transform(new PicassoCirclTransform()).resize(70, 70).centerCrop().error(R.mipmap.ic_launcher).into(writeImg);
                 title.setText(detailsBean.getData().getTitle());

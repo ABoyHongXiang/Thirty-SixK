@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="spingarr">
+        <item>活动类型</item>
+        <item>DemoDay</item>
+        <item>氪空间</item>
+        <item>股权投资</item>
+        <item>企业服务</item>
+        <item>急速融资</item>
+    </string-array>
+</resources>
