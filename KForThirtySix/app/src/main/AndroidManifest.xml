@@ -31,6 +31,8 @@
         <activity android:name=".activity.MainActivity"/>
         <activity android:name=".activity.NearPlayActivity"/>
         <activity android:name=".activity.LolDetailsActivity"/>
+        <activity android:name=".activity.LolVideoActivity"/>
+        <activity android:name=".activity.AllLolDetails"/>
     </application>
 
 

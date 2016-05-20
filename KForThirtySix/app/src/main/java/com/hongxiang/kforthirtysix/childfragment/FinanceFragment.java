@@ -77,7 +77,11 @@ public class FinanceFragment extends BaseFragment implements LolRvLinstener {
     @Override
     public void Onclick(int pos) {
         Intent intent = new Intent(getActivity(), LolDetailsActivity.class);
-        intent.putExtra("urlid",lolBean.getData().get(mypos).getCatword_id().get(pos).getId());
+        intent.putExtra("urlid", lolBean.getData().get(mypos).getCatword_id().get(pos).getId());
+        intent.putExtra("head_title", lolBean.getData().get(mypos).getCatword_id().get(pos).getName());
+        intent.putExtra("head_smalltitle", lolBean.getData().get(mypos).getCatword_id().get(pos).getDesc());
+        intent.putExtra("head_img", lolBean.getData().get(mypos).getCatword_id().get(pos).getPic_url());
+
         startActivity(intent);
 
     }
