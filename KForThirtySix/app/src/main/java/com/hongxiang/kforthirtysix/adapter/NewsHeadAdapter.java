@@ -1,4 +1,4 @@
-package com.hongxiang.kforthirtysix.childfragment;
+package com.hongxiang.kforthirtysix.adapter;
 
 import android.content.Context;
 

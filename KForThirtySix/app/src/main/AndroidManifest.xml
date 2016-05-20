@@ -30,6 +30,7 @@
         <activity android:name=".activity.FoundPeopleActivity"/>
         <activity android:name=".activity.MainActivity"/>
         <activity android:name=".activity.NearPlayActivity"/>
+        <activity android:name=".activity.LolDetailsActivity"/>
     </application>
 
 

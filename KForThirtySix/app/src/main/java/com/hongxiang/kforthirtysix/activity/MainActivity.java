@@ -37,6 +37,7 @@ public class MainActivity extends FragmentActivity {
         setContentView(R.layout.activity_main);
         viewPager = (ViewPager) findViewById(R.id.main_viewpager);
         tabLayout = (TabLayout) findViewById(R.id.main_tablayout);
+
         //添加四个Fragment的方法
         initFragment();
         mainAdapter = new MainAdapter(getSupportFragmentManager());
@@ -45,12 +46,24 @@ public class MainActivity extends FragmentActivity {
         tabLayout.setupWithViewPager(viewPager);
         //设置Tablayout的方法
         initTab();
-
-
-
-
-
-
+//        // configure the SlidingMenu
+//        SlidingMenu menu = new SlidingMenu(this);
+//        menu.setMode(SlidingMenu.LEFT);
+//        // 设置触摸屏幕的模式
+//        menu.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
+//        menu.setShadowWidthRes(R.dimen.shadow_width);
+//        menu.setShadowDrawable(R.drawable.shadow);
+//        // 设置滑动菜单视图的宽度
+//        menu.setBehindOffsetRes(400);
+//        // 设置渐入渐出效果的值
+//        menu.setFadeDegree(0.35f);
+//        /**
+//         * SLIDING_WINDOW will include the Title/ActionBar in the content
+//         * section of the SlidingMenu, while SLIDING_CONTENT does not.
+//         */
+//        menu.attachToActivity(this, SlidingMenu.SLIDING_CONTENT);
+//        //为侧滑菜单设置布局
+//        menu.setMenu(R.layout.slidingmenu);
 
     }
 

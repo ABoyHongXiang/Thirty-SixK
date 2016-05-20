@@ -26,7 +26,7 @@ import it.sephiroth.android.library.picasso.Picasso;
 public class TvAdapter extends BaseAdapter {
     private TvBean tvBean;
     private Context context;
-    private List<Boolean> flag;
+    private List<Boolean> isplay;
 
     public TvAdapter(Context context) {
         this.context = context;
@@ -35,10 +35,11 @@ public class TvAdapter extends BaseAdapter {
     public void setTvBean(TvBean tvBean) {
         this.tvBean = tvBean;
         notifyDataSetChanged();
-        flag = new ArrayList<>();
-        for (int i  = 0 ;i<=tvBean.getData().getData().size();i++){
-            flag.add(false);
+        isplay = new ArrayList<>();
+        for (int i = 0; i <= tvBean.getData().getData().size(); i++) {
+            isplay.add(false);
         }
+
     }
 
     @Override
@@ -57,7 +58,7 @@ public class TvAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         ViewHolder holder = null;
         if (convertView == null) {
             convertView = LayoutInflater.from(context).inflate(R.layout.item_tv, parent, false);
@@ -78,12 +79,25 @@ public class TvAdapter extends BaseAdapter {
         holder.imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                isplay.set(position,true);
+                if (isplay.get(position) == true) {
+                        //如果点击就让图片文字消失,播放视频
+                        finalHolder.title.setVisibility(v.INVISIBLE);
+                        finalHolder.imageView.setVisibility(v.INVISIBLE);
+                        finalHolder.videoView.setVisibility(v.VISIBLE);
+                        finalHolder.videoView.start();
+                        isplay.set(position, false);
+                    }
 
-                //如果点击就让图片文字消失,播放视频
-                finalHolder.title.setVisibility(v.INVISIBLE);
-                finalHolder.imageView.setVisibility(v.INVISIBLE);
-                finalHolder.videoView.setVisibility(v.VISIBLE);
-                finalHolder.videoView.start();
+
+
+
+
+
+
+
+
+
             }
         });
 

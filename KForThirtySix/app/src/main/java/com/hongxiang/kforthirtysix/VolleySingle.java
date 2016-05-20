@@ -67,7 +67,7 @@ public class VolleySingle {
 
     public <T> void _addRequest(String url, Class<T> tClass, Response.Listener<T> listener, Response.ErrorListener errorListener) {
         GsonRequest gsonRequest = new GsonRequest(Request.Method.GET, url, errorListener, listener, tClass);
-        _addRequest(gsonRequest);
+        _addRequest (gsonRequest);
     }
 
     //这个方法是将请求移除队列

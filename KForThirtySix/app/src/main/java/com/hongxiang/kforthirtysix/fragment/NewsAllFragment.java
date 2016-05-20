@@ -16,12 +16,13 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.Volley;
 import com.bartoszlipinski.recyclerviewheader.RecyclerViewHeader;
 import com.hongxiang.kforthirtysix.R;
+import com.hongxiang.kforthirtysix.VolleySingle;
 import com.hongxiang.kforthirtysix.util.GsonRequest;
 import com.hongxiang.kforthirtysix.util.NewRvListener;
 import com.hongxiang.kforthirtysix.activity.DetailsActivity;
 import com.hongxiang.kforthirtysix.adapter.NewsAdapter;
 import com.hongxiang.kforthirtysix.bean.NewsBean;
-import com.hongxiang.kforthirtysix.childfragment.NewsHeadAdapter;
+import com.hongxiang.kforthirtysix.adapter.NewsHeadAdapter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Executors;
@@ -75,6 +76,22 @@ public class NewsAllFragment extends BaseFragment implements NewRvListener {
         //ViewPager设置适配器
         viewpager.setAdapter(newsHeadAdapter);
         //=================>>>>>>>>>>>文字解析,将NewsBean传入Adapter
+
+//        VolleySingle.addRequest("https://rong.36kr.com/api/mobi/news?pageSize=20&columnId=all&pagingAction=up\n", NewsBean.class, new Response.Listener<NewsBean>() {
+//            @Override
+//            public void onResponse(NewsBean response) {
+//                Log.d("NewestFragment", "解析成功");
+//                newsBean = response;
+//                newsAdapter.setNewsBean(newsBean);
+//            }
+//        }, new Response.ErrorListener() {
+//            @Override
+//            public void onErrorResponse(VolleyError error) {
+//
+//            }
+//        });
+
+
         RequestQueue requestQueue = Volley.newRequestQueue(getContext());
         GsonRequest<NewsBean> gsonRequest = new GsonRequest<>(Request.Method.GET, "https://rong.36kr.com/api/mobi/news?pageSize=20&columnId=all&pagingAction=up\n", new Response.ErrorListener() {
             @Override
@@ -83,10 +100,10 @@ public class NewsAllFragment extends BaseFragment implements NewRvListener {
             }
         }, new Response.Listener<NewsBean>() {
             @Override
-            public void onResponse(NewsBean response) {
+         public void onResponse(NewsBean response) {
                 Log.d("NewestFragment", "解析成功");
                 newsBean = response;
-                newsAdapter.setNewsBean(newsBean);
+               newsAdapter.setNewsBean(newsBean);
 
             }
         }, NewsBean.class);

@@ -36,21 +36,23 @@ import static com.hongxiang.kforthirtysix.R.id.details_context;
  * 详情界面
  */
 public class DetailsActivity extends AppCompatActivity {
-    private DetailsBean detailsBean;
-    String url;
+
+    private DetailsBean detailsBean;//详情的数据类
+    String url;//用来接收上个界面传来的id ,拼接网址
     private TextView title, secondTitle, mcontext,writer;
     private ImageView writeImg;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getSupportActionBar().hide();
+        getSupportActionBar().hide();//使app标题栏消失
         setContentView(R.layout.avtivity_details);
         title = (TextView) findViewById(R.id.details_bigtitle);
         secondTitle = (TextView) findViewById(R.id.details_smalltitle);
         mcontext = (TextView) findViewById(R.id.details_context);
         writer = (TextView) findViewById(R.id.details_writer_name);
         writeImg = (ImageView) findViewById(R.id.writer_img);
+        //接收上一个界面传来的id ,拼接网址
         Intent intent = getIntent();
         url = intent.getStringExtra("url");
         initData();
@@ -67,11 +69,12 @@ public class DetailsActivity extends AppCompatActivity {
             @Override
             public void onResponse(DetailsBean response) {
                 detailsBean = response;
-                String ur8l = detailsBean.getData().getUser().getAvatar();
+                String url = detailsBean.getData().getUser().getAvatar();
                 writer.setText(detailsBean.getData().getUser().getName());
-                Picasso.with(getApplication()).load(url).transform(new PicassoCirclTransform()).resize(70, 70).centerCrop().error(R.mipmap.ic_launcher).into(writeImg);
+                Picasso.with(getApplication()).load(url).transform(new PicassoCirclTransform()).resize(100, 100).centerCrop().error(R.mipmap.ic_launcher).into(writeImg);
                 title.setText(detailsBean.getData().getTitle());
                 secondTitle.setText(detailsBean.getData().getSummary());
+               //以下是TextView显示Html
                 String datas = response.getData().getContent();
                 mcontext.setMovementMethod(ScrollingMovementMethod.getInstance());
                 mcontext.setMovementMethod(LinkMovementMethod.getInstance());

@@ -53,9 +53,9 @@ public class InvestFragment extends BaseFragment implements View.OnClickListener
     public void initFragment() {
         fragmentList = new ArrayList<>();
         fragmentList.add(new AllFragment());
-        fragmentList.add(new FinanceFragment());
-        fragmentList.add(new FundraisedFragment());
-        fragmentList.add(new FundraisingFragment());
+        fragmentList.add(new FinanceFragment(0));
+        fragmentList.add(new FinanceFragment(1));
+        fragmentList.add(new FinanceFragment(2));
 
     }
 
