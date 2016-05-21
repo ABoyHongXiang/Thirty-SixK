@@ -25,35 +25,44 @@ import java.util.List;
 public class LogActivity extends AppCompatActivity {
     private List<Fragment> fragmentList;
     private LogAdapter logAdapter;
-    private ViewPager  viewpager;
+    private ViewPager viewpager;
     private TabLayout tabLayout;
     private ImageView finish;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //隐藏标题栏
         getSupportActionBar().hide();
         setContentView(R.layout.activity_log);
+        //viewpager
         viewpager = (ViewPager) findViewById(R.id.log_viewpager);
+        //tablayout
         tabLayout = (TabLayout) findViewById(R.id.log_tablayout);
+        //返回键
         finish = (ImageView) findViewById(R.id.log_back);
+        //添加Fragment的方法 两个Fragment 一个是登录一个是注册
         addFrament();
+
         logAdapter = new LogAdapter(getSupportFragmentManager());
         logAdapter.setFragmentList(fragmentList);
         viewpager.setAdapter(logAdapter);
+
         tabLayout.setupWithViewPager(viewpager);
+        //返回键的监听
         finish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
             }
         });
+        //tablayout 设置自定义View
         tabLayout.getTabAt(0).setCustomView(R.layout.tablayout_viewone);
         tabLayout.getTabAt(1).setCustomView(R.layout.tablayout_viewtwo);
     }
 
 
-
+    //添加两个Fragment的方法
     private void addFrament() {
         fragmentList = new ArrayList<>();
         fragmentList.add(new LogInFragment());

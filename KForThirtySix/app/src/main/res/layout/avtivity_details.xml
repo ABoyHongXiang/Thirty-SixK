@@ -14,43 +14,53 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <RelativeLayout
-                android:layout_width="match_parent"
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/writer_img"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-                >
+                android:src="@mipmap/ic_launcher" />
 
-                <ImageView
-                    android:id="@+id/writer_img"
+            <RelativeLayout
+                android:id="@+id/writer_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp">
+
+                <TextView
+                    android:id="@+id/details_writer_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@mipmap/ic_launcher" />
+                    android:layout_centerVertical="true"
+                    android:layout_margin="10dp"
+                    android:text="111111"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
 
-
-
-                    <TextView
-                        android:id="@+id/details_writer_name"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_toRightOf="@+id/writer_img"
-                        android:layout_centerVertical="true"
-                        android:text="111111" />
-
-
-
-
+                <ImageView
+                    android:id="@+id/writer_menu_img"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@mipmap/menudown" />
 
             </RelativeLayout>
-
+            </LinearLayout>
 
             <TextView
                 android:id="@+id/details_bigtitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:textSize="20dp"
                 android:padding="20dp"
-                android:text="details_bigtitle11111111111111111111111111111111111111111111111111111" />
+                android:text="details_bigtitle11111111111111111111111111111111111111111111111111111"
+                android:textSize="20dp" />
 
             <TextView
                 android:id="@+id/details_smalltitle"
@@ -64,8 +74,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="details_context"
-                android:padding="10dp"/>
+                android:padding="10dp"
+                android:text="details_context" />
         </LinearLayout>
 
     </ScrollView>

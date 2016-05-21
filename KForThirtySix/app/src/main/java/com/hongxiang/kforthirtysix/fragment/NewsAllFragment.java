@@ -76,38 +76,21 @@ public class NewsAllFragment extends BaseFragment implements NewRvListener {
         //ViewPager设置适配器
         viewpager.setAdapter(newsHeadAdapter);
         //=================>>>>>>>>>>>文字解析,将NewsBean传入Adapter
-
-//        VolleySingle.addRequest("https://rong.36kr.com/api/mobi/news?pageSize=20&columnId=all&pagingAction=up\n", NewsBean.class, new Response.Listener<NewsBean>() {
-//            @Override
-//            public void onResponse(NewsBean response) {
-//                Log.d("NewestFragment", "解析成功");
-//                newsBean = response;
-//                newsAdapter.setNewsBean(newsBean);
-//            }
-//        }, new Response.ErrorListener() {
-//            @Override
-//            public void onErrorResponse(VolleyError error) {
-//
-//            }
-//        });
-
-
-        RequestQueue requestQueue = Volley.newRequestQueue(getContext());
-        GsonRequest<NewsBean> gsonRequest = new GsonRequest<>(Request.Method.GET, "https://rong.36kr.com/api/mobi/news?pageSize=20&columnId=all&pagingAction=up\n", new Response.ErrorListener() {
+        VolleySingle.addRequest("https://rong.36kr.com/api/mobi/news?pageSize=20&columnId=all&pagingAction=up\n", NewsBean.class, new Response.Listener<NewsBean>() {
+            @Override
+            public void onResponse(NewsBean response) {
+                Log.d("NewestFragment", "解析成功");
+                newsBean = response;
+                newsAdapter.setNewsBean(newsBean);
+            }
+        }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
 
             }
-        }, new Response.Listener<NewsBean>() {
-            @Override
-         public void onResponse(NewsBean response) {
-                Log.d("NewestFragment", "解析成功");
-                newsBean = response;
-               newsAdapter.setNewsBean(newsBean);
+        });
 
-            }
-        }, NewsBean.class);
-        requestQueue.add(gsonRequest);
+
     }
 
 
@@ -146,6 +129,7 @@ public class NewsAllFragment extends BaseFragment implements NewRvListener {
     public void Onclick(int pos) {
         Intent intent = new Intent(getActivity(), DetailsActivity.class);
         String a = newsBean.getData().getData().get(pos).getFeedId();
+        Log.d( "Onclick: ",a);
         intent.putExtra("url",a);
         startActivity(intent);
     }

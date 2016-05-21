@@ -10,10 +10,9 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.Volley;
-import com.hongxiang.kforthirtysix.activity.AllLolDetails;
+import com.hongxiang.kforthirtysix.activity.AllLolDetailsActivity;
 import com.hongxiang.kforthirtysix.adapter.AllLolAdapter;
 import com.hongxiang.kforthirtysix.bean.LolAllBean;
-import com.hongxiang.kforthirtysix.bean.TvBean;
 import com.hongxiang.kforthirtysix.fragment.BaseFragment;
 import com.hongxiang.kforthirtysix.R;
 import com.hongxiang.kforthirtysix.util.GsonRequest;
@@ -53,7 +52,7 @@ public class AllFragment extends BaseFragment {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(getActivity(), AllLolDetails.class);
+                Intent intent = new Intent(getActivity(), AllLolDetailsActivity.class);
                 intent.putExtra("id",lolAllBean.getData().get(position).getId());
                 startActivity(intent);
             }
