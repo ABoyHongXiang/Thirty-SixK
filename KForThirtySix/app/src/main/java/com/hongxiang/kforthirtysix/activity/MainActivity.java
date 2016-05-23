@@ -5,15 +5,13 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
-import android.view.View;
 
 import com.hongxiang.kforthirtysix.adapter.MainAdapter;
 import com.hongxiang.kforthirtysix.R;
-import com.hongxiang.kforthirtysix.fragment.FoundFragment;
-import com.hongxiang.kforthirtysix.fragment.InvestFragment;
-import com.hongxiang.kforthirtysix.fragment.MineFragment;
-import com.hongxiang.kforthirtysix.fragment.NewsFragment;
-import com.slidingmenu.lib.SlidingMenu;
+import com.hongxiang.kforthirtysix.fragment.found.FoundFragment;
+import com.hongxiang.kforthirtysix.fragment.lol.LolMainFragment;
+import com.hongxiang.kforthirtysix.fragment.mine.MineFragment;
+import com.hongxiang.kforthirtysix.fragment.news.NewsFragment;
 
 
 import java.util.ArrayList;
@@ -29,7 +27,7 @@ public class MainActivity extends FragmentActivity {
     private TabLayout tabLayout;
     private MainAdapter mainAdapter;
     private List<Fragment> fragmentList;
-    private SlidingMenu mLeftMenu;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,45 +35,26 @@ public class MainActivity extends FragmentActivity {
         setContentView(R.layout.activity_main);
         viewPager = (ViewPager) findViewById(R.id.main_viewpager);
         tabLayout = (TabLayout) findViewById(R.id.main_tablayout);
-
-        //添加四个Fragment的方法
-        initFragment();
+        initFragment();//添加四个Fragment的方法
         mainAdapter = new MainAdapter(getSupportFragmentManager());
         mainAdapter.setFragmentList(fragmentList);
         viewPager.setAdapter(mainAdapter);
         tabLayout.setupWithViewPager(viewPager);
-        //设置Tablayout的方法
-        initTab();
-//        // configure the SlidingMenu
-//        SlidingMenu menu = new SlidingMenu(this);
-//        menu.setMode(SlidingMenu.LEFT);
-//        // 设置触摸屏幕的模式
-//        menu.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
-//        menu.setShadowWidthRes(R.dimen.shadow_width);
-//        menu.setShadowDrawable(R.drawable.shadow);
-//        // 设置滑动菜单视图的宽度
-//        menu.setBehindOffsetRes(400);
-//        // 设置渐入渐出效果的值
-//        menu.setFadeDegree(0.35f);
-//        /**
-//         * SLIDING_WINDOW will include the Title/ActionBar in the content
-//         * section of the SlidingMenu, while SLIDING_CONTENT does not.
-//         */
-//        menu.attachToActivity(this, SlidingMenu.SLIDING_CONTENT);
-//        //为侧滑菜单设置布局
-//        menu.setMenu(R.layout.slidingmenu);
+        initTab();//设置tab的方法
 
     }
 
+    //添加四个Fragment的方法
     private void initFragment() {
         fragmentList = new ArrayList<>();
         fragmentList.add(new NewsFragment());
-        fragmentList.add(new InvestFragment());
+        fragmentList.add(new LolMainFragment());
         fragmentList.add(new FoundFragment());
         fragmentList.add(new MineFragment());
 
     }
 
+    //设置tab的方法
     private void initTab() {
         tabLayout.getTabAt(0).setIcon(R.drawable.table_selector_news);
         tabLayout.getTabAt(1).setIcon(R.drawable.table_selector_invest);

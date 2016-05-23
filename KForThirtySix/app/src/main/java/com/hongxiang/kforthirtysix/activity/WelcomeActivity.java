@@ -36,14 +36,11 @@ import java.util.concurrent.ThreadPoolExecutor;
 public class WelcomeActivity extends AppCompatActivity {
     private TextView timeTv;
     private CountDownTimer timer;
-
-
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
-        getSupportActionBar().hide();
+        getSupportActionBar().hide();//隐藏标题栏
         timeTv = (TextView) findViewById(R.id.wel_time);
         timeTv.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,13 +52,11 @@ public class WelcomeActivity extends AppCompatActivity {
             }
         });
 
-
         timer = new CountDownTimer(5000, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
                 timeTv.setText(millisUntilFinished / 1000 + "s");
             }
-
             @Override
             public void onFinish() {
                 timeTv.setText("跳转");

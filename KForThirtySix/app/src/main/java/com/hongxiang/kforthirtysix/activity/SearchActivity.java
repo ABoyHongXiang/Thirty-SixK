@@ -6,7 +6,6 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.hongxiang.kforthirtysix.R;
-import com.hongxiang.kforthirtysix.fragment.NewsFragment;
 
 /**
  * Created by dllo on 16/5/10.
