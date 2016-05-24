@@ -3,12 +3,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:src="@mipmap/startpage" />
-
     <TextView
         android:id="@+id/wel_time"
         android:layout_width="wrap_content"
@@ -16,5 +10,20 @@
         android:layout_alignParentRight="true"
         android:layout_margin="15dp"
         android:text="跳转"
-        android:textSize="10dp" />
+        android:textSize="10dp"
+        />
+
+    <ImageView
+        android:id="@+id/welcome_img"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@mipmap/ic_launcher" />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_alignParentBottom="true"
+        android:src="@mipmap/startpage" />
+
+
 </RelativeLayout>

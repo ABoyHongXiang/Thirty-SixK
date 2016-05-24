@@ -65,7 +65,6 @@ public class NewsAllFragment extends BaseFragment {
         pullToRefreshListView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
             @Override
             public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
-                startVolley(20*n);
                 pullToRefreshListView.onRefreshComplete();
             }
 
@@ -86,7 +85,7 @@ public class NewsAllFragment extends BaseFragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(getActivity(), DetailsActivity.class);
-                String a = newsBean.getData().getData().get(position).getFeedId();
+                String  a = newsBean.getData().getData().get(position).getFeedId();
                 intent.putExtra("url", a);
                 startActivity(intent);
             }

@@ -7,7 +7,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.hongxiang.kforthirtysix.fragment.BaseFragment;
-import com.hongxiang.kforthirtysix.util.MyPopWindow;
+import com.hongxiang.kforthirtysix.util.MyMenuPopWindow;
 
 import com.hongxiang.kforthirtysix.R;
 import com.hongxiang.kforthirtysix.activity.SearchActivity;
@@ -19,7 +19,7 @@ import com.hongxiang.kforthirtysix.activity.SearchActivity;
 public class NewsFragment extends BaseFragment implements View.OnClickListener {
     private ImageView search, menu;
     private TextView title;
-    private MyPopWindow popupWindow;
+    private MyMenuPopWindow popupWindow;
 
     @Override
     public void initView(View view) {
@@ -55,7 +55,7 @@ public class NewsFragment extends BaseFragment implements View.OnClickListener {
                 break;
             case R.id.fragmentnews_menu:
                 //实例化SelectPicPopupWindow
-                popupWindow = new MyPopWindow(getContext(), itemsOnClick);
+                popupWindow = new MyMenuPopWindow(getContext(), itemsOnClick);
                 //显示窗口
                 popupWindow.showAtLocation(v, Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0); //设置layout在PopupWindow中显示的位置
                 break;
@@ -64,7 +64,6 @@ public class NewsFragment extends BaseFragment implements View.OnClickListener {
     }
 
     private View.OnClickListener itemsOnClick = new View.OnClickListener() {
-
         public void onClick(View v) {
             popupWindow.dismiss();
             switch (v.getId()) {

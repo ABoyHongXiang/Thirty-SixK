@@ -12,12 +12,11 @@ import com.hongxiang.kforthirtysix.R;
 /**
  * Created by dllo on 16/5/12.
  */
-public class MyPopWindow extends PopupWindow {
+public class MyMenuPopWindow extends PopupWindow {
 
     private View mMenuView;
     private Button recent, tv, exit, all;
-
-    public MyPopWindow(Context context, View.OnClickListener itemsOnClick) {
+    public MyMenuPopWindow(Context context, View.OnClickListener itemsOnClick) {
         super(context);
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         mMenuView = inflater.inflate(R.layout.menu_popwindow, null);
