@@ -1,0 +1,14 @@
+[
+    {
+        "merged": "/Users/dllo/Desktop/HongxiangBoy/Thirty-SixK/KForThirtySix/pullToRefreshViewPager/build/intermediates/res/merged/debug/layout/pull_to_refresh_header_vertical.xml",
+        "source": "/Users/dllo/Desktop/HongxiangBoy/Thirty-SixK/KForThirtySix/pullToRefreshViewPager/build/intermediates/exploded-aar/KForThirtySix/library/unspecified/res/layout/pull_to_refresh_header_vertical.xml"
+    },
+    {
+        "merged": "/Users/dllo/Desktop/HongxiangBoy/Thirty-SixK/KForThirtySix/pullToRefreshViewPager/build/intermediates/res/merged/debug/layout/need_this_for_maven.xml",
+        "source": "/Users/dllo/Desktop/HongxiangBoy/Thirty-SixK/KForThirtySix/pullToRefreshViewPager/src/main/res/layout/need_this_for_maven.xml"
+    },
+    {
+        "merged": "/Users/dllo/Desktop/HongxiangBoy/Thirty-SixK/KForThirtySix/pullToRefreshViewPager/build/intermediates/res/merged/debug/layout/pull_to_refresh_header_horizontal.xml",
+        "source": "/Users/dllo/Desktop/HongxiangBoy/Thirty-SixK/KForThirtySix/pullToRefreshViewPager/build/intermediates/exploded-aar/KForThirtySix/library/unspecified/res/layout/pull_to_refresh_header_horizontal.xml"
+    }
+]

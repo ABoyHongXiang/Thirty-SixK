@@ -1,0 +1,58 @@
+[
+    {
+        "merged": "/Users/dllo/Desktop/HongxiangBoy/Thirty-SixK/KForThirtySix/sample/build/intermediates/res/merged/debug/layout/pull_to_refresh_header_vertical.xml",
+        "source": "/Users/dllo/Desktop/HongxiangBoy/Thirty-SixK/KForThirtySix/sample/build/intermediates/exploded-aar/KForThirtySix/library/unspecified/res/layout/pull_to_refresh_header_vertical.xml"
+    },
+    {
+        "merged": "/Users/dllo/Desktop/HongxiangBoy/Thirty-SixK/KForThirtySix/sample/build/intermediates/res/merged/debug/layout/pull_to_refresh_header_horizontal.xml",
+        "source": "/Users/dllo/Desktop/HongxiangBoy/Thirty-SixK/KForThirtySix/sample/build/intermediates/exploded-aar/KForThirtySix/library/unspecified/res/layout/pull_to_refresh_header_horizontal.xml"
+    },
+    {
+        "merged": "/Users/dllo/Desktop/HongxiangBoy/Thirty-SixK/KForThirtySix/sample/build/intermediates/res/merged/debug/layout/activity_ptr_list_fragment.xml",
+        "source": "/Users/dllo/Desktop/HongxiangBoy/Thirty-SixK/KForThirtySix/sample/src/main/res/layout/activity_ptr_list_fragment.xml"
+    },
+    {
+        "merged": "/Users/dllo/Desktop/HongxiangBoy/Thirty-SixK/KForThirtySix/sample/build/intermediates/res/merged/debug/layout/activity_ptr_expandable_list.xml",
+        "source": "/Users/dllo/Desktop/HongxiangBoy/Thirty-SixK/KForThirtySix/sample/src/main/res/layout/activity_ptr_expandable_list.xml"
+    },
+    {
+        "merged": "/Users/dllo/Desktop/HongxiangBoy/Thirty-SixK/KForThirtySix/sample/build/intermediates/res/merged/debug/layout/activity_ptr_list_in_vp.xml",
+        "source": "/Users/dllo/Desktop/HongxiangBoy/Thirty-SixK/KForThirtySix/sample/src/main/res/layout/activity_ptr_list_in_vp.xml"
+    },
+    {
+        "merged": "/Users/dllo/Desktop/HongxiangBoy/Thirty-SixK/KForThirtySix/sample/build/intermediates/res/merged/debug/layout/layout_listview_in_viewpager.xml",
+        "source": "/Users/dllo/Desktop/HongxiangBoy/Thirty-SixK/KForThirtySix/sample/src/main/res/layout/layout_listview_in_viewpager.xml"
+    },
+    {
+        "merged": "/Users/dllo/Desktop/HongxiangBoy/Thirty-SixK/KForThirtySix/sample/build/intermediates/res/merged/debug/layout/need_this_for_maven.xml",
+        "source": "/Users/dllo/Desktop/HongxiangBoy/Thirty-SixK/KForThirtySix/sample/build/intermediates/exploded-aar/KForThirtySix/pullToRefreshListFragment/unspecified/res/layout/need_this_for_maven.xml"
+    },
+    {
+        "merged": "/Users/dllo/Desktop/HongxiangBoy/Thirty-SixK/KForThirtySix/sample/build/intermediates/res/merged/debug/layout/activity_ptr_webview2.xml",
+        "source": "/Users/dllo/Desktop/HongxiangBoy/Thirty-SixK/KForThirtySix/sample/src/main/res/layout/activity_ptr_webview2.xml"
+    },
+    {
+        "merged": "/Users/dllo/Desktop/HongxiangBoy/Thirty-SixK/KForThirtySix/sample/build/intermediates/res/merged/debug/layout/activity_ptr_scrollview.xml",
+        "source": "/Users/dllo/Desktop/HongxiangBoy/Thirty-SixK/KForThirtySix/sample/src/main/res/layout/activity_ptr_scrollview.xml"
+    },
+    {
+        "merged": "/Users/dllo/Desktop/HongxiangBoy/Thirty-SixK/KForThirtySix/sample/build/intermediates/res/merged/debug/layout/activity_ptr_horizontalscrollview.xml",
+        "source": "/Users/dllo/Desktop/HongxiangBoy/Thirty-SixK/KForThirtySix/sample/src/main/res/layout/activity_ptr_horizontalscrollview.xml"
+    },
+    {
+        "merged": "/Users/dllo/Desktop/HongxiangBoy/Thirty-SixK/KForThirtySix/sample/build/intermediates/res/merged/debug/layout/activity_ptr_webview.xml",
+        "source": "/Users/dllo/Desktop/HongxiangBoy/Thirty-SixK/KForThirtySix/sample/src/main/res/layout/activity_ptr_webview.xml"
+    },
+    {
+        "merged": "/Users/dllo/Desktop/HongxiangBoy/Thirty-SixK/KForThirtySix/sample/build/intermediates/res/merged/debug/layout/activity_ptr_viewpager.xml",
+        "source": "/Users/dllo/Desktop/HongxiangBoy/Thirty-SixK/KForThirtySix/sample/src/main/res/layout/activity_ptr_viewpager.xml"
+    },
+    {
+        "merged": "/Users/dllo/Desktop/HongxiangBoy/Thirty-SixK/KForThirtySix/sample/build/intermediates/res/merged/debug/layout/activity_ptr_list.xml",
+        "source": "/Users/dllo/Desktop/HongxiangBoy/Thirty-SixK/KForThirtySix/sample/src/main/res/layout/activity_ptr_list.xml"
+    },
+    {
+        "merged": "/Users/dllo/Desktop/HongxiangBoy/Thirty-SixK/KForThirtySix/sample/build/intermediates/res/merged/debug/layout/activity_ptr_grid.xml",
+        "source": "/Users/dllo/Desktop/HongxiangBoy/Thirty-SixK/KForThirtySix/sample/src/main/res/layout/activity_ptr_grid.xml"
+    }
+]

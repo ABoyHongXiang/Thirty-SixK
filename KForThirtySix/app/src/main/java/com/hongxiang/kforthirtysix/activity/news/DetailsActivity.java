@@ -6,7 +6,6 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.ContentFrameLayout;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
 import android.text.method.ScrollingMovementMethod;
@@ -24,16 +23,14 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.hongxiang.kforthirtysix.fragment.news.NewsAllFragment;
-import com.hongxiang.kforthirtysix.fragment.news.RecentFragment;
-import com.hongxiang.kforthirtysix.fragment.news.TvFragment;
-import com.hongxiang.kforthirtysix.util.MyMenuPopWindow;
+import com.hongxiang.kforthirtysix.sql.FavouriteText;
+import com.hongxiang.kforthirtysix.sql.FavouriteTextDao;
+import com.hongxiang.kforthirtysix.util.GreendaoSingle;
 import com.hongxiang.kforthirtysix.util.MyScrollView;
 import com.hongxiang.kforthirtysix.util.MySharePopWindow;
 import com.hongxiang.kforthirtysix.util.PicassoCirclTransform;
@@ -49,8 +46,6 @@ import java.net.URL;
 
 
 import it.sephiroth.android.library.picasso.Picasso;
-
-import static com.hongxiang.kforthirtysix.R.id.details_scrollview;
 
 
 /**
@@ -71,19 +66,23 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
     private RelativeLayout relativeLayout;
     private MyScrollView scrollView;
     private LinearLayout linearLayout;
-    Animation animation_in,animation_out;
+    Animation animation_in, animation_out;
     private boolean heartBoolean = true;
+    private boolean favourite;
     private MySharePopWindow sharepop;
+    private FavouriteTextDao favouriteTextDao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();//使app标题栏消失
         setContentView(R.layout.avtivity_details);
+        //数据库的对象
+        favouriteTextDao = GreendaoSingle.getInstance().getPersonDao();
         scrollView = (MyScrollView) findViewById(R.id.details_scrollview);
         linearLayout = (LinearLayout) findViewById(R.id.details_bottom_title);
         animation_in = AnimationUtils.loadAnimation(this, R.anim.anim_in);
-        animation_out= AnimationUtils.loadAnimation(this, R.anim.anim_out);
+        animation_out = AnimationUtils.loadAnimation(this, R.anim.anim_out);
         ColorDrawable dw = new ColorDrawable(0x70000000);
         //设置SelectPicPopupWindow弹出窗体的背景
         linearLayout.setBackgroundDrawable(dw);
@@ -133,13 +132,21 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
 
         //接收上一个界面传来的id ,拼接网址
         Intent intent = getIntent();
+
         url = intent.getStringExtra("url");
-        Log.d("DetailsActivity", url);
+
+        favourite = intent.getBooleanExtra("favourite", false);
+        if (favourite == true) {
+            heart.setImageResource(R.mipmap.heart_bt_true);
+            heartBoolean = false;
+        }
+
         startVolleyDetails(url);//解析详情的方法
         struct();//加载html的方法
         startVolleyWriter();//解析作者的方法
         //显示popupWindow
         showPop();
+
         //标题的点击事件,弹出一个popupwindow
         relativeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -154,6 +161,10 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
 
             }
         });
+
+
+
+
     }
 
     //解析作者===解析的是popupwindow的内容,下面解析的是界面的
@@ -279,20 +290,27 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
             case R.id.bt_heart:
                 if (heartBoolean == true) {
                     heart.setImageResource(R.mipmap.heart_bt_true);
+                    String writer = detailsBean.getData().getUser().getName();
+                    String title = detailsBean.getData().getTitle();
+                    FavouriteText a = new FavouriteText(writer, title, url);
+                    Toast.makeText(this, "收藏成功", Toast.LENGTH_SHORT).show();
+                    favouriteTextDao.insert(a);
                     heartBoolean = false;
                 } else {
                     heart.setImageResource(R.mipmap.heart_bt);
+                    Toast.makeText(this, "取消收藏", Toast.LENGTH_SHORT).show();
                     heartBoolean = true;
                 }
                 break;
             case R.id.bt_back:
+                finish();
                 break;
             case R.id.bt_message:
+
                 break;
             case R.id.bt_share:
                 //实例化SelectPicPopupWindow
                 sharepop = new MySharePopWindow(this, itemsOnClick);
-
                 //显示窗口
                 sharepop.showAtLocation(v, Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
                 linearLayout.setVisibility(View.INVISIBLE);
@@ -306,32 +324,32 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
     private View.OnClickListener itemsOnClick = new View.OnClickListener() {
         public void onClick(View v) {
             sharepop.dismiss();
-          switch (v.getId()){
-              //微信
-              case R.id.share_wechat:
-                  Toast.makeText(DetailsActivity.this, "微信", Toast.LENGTH_SHORT).show();
-                  break;
-              //qq
-              case R.id.share_qq:
-                  Toast.makeText(DetailsActivity.this, "QQ", Toast.LENGTH_SHORT).show();
-                  break;
-              //微信
-              case R.id.share_link:
-                  Toast.makeText(DetailsActivity.this, "复制网址", Toast.LENGTH_SHORT).show();
-                  break;
-              //微信
-              case R.id.share_living:
-                  Toast.makeText(DetailsActivity.this, "生活圈", Toast.LENGTH_SHORT).show();
-                  break;
-              //微信
-              case R.id.share_moment:
-                  Toast.makeText(DetailsActivity.this, "朋友圈", Toast.LENGTH_SHORT).show();
-                  break;
-              //微信
-              case R.id.share_weibo:
-                  Toast.makeText(DetailsActivity.this, "微博", Toast.LENGTH_SHORT).show();
-                  break;
-          }
+            switch (v.getId()) {
+                //微信
+                case R.id.share_wechat:
+                    Toast.makeText(DetailsActivity.this, "微信", Toast.LENGTH_SHORT).show();
+                    break;
+                //qq
+                case R.id.share_qq:
+                    Toast.makeText(DetailsActivity.this, "QQ", Toast.LENGTH_SHORT).show();
+                    break;
+                //微信
+                case R.id.share_link:
+                    Toast.makeText(DetailsActivity.this, "复制网址", Toast.LENGTH_SHORT).show();
+                    break;
+                //微信
+                case R.id.share_living:
+                    Toast.makeText(DetailsActivity.this, "生活圈", Toast.LENGTH_SHORT).show();
+                    break;
+                //微信
+                case R.id.share_moment:
+                    Toast.makeText(DetailsActivity.this, "朋友圈", Toast.LENGTH_SHORT).show();
+                    break;
+                //微信
+                case R.id.share_weibo:
+                    Toast.makeText(DetailsActivity.this, "微博", Toast.LENGTH_SHORT).show();
+                    break;
+            }
         }
 
 

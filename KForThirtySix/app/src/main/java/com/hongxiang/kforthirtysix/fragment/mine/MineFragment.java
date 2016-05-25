@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.view.View;
 
 import com.hongxiang.kforthirtysix.R;
+import com.hongxiang.kforthirtysix.activity.mine.FavouriteActivity;
 import com.hongxiang.kforthirtysix.activity.mine.LogActivity;
 import com.hongxiang.kforthirtysix.fragment.BaseFragment;
 
@@ -14,10 +15,11 @@ import com.hongxiang.kforthirtysix.fragment.BaseFragment;
 
 
 public class MineFragment extends BaseFragment {
-    private View logLayout;
+    private View logLayout, favoriteLayout;
 
     @Override
     public void initView(View view) {
+        favoriteLayout = view.findViewById(R.id.mine_favourite_layout);
         logLayout = view.findViewById(R.id.log_layout);
     }
 
@@ -27,6 +29,13 @@ public class MineFragment extends BaseFragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), LogActivity.class);
+                startActivity(intent);
+            }
+        });
+        favoriteLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), FavouriteActivity.class);
                 startActivity(intent);
             }
         });

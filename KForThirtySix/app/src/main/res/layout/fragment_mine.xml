@@ -234,6 +234,7 @@
                 android:background="#dcdcdb" />
 
             <LinearLayout
+                android:id="@+id/mine_favourite_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"

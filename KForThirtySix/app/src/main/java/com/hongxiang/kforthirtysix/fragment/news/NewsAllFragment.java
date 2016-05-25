@@ -20,6 +20,9 @@ import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.hongxiang.kforthirtysix.R;
 import com.hongxiang.kforthirtysix.fragment.BaseFragment;
+import com.hongxiang.kforthirtysix.sql.FavouriteText;
+import com.hongxiang.kforthirtysix.sql.FavouriteTextDao;
+import com.hongxiang.kforthirtysix.util.GreendaoSingle;
 import com.hongxiang.kforthirtysix.util.VolleySingle;
 import com.hongxiang.kforthirtysix.activity.news.DetailsActivity;
 import com.hongxiang.kforthirtysix.adapter.news.NewsAdapter;
@@ -51,6 +54,8 @@ public class NewsAllFragment extends BaseFragment {
     private int currentItem;
     private NewsBean newsBean;
     private int n = 2;
+    private FavouriteTextDao favouriteTextDao;
+    private List<FavouriteText>favouriteTexts;
 
     @Override
     public void initView(View view) {
@@ -86,6 +91,18 @@ public class NewsAllFragment extends BaseFragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(getActivity(), DetailsActivity.class);
                 String  a = newsBean.getData().getData().get(position).getFeedId();
+                favouriteTexts = new ArrayList<>();
+                favouriteTextDao = GreendaoSingle.getInstance().getPersonDao();
+                favouriteTexts  = favouriteTextDao.queryBuilder().list();
+                for (FavouriteText favouriteText : favouriteTexts) {
+                    Log.d("---1", a);
+                    Log.d("---1", "favouriteText:" + favouriteText.getUrlid());
+                   if(favouriteText.getUrlid().equals(a)) {
+                       intent.putExtra("favourite",true);
+                       Log.d("---8", a);
+                       Log.d("---8", "favouriteText:" + favouriteText.getUrlid());
+                   }
+                }
                 intent.putExtra("url", a);
                 startActivity(intent);
             }

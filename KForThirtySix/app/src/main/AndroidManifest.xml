@@ -29,12 +29,14 @@
         <activity android:name=".activity.news.DetailsActivity" />
         <activity android:name=".activity.mine.LogActivity"/>
         <activity android:name=".activity.found.FoundPeopleActivity"/>
-        <activity android:name=".activity.MainActivity"/>
+         <activity android:name=".activity.MainActivity"/>
         <activity android:name=".activity.found.NearPlayActivity"/>
         <activity android:name=".activity.lol.LolDetailsActivity"/>
         <activity android:name=".activity.lol.LolVideoActivity"/>
         <activity android:name=".activity.lol.LolNewsDetailsActivity"/>
         <activity android:name=".activity.news.WriterActivity"/>
+        <activity android:name=".activity.mine.FavouriteActivity"/>
+        <activity android:name=".activity.mine.FavouriteDetailsActivity"/>
     </application>
 
 
