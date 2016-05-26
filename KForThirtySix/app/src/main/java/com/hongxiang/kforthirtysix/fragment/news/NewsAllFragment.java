@@ -55,14 +55,12 @@ public class NewsAllFragment extends BaseFragment {
     private NewsBean newsBean;
     private int n = 2;
     private FavouriteTextDao favouriteTextDao;
-    private List<FavouriteText>favouriteTexts;
-
+    private List<FavouriteText> favouriteTexts;
     @Override
     public void initView(View view) {
         pullToRefreshListView = (PullToRefreshListView) view.findViewById(R.id.news_listview);
         pullToRefreshListView.setMode(PullToRefreshBase.Mode.BOTH);
     }
-
     @Override
     public void initData() {
         startVolley(20);
@@ -70,13 +68,11 @@ public class NewsAllFragment extends BaseFragment {
         pullToRefreshListView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
             @Override
             public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
-                pullToRefreshListView.onRefreshComplete();
+                startVolley(20);
             }
-
             @Override
             public void onPullUpToRefresh(PullToRefreshBase<ListView> refreshView) {
                 startVolley(20 * n);
-                pullToRefreshListView.onRefreshComplete();
                 n = n + 1;
 
             }
@@ -89,19 +85,16 @@ public class NewsAllFragment extends BaseFragment {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(getActivity(), DetailsActivity.class);
-                String  a = newsBean.getData().getData().get(position).getFeedId();
+                Intent intent = new Intent(getContext(), DetailsActivity.class);
+                String a = newsBean.getData().getData().get(position-2).getFeedId();
                 favouriteTexts = new ArrayList<>();
                 favouriteTextDao = GreendaoSingle.getInstance().getPersonDao();
-                favouriteTexts  = favouriteTextDao.queryBuilder().list();
+                favouriteTexts = favouriteTextDao.queryBuilder().list();
                 for (FavouriteText favouriteText : favouriteTexts) {
-                    Log.d("---1", a);
-                    Log.d("---1", "favouriteText:" + favouriteText.getUrlid());
-                   if(favouriteText.getUrlid().equals(a)) {
-                       intent.putExtra("favourite",true);
-                       Log.d("---8", a);
-                       Log.d("---8", "favouriteText:" + favouriteText.getUrlid());
-                   }
+                    if (favouriteText.getUrlid().equals(a)) {
+                        intent.putExtra("favourite", true);
+
+                    }
                 }
                 intent.putExtra("url", a);
                 startActivity(intent);
@@ -131,6 +124,7 @@ public class NewsAllFragment extends BaseFragment {
                 Log.d("NewestFragment", "解析成功");
                 newsBean = response;
                 newsAdapter.setNewsBean(newsBean);
+                pullToRefreshListView.onRefreshComplete();
             }
         }, new Response.ErrorListener() {
             @Override
@@ -142,7 +136,6 @@ public class NewsAllFragment extends BaseFragment {
 
 
     private void addImage() {
-        addImssss();
         imageView1 = new ImageView(getContext());
         imageView2 = new ImageView(getContext());
         imageView3 = new ImageView(getContext());
@@ -155,9 +148,7 @@ public class NewsAllFragment extends BaseFragment {
         Picasso.with(getActivity()).load("http://avatar.anzogame.com/pic_v1/lol/news/20160504/picad65250h5729a7ea.jpg").into(imageView3);
     }
 
-    private void addImssss() {
 
-    }
 
 
     @Override

@@ -1,5 +1,4 @@
 package com.hongxiang.kforthirtysix.activity.news;
-
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
@@ -46,8 +45,6 @@ import java.net.URL;
 
 
 import it.sephiroth.android.library.picasso.Picasso;
-
-
 /**
  * Created by dllo on 16/5/14.
  * 新闻的详情界面
@@ -68,10 +65,10 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
     private LinearLayout linearLayout;
     Animation animation_in, animation_out;
     private boolean heartBoolean = true;
-    private boolean favourite;
+    private boolean favourite,recentFavourite;
     private MySharePopWindow sharepop;
     private FavouriteTextDao favouriteTextDao;
-
+    private int id;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -132,11 +129,14 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
 
         //接收上一个界面传来的id ,拼接网址
         Intent intent = getIntent();
-
         url = intent.getStringExtra("url");
-
         favourite = intent.getBooleanExtra("favourite", false);
+        recentFavourite = intent.getBooleanExtra("recent_favourite", false);
         if (favourite == true) {
+            heart.setImageResource(R.mipmap.heart_bt_true);
+            heartBoolean = false;
+        }
+        if (recentFavourite == true) {
             heart.setImageResource(R.mipmap.heart_bt_true);
             heartBoolean = false;
         }
@@ -144,9 +144,7 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
         startVolleyDetails(url);//解析详情的方法
         struct();//加载html的方法
         startVolleyWriter();//解析作者的方法
-        //显示popupWindow
-        showPop();
-
+        showPop();//显示popupWindow
         //标题的点击事件,弹出一个popupwindow
         relativeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -158,15 +156,9 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
                     pop.showAsDropDown(writeline);
                     menudown.setImageResource(R.mipmap.menuup);
                 }
-
             }
         });
-
-
-
-
     }
-
     //解析作者===解析的是popupwindow的内容,下面解析的是界面的
     private void startVolleyWriter() {
         VolleySingle.addRequest(START_URL + url + END_URL, WriterBean.class, new Response.Listener<WriterBean>() {
@@ -186,7 +178,6 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
             }
         });
     }
-
     //popupwindow具体的设置
     private void showPop() {
         pop = new PopupWindow(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -220,7 +211,6 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
 
 
     }
-
     //解析详情数据====界面的内容,上面解析的是popupwindow的内容
     public void startVolleyDetails(String myUrl) {
         VolleySingle.addRequest("https://rong.36kr.com/api/mobi/news/" + myUrl, DetailsBean.class, new Response.Listener<DetailsBean>() {
@@ -250,9 +240,6 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
 
 
     }
-
-//屏幕的监听
-
     //加载Html的方法
     Html.ImageGetter imgGetter = new Html.ImageGetter() {
         public Drawable getDrawable(String source) {
@@ -282,8 +269,6 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
                 .penaltyLog() // 打印logcat
                 .penaltyDeath().build());
     }
-
-
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -292,12 +277,15 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
                     heart.setImageResource(R.mipmap.heart_bt_true);
                     String writer = detailsBean.getData().getUser().getName();
                     String title = detailsBean.getData().getTitle();
-                    FavouriteText a = new FavouriteText(writer, title, url);
+                    id =detailsBean.getData().getPostId();
+                    FavouriteText a = new FavouriteText((long)id,writer, title, url);
                     Toast.makeText(this, "收藏成功", Toast.LENGTH_SHORT).show();
                     favouriteTextDao.insert(a);
                     heartBoolean = false;
                 } else {
                     heart.setImageResource(R.mipmap.heart_bt);
+                    id =detailsBean.getData().getPostId();
+                    favouriteTextDao.deleteByKey((long)id);
                     Toast.makeText(this, "取消收藏", Toast.LENGTH_SHORT).show();
                     heartBoolean = true;
                 }
@@ -320,7 +308,6 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
 
         }
     }
-
     private View.OnClickListener itemsOnClick = new View.OnClickListener() {
         public void onClick(View v) {
             sharepop.dismiss();
@@ -333,19 +320,19 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
                 case R.id.share_qq:
                     Toast.makeText(DetailsActivity.this, "QQ", Toast.LENGTH_SHORT).show();
                     break;
-                //微信
+                //复制网址
                 case R.id.share_link:
                     Toast.makeText(DetailsActivity.this, "复制网址", Toast.LENGTH_SHORT).show();
                     break;
-                //微信
+                //生活圈
                 case R.id.share_living:
                     Toast.makeText(DetailsActivity.this, "生活圈", Toast.LENGTH_SHORT).show();
                     break;
-                //微信
+                //朋友圈
                 case R.id.share_moment:
                     Toast.makeText(DetailsActivity.this, "朋友圈", Toast.LENGTH_SHORT).show();
                     break;
-                //微信
+                //微博
                 case R.id.share_weibo:
                     Toast.makeText(DetailsActivity.this, "微博", Toast.LENGTH_SHORT).show();
                     break;

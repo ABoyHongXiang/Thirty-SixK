@@ -2,6 +2,7 @@ package com.hongxiang.kforthirtysix.adapter.news;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -60,6 +61,7 @@ public class NewsAdapter extends BaseAdapter {
         }
         //获取想要的数据
         title = newsBean.getData().getData().get(position).getTitle();
+        Log.d("NewsAdapter", title);
         writer = newsBean.getData().getData().get(position).getUser().getName();
         type = newsBean.getData().getData().get(position).getColumnName();
         imageurl = newsBean.getData().getData().get(position).getFeatureImg();
