@@ -80,7 +80,7 @@ public class RecentFragment extends BaseFragment {
                 intent.putExtra("url",a);
                 for (FavouriteText favouriteText : favouriteTexts) {
                     if (favouriteText.getUrlid().equals(a)) {
-                        intent.putExtra("recent_favourite", true);
+                        intent.putExtra("favourite", true);
 
                     }
                 }

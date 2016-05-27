@@ -67,6 +67,11 @@ public class TvAdapter extends BaseAdapter {
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
+            if(holder.videoView.getVisibility()==View.VISIBLE){
+                holder.title.setVisibility(View.VISIBLE);
+                holder.imageView.setVisibility(View.VISIBLE);
+                holder.videoView.setVisibility(View.INVISIBLE);
+            }
         }
         String imageurl = tvBean.getData().getData().get(position).getTv().getFeatureImg();
         String videoUri = tvBean.getData().getData().get(position).getTv().getVideoSource();

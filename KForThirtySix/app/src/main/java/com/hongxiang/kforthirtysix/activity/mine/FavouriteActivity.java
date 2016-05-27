@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.hongxiang.kforthirtysix.R;
+import com.hongxiang.kforthirtysix.activity.news.DetailsActivity;
 import com.hongxiang.kforthirtysix.adapter.mine.FavouriteAdapter;
 import com.hongxiang.kforthirtysix.sql.FavouriteText;
 import com.hongxiang.kforthirtysix.sql.FavouriteTextDao;
@@ -52,10 +53,9 @@ public class FavouriteActivity extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(FavouriteActivity.this, FavouriteDetailsActivity.class);
-                intent.putExtra("title", favouriteTexts.get(position).getTitle());
-                intent.putExtra("writer", favouriteTexts.get(position).getWriter());
-                intent.putExtra("url", favouriteTexts.get(position).getUrlid());
+                Intent intent = new Intent(FavouriteActivity.this, DetailsActivity.class);
+                intent.putExtra("url",favouriteTexts.get(position).getUrlid());
+                intent.putExtra("favourite", true);
                 startActivity(intent);
             }
         });

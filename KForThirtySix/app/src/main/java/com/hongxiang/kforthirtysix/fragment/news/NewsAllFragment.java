@@ -86,17 +86,16 @@ public class NewsAllFragment extends BaseFragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(getContext(), DetailsActivity.class);
-                String a = newsBean.getData().getData().get(position-2).getFeedId();
+                String feedId = newsBean.getData().getData().get(position-2).getFeedId();
                 favouriteTexts = new ArrayList<>();
                 favouriteTextDao = GreendaoSingle.getInstance().getPersonDao();
                 favouriteTexts = favouriteTextDao.queryBuilder().list();
                 for (FavouriteText favouriteText : favouriteTexts) {
-                    if (favouriteText.getUrlid().equals(a)) {
+                    if (favouriteText.getUrlid().equals(feedId)) {
                         intent.putExtra("favourite", true);
-
                     }
                 }
-                intent.putExtra("url", a);
+                intent.putExtra("url", feedId);
                 startActivity(intent);
             }
         });

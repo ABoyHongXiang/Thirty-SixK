@@ -131,12 +131,7 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
         Intent intent = getIntent();
         url = intent.getStringExtra("url");
         favourite = intent.getBooleanExtra("favourite", false);
-        recentFavourite = intent.getBooleanExtra("recent_favourite", false);
         if (favourite == true) {
-            heart.setImageResource(R.mipmap.heart_bt_true);
-            heartBoolean = false;
-        }
-        if (recentFavourite == true) {
             heart.setImageResource(R.mipmap.heart_bt_true);
             heartBoolean = false;
         }

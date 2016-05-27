@@ -33,5 +33,7 @@ public class MyClass {
         entity.addStringProperty("writer");
         entity.addStringProperty("urlid");
 
+
+
     }
 }
