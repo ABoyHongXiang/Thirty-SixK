@@ -32,6 +32,7 @@ public class MyClass {
         entity.addStringProperty("title");
         entity.addStringProperty("writer");
         entity.addStringProperty("urlid");
+        entity.addStringProperty("imgurl");
 
 
 

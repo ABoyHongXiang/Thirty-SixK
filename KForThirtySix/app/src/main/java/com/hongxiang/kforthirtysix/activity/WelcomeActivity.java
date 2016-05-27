@@ -31,6 +31,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.concurrent.ThreadPoolExecutor;
 
+import cn.jpush.android.api.JPushInterface;
 import it.sephiroth.android.library.picasso.Picasso;
 
 /**
@@ -77,5 +78,17 @@ public class WelcomeActivity extends AppCompatActivity {
         }.start();
 
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        JPushInterface.onResume(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        JPushInterface.onPause(this);
     }
 }

@@ -3,6 +3,8 @@ package com.hongxiang.kforthirtysix.util;
 import android.app.Application;
 import android.content.Context;
 
+import cn.jpush.android.api.JPushInterface;
+
 /**
  * Created by dllo on 16/5/20.
  */
@@ -17,6 +19,9 @@ public class MyApplication extends Application {
         super.onCreate();
         //this代表当前的环境
         mContext = this;
+
+        JPushInterface.setDebugMode(true); 	// 设置开启日志,发布时请关闭日志
+        JPushInterface.init(this);     		// 初始化 JPush
     }
 
     //对外提供一个方法 这个方法就是让别的类获取自己的context

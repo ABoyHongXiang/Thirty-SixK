@@ -53,7 +53,7 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
     private final static String START_URL = "https://rong.36kr.com/api/mobi/news/";
     private final static String END_URL = "/author-region";
     private DetailsBean detailsBean;//详情的数据类
-    private String url;//用来接收上个界面传来的id ,拼接网址
+    private String url,imgurl;//用来接收上个界面传来的id ,拼接网址
     private TextView title, secondTitle, mcontext, writer, num, read, writeline;
     private ImageView writeImg, menudown, heart;
     private PopupWindow pop;
@@ -65,7 +65,7 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
     private LinearLayout linearLayout;
     Animation animation_in, animation_out;
     private boolean heartBoolean = true;
-    private boolean favourite,recentFavourite;
+    private boolean favourite;
     private MySharePopWindow sharepop;
     private FavouriteTextDao favouriteTextDao;
     private int id;
@@ -130,6 +130,7 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
         //接收上一个界面传来的id ,拼接网址
         Intent intent = getIntent();
         url = intent.getStringExtra("url");
+        imgurl = intent.getStringExtra("imageurl");
         favourite = intent.getBooleanExtra("favourite", false);
         if (favourite == true) {
             heart.setImageResource(R.mipmap.heart_bt_true);
@@ -273,7 +274,7 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
                     String writer = detailsBean.getData().getUser().getName();
                     String title = detailsBean.getData().getTitle();
                     id =detailsBean.getData().getPostId();
-                    FavouriteText a = new FavouriteText((long)id,writer, title, url);
+                    FavouriteText a = new FavouriteText((long)id,title, writer, url,imgurl);
                     Toast.makeText(this, "收藏成功", Toast.LENGTH_SHORT).show();
                     favouriteTextDao.insert(a);
                     heartBoolean = false;

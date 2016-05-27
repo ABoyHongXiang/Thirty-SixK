@@ -27,6 +27,7 @@ public class FavouriteTextDao extends AbstractDao<FavouriteText, Long> {
         public final static Property Title = new Property(1, String.class, "title", false, "TITLE");
         public final static Property Writer = new Property(2, String.class, "writer", false, "WRITER");
         public final static Property Urlid = new Property(3, String.class, "urlid", false, "URLID");
+        public final static Property Imgurl = new Property(4, String.class, "imgurl", false, "IMGURL");
     };
 
 
@@ -45,7 +46,8 @@ public class FavouriteTextDao extends AbstractDao<FavouriteText, Long> {
                 "\"_id\" INTEGER PRIMARY KEY AUTOINCREMENT ," + // 0: id
                 "\"TITLE\" TEXT," + // 1: title
                 "\"WRITER\" TEXT," + // 2: writer
-                "\"URLID\" TEXT);"); // 3: urlid
+                "\"URLID\" TEXT," + // 3: urlid
+                "\"IMGURL\" TEXT);"); // 4: imgurl
     }
 
     /** Drops the underlying database table. */
@@ -78,6 +80,11 @@ public class FavouriteTextDao extends AbstractDao<FavouriteText, Long> {
         if (urlid != null) {
             stmt.bindString(4, urlid);
         }
+ 
+        String imgurl = entity.getImgurl();
+        if (imgurl != null) {
+            stmt.bindString(5, imgurl);
+        }
     }
 
     /** @inheritdoc */
@@ -93,7 +100,8 @@ public class FavouriteTextDao extends AbstractDao<FavouriteText, Long> {
             cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // id
             cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // title
             cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // writer
-            cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3) // urlid
+            cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // urlid
+            cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4) // imgurl
         );
         return entity;
     }
@@ -105,6 +113,7 @@ public class FavouriteTextDao extends AbstractDao<FavouriteText, Long> {
         entity.setTitle(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
         entity.setWriter(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
         entity.setUrlid(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
+        entity.setImgurl(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
      }
     
     /** @inheritdoc */

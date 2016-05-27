@@ -87,6 +87,7 @@ public class NewsAllFragment extends BaseFragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(getContext(), DetailsActivity.class);
                 String feedId = newsBean.getData().getData().get(position-2).getFeedId();
+                String imgurl = newsBean.getData().getData().get(position).getFeatureImg();
                 favouriteTexts = new ArrayList<>();
                 favouriteTextDao = GreendaoSingle.getInstance().getPersonDao();
                 favouriteTexts = favouriteTextDao.queryBuilder().list();
@@ -95,7 +96,9 @@ public class NewsAllFragment extends BaseFragment {
                         intent.putExtra("favourite", true);
                     }
                 }
+                intent.putExtra("imageurl",imgurl);
                 intent.putExtra("url", feedId);
+                Log.d("NewsAllFragment", imgurl);
                 startActivity(intent);
             }
         });

@@ -9,20 +9,28 @@
         android:layout_height="wrap_content"
         android:layout_margin="10dp">
 
+        <ImageView
+            android:id="@+id/item_facourite_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:src="@mipmap/ic_launcher" />
+
         <TextView
             android:id="@+id/item_favourite_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
+            android:layout_toRightOf="@+id/item_facourite_img"
             android:text="title" />
 
         <TextView
             android:id="@+id/item_favourite_writer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
             android:layout_below="@+id/item_favourite_title"
             android:layout_margin="5dp"
-            android:layout_alignParentRight="true"
             android:text="writer" />
 
 

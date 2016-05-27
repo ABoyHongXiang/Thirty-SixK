@@ -10,6 +10,7 @@ public class FavouriteText {
     private String title;
     private String writer;
     private String urlid;
+    private String imgurl;
 
     public FavouriteText() {
     }
@@ -18,17 +19,12 @@ public class FavouriteText {
         this.id = id;
     }
 
-    public FavouriteText(Long id, String title, String writer, String urlid) {
+    public FavouriteText(Long id, String title, String writer, String urlid, String imgurl) {
         this.id = id;
         this.title = title;
         this.writer = writer;
         this.urlid = urlid;
-    }
-
-    public FavouriteText(String writer, String title, String urlid) {
-        this.writer = writer;
-        this.title = title;
-        this.urlid = urlid;
+        this.imgurl = imgurl;
     }
 
     public Long getId() {
@@ -61,6 +57,14 @@ public class FavouriteText {
 
     public void setUrlid(String urlid) {
         this.urlid = urlid;
+    }
+
+    public String getImgurl() {
+        return imgurl;
+    }
+
+    public void setImgurl(String imgurl) {
+        this.imgurl = imgurl;
     }
 
 }
