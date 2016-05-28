@@ -21,10 +21,12 @@ public class MineFragment extends BaseFragment {
     public void initView(View view) {
         favoriteLayout = view.findViewById(R.id.mine_favourite_layout);
         logLayout = view.findViewById(R.id.log_layout);
+
     }
 
     @Override
     public void initData() {
+
         logLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

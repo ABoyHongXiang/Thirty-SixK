@@ -1,4 +1,4 @@
-include ':app', ':favouritelib', ':JPushExample(463887)'
+include ':app', ':favouritelib', ':JPushExample(463887)', ':loglib'
 include ':library'
 include ':pullToRefreshListFragment'
 include ':pullToRefreshViewPager'

@@ -1,12 +1,17 @@
 package com.hongxiang.kforthirtysix.util;
+
 import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 import android.widget.PopupWindow;
 import android.view.ViewGroup.LayoutParams;
+
 import com.hongxiang.kforthirtysix.R;
 
 /**
@@ -16,6 +21,7 @@ public class MyMenuPopWindow extends PopupWindow {
 
     private View mMenuView;
     private Button recent, tv, exit, all;
+
     public MyMenuPopWindow(Context context, View.OnClickListener itemsOnClick) {
         super(context);
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -47,6 +53,13 @@ public class MyMenuPopWindow extends PopupWindow {
         //设置SelectPicPopupWindow弹出窗体的背景
         this.setBackgroundDrawable(dw);
         //mMenuView添加OnTouchListener监听判断获取触屏位置如果在选择框外面则销毁弹出框
+        AlphaAnimation alphaAnimation
+                //从多少透明度 到多少透明度
+                = new AlphaAnimation(0, 1);
+        alphaAnimation.setDuration(2000);
+        alphaAnimation.setRepeatMode(Animation.REVERSE);
+        alphaAnimation.setDuration(1000);
+        mMenuView.setAnimation(alphaAnimation);
         mMenuView.setOnTouchListener(new View.OnTouchListener() {
 
             public boolean onTouch(View v, MotionEvent event) {

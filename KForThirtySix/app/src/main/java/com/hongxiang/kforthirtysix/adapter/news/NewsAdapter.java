@@ -6,6 +6,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.TranslateAnimation;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -88,8 +90,15 @@ public class NewsAdapter extends BaseAdapter {
         holder.writer.setText(writer);
         holder.type.setText(type);
         //通过毕加索 传入自己的图片组件,传入图片的网址 即可完成替换
+        TranslateAnimation translateAnimation = new TranslateAnimation(
+                Animation.RELATIVE_TO_SELF, -1,
+                Animation.RELATIVE_TO_PARENT, 0f,
+                Animation.RELATIVE_TO_SELF, -1,
+                Animation.RELATIVE_TO_PARENT, 0f);
+        translateAnimation.setDuration(1000);
+        convertView.setAnimation(translateAnimation);
+        holder.imageView.startAnimation(translateAnimation);
         Picasso.with(context).load(imageurl).into(holder.imageView);
-
         return convertView;
 
     }

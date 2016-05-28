@@ -11,19 +11,48 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <Spinner
+        <LinearLayout
+            android:id="@+id/play_time"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:entries="@array/spingarr" />
 
-        <Spinner
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/play_time_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="活动时间" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/menudown" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/play_type"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:entries="@array/spingarr2"
-            android:spinnerMode="dialog"
-            />
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/play_type_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="活动类型"/>
+
+            <ImageView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/menudown" />
+        </LinearLayout>
     </LinearLayout>
 
 

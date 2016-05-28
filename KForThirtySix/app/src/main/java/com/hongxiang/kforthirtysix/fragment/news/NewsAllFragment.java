@@ -4,12 +4,9 @@ import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.view.ViewPager;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -20,9 +17,9 @@ import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.hongxiang.kforthirtysix.R;
 import com.hongxiang.kforthirtysix.fragment.BaseFragment;
-import com.hongxiang.kforthirtysix.sql.FavouriteText;
-import com.hongxiang.kforthirtysix.sql.FavouriteTextDao;
-import com.hongxiang.kforthirtysix.util.GreendaoSingle;
+import com.hongxiang.kforthirtysix.favouritesql.FavouriteText;
+import com.hongxiang.kforthirtysix.favouritesql.FavouriteTextDao;
+import com.hongxiang.kforthirtysix.util.FavouritedaoSingle;
 import com.hongxiang.kforthirtysix.util.VolleySingle;
 import com.hongxiang.kforthirtysix.activity.news.DetailsActivity;
 import com.hongxiang.kforthirtysix.adapter.news.NewsAdapter;
@@ -89,7 +86,7 @@ public class NewsAllFragment extends BaseFragment {
                 String feedId = newsBean.getData().getData().get(position-2).getFeedId();
                 String imgurl = newsBean.getData().getData().get(position).getFeatureImg();
                 favouriteTexts = new ArrayList<>();
-                favouriteTextDao = GreendaoSingle.getInstance().getPersonDao();
+                favouriteTextDao = FavouritedaoSingle.getInstance().getFavouriteTextDao();
                 favouriteTexts = favouriteTextDao.queryBuilder().list();
                 for (FavouriteText favouriteText : favouriteTexts) {
                     if (favouriteText.getUrlid().equals(feedId)) {
@@ -99,7 +96,9 @@ public class NewsAllFragment extends BaseFragment {
                 intent.putExtra("imageurl",imgurl);
                 intent.putExtra("url", feedId);
                 Log.d("NewsAllFragment", imgurl);
+
                 startActivity(intent);
+
             }
         });
         View view = LayoutInflater.from(getContext()).inflate(R.layout.news_header, null);

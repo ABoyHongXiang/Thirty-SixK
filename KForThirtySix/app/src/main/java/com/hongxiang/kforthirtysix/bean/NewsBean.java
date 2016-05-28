@@ -116,8 +116,8 @@ public class NewsBean {
             private String type;
             private String featureImg;
             private int commentCount;
-            /**
-             * avatar : https://krplus-pic.b0.upaiyun.com/201602/17045316/0rzrnabs86rx4alj.jpg!480
+            /***
+              avatar : https://krplus-pic.b0.upaiyun.com/201602/17045316/0rzrnabs86rx4alj.jpg!480
              * name : 陈庆翔
              * ssoId : 545554
              */

@@ -1,16 +1,12 @@
 package com.hongxiang.kforthirtysix.fragment.news;
 
 import android.content.Intent;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.Volley;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.hongxiang.kforthirtysix.R;
@@ -18,10 +14,9 @@ import com.hongxiang.kforthirtysix.activity.news.DetailsActivity;
 import com.hongxiang.kforthirtysix.adapter.news.RecentAdapter;
 import com.hongxiang.kforthirtysix.bean.RecentBean;
 import com.hongxiang.kforthirtysix.fragment.BaseFragment;
-import com.hongxiang.kforthirtysix.sql.FavouriteText;
-import com.hongxiang.kforthirtysix.sql.FavouriteTextDao;
-import com.hongxiang.kforthirtysix.util.GreendaoSingle;
-import com.hongxiang.kforthirtysix.util.GsonRequest;
+import com.hongxiang.kforthirtysix.favouritesql.FavouriteText;
+import com.hongxiang.kforthirtysix.favouritesql.FavouriteTextDao;
+import com.hongxiang.kforthirtysix.util.FavouritedaoSingle;
 import com.hongxiang.kforthirtysix.util.VolleySingle;
 
 import java.util.ArrayList;
@@ -75,7 +70,7 @@ public class RecentFragment extends BaseFragment {
                 Intent intent = new Intent(getActivity(), DetailsActivity.class);
                 String a = recentBean.getData().getData().get(position-1).getFeedId();
                 favouriteTexts = new ArrayList<>();
-                favouriteTextDao = GreendaoSingle.getInstance().getPersonDao();
+                favouriteTextDao = FavouritedaoSingle.getInstance().getFavouriteTextDao();
                 favouriteTexts = favouriteTextDao.queryBuilder().list();
                 intent.putExtra("url",a);
                 for (FavouriteText favouriteText : favouriteTexts) {

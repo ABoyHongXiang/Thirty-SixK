@@ -6,6 +6,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.TranslateAnimation;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -21,6 +23,7 @@ import it.sephiroth.android.library.picasso.Picasso;
 public class NearPlayAdapter extends BaseAdapter {
     private NearPlayBean nearPlayBean;
     private Context context;
+
 
     public NearPlayAdapter(Context context) {
         this.context = context;
@@ -68,7 +71,14 @@ public class NearPlayAdapter extends BaseAdapter {
         holder.title.setText(title);
         holder.smalltitle.setText(smalltitle);
         holder.type.setText(type);
-        Picasso.with(context).load(url).into(holder.imageView);
+        Picasso.with(context).load(url).resize(500,300).into(holder.imageView);
+        TranslateAnimation translateAnimation = new TranslateAnimation(
+                Animation.RELATIVE_TO_SELF, -1,
+                Animation.RELATIVE_TO_PARENT, 0f,
+                Animation.RELATIVE_TO_SELF, -1,
+                Animation.RELATIVE_TO_PARENT, 0f);
+        translateAnimation.setDuration(1000);
+        convertView.setAnimation(translateAnimation);
         return convertView;
     }
 
@@ -84,5 +94,6 @@ public class NearPlayAdapter extends BaseAdapter {
             date= (TextView) itemView.findViewById(R.id.nearplay_date);
 
         }
+
     }
 }

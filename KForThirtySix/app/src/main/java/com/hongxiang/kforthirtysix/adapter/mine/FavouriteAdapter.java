@@ -1,16 +1,17 @@
 package com.hongxiang.kforthirtysix.adapter.mine;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.TranslateAnimation;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.hongxiang.kforthirtysix.R;
-import com.hongxiang.kforthirtysix.sql.FavouriteText;
+import com.hongxiang.kforthirtysix.favouritesql.FavouriteText;
 
 import java.util.List;
 
@@ -62,6 +63,13 @@ public class FavouriteAdapter extends BaseAdapter {
         holder.title.setText(favouriteTexts.get(position).getTitle());
         holder.writer.setText(favouriteTexts.get(position).getWriter());
         Picasso.with(context).load(imgurl).resize(150,150).into(holder.imageView);
+        TranslateAnimation translateAnimation = new TranslateAnimation(
+                Animation.RELATIVE_TO_SELF, -1,
+                Animation.RELATIVE_TO_PARENT, 0f,
+                Animation.RELATIVE_TO_SELF, -1,
+                Animation.RELATIVE_TO_PARENT, 0f);
+        translateAnimation.setDuration(1000);
+        convertView.setAnimation(translateAnimation);
         return convertView;
     }
 

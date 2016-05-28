@@ -7,6 +7,8 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
 import android.widget.Button;
 import android.widget.PopupWindow;
 
@@ -15,7 +17,7 @@ import com.hongxiang.kforthirtysix.R;
 /**
  * Created by dllo on 16/5/24.
  */
-public class MySharePopWindow  extends PopupWindow {
+public class MySharePopWindow extends PopupWindow {
 
     private View mShareView;
     private View wechat;//微信
@@ -66,10 +68,16 @@ public class MySharePopWindow  extends PopupWindow {
         //设置SelectPicPopupWindow弹出窗体的背景
         this.setBackgroundDrawable(dw);
         //mMenuView添加OnTouchListener监听判断获取触屏位置如果在选择框外面则销毁弹出框
+        AlphaAnimation alphaAnimation
+                //从多少透明度 到多少透明度
+                = new AlphaAnimation(0, 1);
+        alphaAnimation.setDuration(2000);
+        alphaAnimation.setRepeatMode(Animation.REVERSE);
+        alphaAnimation.setDuration(1000);
+        mShareView.setAnimation(alphaAnimation);
         mShareView.setOnTouchListener(new View.OnTouchListener() {
 
             public boolean onTouch(View v, MotionEvent event) {
-
                 int height = mShareView.findViewById(R.id.share_pop_layout).getTop();
                 int y = (int) event.getY();
                 if (event.getAction() == MotionEvent.ACTION_UP) {

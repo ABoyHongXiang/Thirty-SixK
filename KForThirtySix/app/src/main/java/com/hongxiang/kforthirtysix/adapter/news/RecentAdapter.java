@@ -5,6 +5,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.TranslateAnimation;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -65,7 +67,13 @@ public class RecentAdapter extends BaseAdapter {
         Picasso.with(context).load(imgurl).into(holder.imageView);
         holder.title.setText(title);
         holder.writer.setText(writer);
-
+        TranslateAnimation translateAnimation = new TranslateAnimation(
+                Animation.RELATIVE_TO_SELF, -1,
+                Animation.RELATIVE_TO_PARENT, 0f,
+                Animation.RELATIVE_TO_SELF, -1,
+                Animation.RELATIVE_TO_PARENT, 0f);
+        translateAnimation.setDuration(1000);
+        convertView.setAnimation(translateAnimation);
 
         return convertView;
     }

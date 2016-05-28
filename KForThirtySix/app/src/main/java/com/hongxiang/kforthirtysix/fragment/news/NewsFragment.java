@@ -3,6 +3,8 @@ package com.hongxiang.kforthirtysix.fragment.news;
 import android.content.Intent;
 import android.view.Gravity;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -54,6 +56,9 @@ public class NewsFragment extends BaseFragment implements View.OnClickListener {
                 startActivity(intent);
                 break;
             case R.id.fragmentnews_menu:
+                //动画
+
+
                 //实例化SelectPicPopupWindow
                 popupWindow = new MyMenuPopWindow(getContext(), itemsOnClick);
                 //显示窗口

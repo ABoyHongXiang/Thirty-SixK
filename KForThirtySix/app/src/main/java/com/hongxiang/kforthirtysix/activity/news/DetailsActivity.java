@@ -11,6 +11,7 @@ import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
@@ -27,9 +28,9 @@ import android.widget.Toast;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.hongxiang.kforthirtysix.sql.FavouriteText;
-import com.hongxiang.kforthirtysix.sql.FavouriteTextDao;
-import com.hongxiang.kforthirtysix.util.GreendaoSingle;
+import com.hongxiang.kforthirtysix.favouritesql.FavouriteText;
+import com.hongxiang.kforthirtysix.favouritesql.FavouriteTextDao;
+import com.hongxiang.kforthirtysix.util.FavouritedaoSingle;
 import com.hongxiang.kforthirtysix.util.MyScrollView;
 import com.hongxiang.kforthirtysix.util.MySharePopWindow;
 import com.hongxiang.kforthirtysix.util.PicassoCirclTransform;
@@ -75,7 +76,7 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
         getSupportActionBar().hide();//使app标题栏消失
         setContentView(R.layout.avtivity_details);
         //数据库的对象
-        favouriteTextDao = GreendaoSingle.getInstance().getPersonDao();
+        favouriteTextDao = FavouritedaoSingle.getInstance().getFavouriteTextDao();
         scrollView = (MyScrollView) findViewById(R.id.details_scrollview);
         linearLayout = (LinearLayout) findViewById(R.id.details_bottom_title);
         animation_in = AnimationUtils.loadAnimation(this, R.anim.anim_in);
@@ -102,6 +103,13 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
         title = (TextView) findViewById(R.id.details_bigtitle);
         secondTitle = (TextView) findViewById(R.id.details_smalltitle);
         mcontext = (TextView) findViewById(R.id.details_context);
+        mcontext.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                pop.dismiss();
+                return false;
+            }
+        });
         writeline = (TextView) findViewById(R.id.details_line);
         //顶部标题的组件
         relativeLayout = (RelativeLayout) findViewById(R.id.writer_layout);
@@ -288,6 +296,7 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
                 break;
             case R.id.bt_back:
                 finish();
+
                 break;
             case R.id.bt_message:
 

@@ -59,6 +59,7 @@ public class SearchAdapter extends BaseAdapter {
         holder.title.setText(searchBean.getData().getData().get(position).getTitle());
         holder.writer.setText(searchBean.getData().getData().get(position).getUser().getName());
         holder.type.setText(searchBean.getData().getData().get(position).getColumnName());
+
         return convertView;
     }
 
