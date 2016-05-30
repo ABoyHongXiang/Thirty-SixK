@@ -67,12 +67,10 @@ public class WelcomeActivity extends AppCompatActivity {
             public void onTick(long millisUntilFinished) {
                 timeTv.setText(millisUntilFinished / 1000 + "s");
             }
-
             @Override
             public void onFinish() {
                 timeTv.setText("跳转");
                 startActivity(new Intent(WelcomeActivity.this, MainActivity.class));
-                overridePendingTransition(R.anim.anim_in, R.anim.anim_out);
                 finish();
             }
         }.start();

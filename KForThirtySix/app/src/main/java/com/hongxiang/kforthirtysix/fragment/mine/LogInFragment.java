@@ -61,7 +61,7 @@ public class LogInFragment extends BaseFragment implements View.OnClickListener 
                 user = String.valueOf(userNumEt.getText());
                 key = String.valueOf(keyEt.getText());
                 if (logList.size() < 1) {
-                    Toast.makeText(getContext(), "heuheuheu ", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "没注册", Toast.LENGTH_SHORT).show();
                 } else {
                     if (user.length() == 11 && key.length() > 6 && key.length() < 15) {
                         for (Log log : logList) {
@@ -69,8 +69,12 @@ public class LogInFragment extends BaseFragment implements View.OnClickListener 
                                 i = 2;
                                 if (log.getKey().equals(key)) {
                                     Toast.makeText(getContext(), "登录成功", Toast.LENGTH_SHORT).show();
-                                    Intent intent = new Intent(getContext(), MainActivity.class);
-                                    startActivity(intent);
+                                    Intent broadIntent = new Intent("LogBroad");
+                                    broadIntent.putExtra("user",user);
+                                    broadIntent.putExtra("finish", )
+                                    getContext().sendBroadcast(broadIntent);
+
+
 
                                 } else {
                                     Toast.makeText(getContext(), "密码错误请重新输入", Toast.LENGTH_SHORT).show();
@@ -83,6 +87,7 @@ public class LogInFragment extends BaseFragment implements View.OnClickListener 
                     } else {
                         Toast.makeText(getContext(), "请输入正确的手机号和密码", Toast.LENGTH_SHORT).show();
                     }
+
 
                 }
 

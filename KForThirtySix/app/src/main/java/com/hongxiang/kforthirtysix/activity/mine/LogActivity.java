@@ -1,5 +1,9 @@
 package com.hongxiang.kforthirtysix.activity.mine;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -27,6 +31,7 @@ public class LogActivity extends AppCompatActivity {
     private TabLayout tabLayout;
     private ImageView finish;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,11 +46,9 @@ public class LogActivity extends AppCompatActivity {
         finish = (ImageView) findViewById(R.id.log_back);
         //添加Fragment的方法 两个Fragment 一个是登录一个是注册
         addFrament();
-
         logAdapter = new LogAdapter(getSupportFragmentManager());
         logAdapter.setFragmentList(fragmentList);
         viewpager.setAdapter(logAdapter);
-
         tabLayout.setupWithViewPager(viewpager);
         //返回键的监听
         finish.setOnClickListener(new View.OnClickListener() {
@@ -57,6 +60,9 @@ public class LogActivity extends AppCompatActivity {
         //tablayout 设置自定义View
         tabLayout.getTabAt(0).setCustomView(R.layout.tablayout_viewone);
         tabLayout.getTabAt(1).setCustomView(R.layout.tablayout_viewtwo);
+
+
+
     }
 
 
@@ -66,5 +72,6 @@ public class LogActivity extends AppCompatActivity {
         fragmentList.add(new LogInFragment());
         fragmentList.add(new LogFragment());
     }
+
 
 }

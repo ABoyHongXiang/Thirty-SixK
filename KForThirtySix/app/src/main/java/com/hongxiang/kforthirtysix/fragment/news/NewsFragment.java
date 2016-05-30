@@ -57,8 +57,6 @@ public class NewsFragment extends BaseFragment implements View.OnClickListener {
                 break;
             case R.id.fragmentnews_menu:
                 //动画
-
-
                 //实例化SelectPicPopupWindow
                 popupWindow = new MyMenuPopWindow(getContext(), itemsOnClick);
                 //显示窗口

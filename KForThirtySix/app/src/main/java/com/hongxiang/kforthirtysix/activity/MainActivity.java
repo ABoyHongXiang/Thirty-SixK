@@ -9,11 +9,12 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.hongxiang.kforthirtysix.adapter.MainAdapter;
 import com.hongxiang.kforthirtysix.R;
 import com.hongxiang.kforthirtysix.fragment.found.FoundFragment;
-import com.hongxiang.kforthirtysix.fragment.lol.LolMainFragment;
+import com.hongxiang.kforthirtysix.fragment.investment.InvestmentMainFragment;
 import com.hongxiang.kforthirtysix.fragment.mine.MineFragment;
 import com.hongxiang.kforthirtysix.fragment.news.NewsFragment;
 import com.hongxiang.kforthirtysix.util.ExampleUtil;
@@ -34,7 +35,8 @@ public class MainActivity extends FragmentActivity {
     private TabLayout tabLayout;
     private MainAdapter mainAdapter;
     private List<Fragment> fragmentList;
-
+    private MyBroad myBroad;
+    private String user = "";
     public static boolean isForeground = false;
 
 
@@ -50,18 +52,39 @@ public class MainActivity extends FragmentActivity {
         viewPager.setAdapter(mainAdapter);
         tabLayout.setupWithViewPager(viewPager);
         initTab();//设置tab的方法
-
-
+        myBroad = new MyBroad();
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction("LogBroad");
+        registerReceiver(myBroad, intentFilter);
         registerMessageReceiver();  // used for receive msg
+        Log.d("MyBroad----------", user);
+    }
+
+
+    class MyBroad extends BroadcastReceiver {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            user = intent.getStringExtra("user");
+            Log.d("MyBroad", user);
+
+        }
     }
 
     //添加四个Fragment的方法
     private void initFragment() {
         fragmentList = new ArrayList<>();
         fragmentList.add(new NewsFragment());
-        fragmentList.add(new LolMainFragment());
+        fragmentList.add(new InvestmentMainFragment());
         fragmentList.add(new FoundFragment());
-        fragmentList.add(new MineFragment());
+
+        if (user.length()> 0) {
+            fragmentList.add(new MineFragment(user));
+            Log.d("MainActivity", "user");
+        } else {
+            fragmentList.add(new MineFragment("未登录"));
+            Log.d("MainActivity", "未登录");
+        }
+
 
     }
 
@@ -75,7 +98,7 @@ public class MainActivity extends FragmentActivity {
     }
 
     // 初始化 JPush。如果已经初始化，但没有登录成功，则执行重新登录。
-    private void init(){
+    private void init() {
         JPushInterface.init(getApplicationContext());
     }
 
@@ -97,6 +120,7 @@ public class MainActivity extends FragmentActivity {
     @Override
     protected void onDestroy() {
         unregisterReceiver(mMessageReceiver);
+        unregisterReceiver(myBroad);
         super.onDestroy();
     }
 
@@ -132,7 +156,6 @@ public class MainActivity extends FragmentActivity {
             }
         }
     }
-
 
 
 }

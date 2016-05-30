@@ -1,4 +1,5 @@
 package com.hongxiang.kforthirtysix.activity.news;
+
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
@@ -46,6 +47,7 @@ import java.net.URL;
 
 
 import it.sephiroth.android.library.picasso.Picasso;
+
 /**
  * Created by dllo on 16/5/14.
  * 新闻的详情界面
@@ -54,7 +56,7 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
     private final static String START_URL = "https://rong.36kr.com/api/mobi/news/";
     private final static String END_URL = "/author-region";
     private DetailsBean detailsBean;//详情的数据类
-    private String url,imgurl;//用来接收上个界面传来的id ,拼接网址
+    private String url, imgurl;//用来接收上个界面传来的id ,拼接网址
     private TextView title, secondTitle, mcontext, writer, num, read, writeline;
     private ImageView writeImg, menudown, heart;
     private PopupWindow pop;
@@ -70,6 +72,7 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
     private MySharePopWindow sharepop;
     private FavouriteTextDao favouriteTextDao;
     private int id;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -163,6 +166,7 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
             }
         });
     }
+
     //解析作者===解析的是popupwindow的内容,下面解析的是界面的
     private void startVolleyWriter() {
         VolleySingle.addRequest(START_URL + url + END_URL, WriterBean.class, new Response.Listener<WriterBean>() {
@@ -182,16 +186,17 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
             }
         });
     }
+
     //popupwindow具体的设置
     private void showPop() {
-        pop = new PopupWindow(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        //绑定布局
         View view = LayoutInflater.from(this).inflate(R.layout.popwindow_writer, null);
+        pop = new PopupWindow(view,ViewGroup.LayoutParams.FILL_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        //绑定布局
         pop.setWidth(WindowManager.LayoutParams.MATCH_PARENT);
         ColorDrawable dw = new ColorDrawable(0x70000000);
         //设置SelectPicPopupWindow弹出窗体的背景
         pop.setBackgroundDrawable(dw);
-        pop.setContentView(view);
+        pop.setAnimationStyle(R.style.pop_anim);
         num = (TextView) view.findViewById(R.id.pop_writer_num);
         read = (TextView) view.findViewById(R.id.pop_writer_readnum);
         listView = (ListView) view.findViewById(R.id.pop_wirter_listview);
@@ -215,6 +220,7 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
 
 
     }
+
     //解析详情数据====界面的内容,上面解析的是popupwindow的内容
     public void startVolleyDetails(String myUrl) {
         VolleySingle.addRequest("https://rong.36kr.com/api/mobi/news/" + myUrl, DetailsBean.class, new Response.Listener<DetailsBean>() {
@@ -244,6 +250,7 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
 
 
     }
+
     //加载Html的方法
     Html.ImageGetter imgGetter = new Html.ImageGetter() {
         public Drawable getDrawable(String source) {
@@ -273,6 +280,7 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
                 .penaltyLog() // 打印logcat
                 .penaltyDeath().build());
     }
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -281,15 +289,15 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
                     heart.setImageResource(R.mipmap.heart_bt_true);
                     String writer = detailsBean.getData().getUser().getName();
                     String title = detailsBean.getData().getTitle();
-                    id =detailsBean.getData().getPostId();
-                    FavouriteText a = new FavouriteText((long)id,title, writer, url,imgurl);
+                    id = detailsBean.getData().getPostId();
+                    FavouriteText a = new FavouriteText((long) id, title, writer, url, imgurl);
                     Toast.makeText(this, "收藏成功", Toast.LENGTH_SHORT).show();
                     favouriteTextDao.insert(a);
                     heartBoolean = false;
                 } else {
                     heart.setImageResource(R.mipmap.heart_bt);
-                    id =detailsBean.getData().getPostId();
-                    favouriteTextDao.deleteByKey((long)id);
+                    id = detailsBean.getData().getPostId();
+                    favouriteTextDao.deleteByKey((long) id);
                     Toast.makeText(this, "取消收藏", Toast.LENGTH_SHORT).show();
                     heartBoolean = true;
                 }
@@ -313,6 +321,7 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
 
         }
     }
+
     private View.OnClickListener itemsOnClick = new View.OnClickListener() {
         public void onClick(View v) {
             sharepop.dismiss();

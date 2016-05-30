@@ -71,7 +71,7 @@ public class NearPlayAdapter extends BaseAdapter {
         holder.title.setText(title);
         holder.smalltitle.setText(smalltitle);
         holder.type.setText(type);
-        Picasso.with(context).load(url).resize(500,300).into(holder.imageView);
+        Picasso.with(context).load(url).into(holder.imageView);
         TranslateAnimation translateAnimation = new TranslateAnimation(
                 Animation.RELATIVE_TO_SELF, -1,
                 Animation.RELATIVE_TO_PARENT, 0f,

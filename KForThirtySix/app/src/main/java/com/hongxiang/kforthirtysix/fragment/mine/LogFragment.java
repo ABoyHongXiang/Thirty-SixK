@@ -27,7 +27,7 @@ public class LogFragment extends BaseFragment {
     private Button log;
     private EditText phoneNum, diglogUser, diglogKey;
     private LogDao logdao;
-    private String user, key;
+    private String user, key,userNum;
     private List<Log> logList;
 
 
@@ -46,6 +46,7 @@ public class LogFragment extends BaseFragment {
             @Override
             public void onClick(View v) {
                 if (phoneNum.getText().length() == 11) {
+                    userNum= String.valueOf(phoneNum.getText());
                     showDialog();
                 } else {
                     Toast.makeText(getContext(), "请输入正确的手机号", Toast.LENGTH_SHORT).show();
@@ -55,7 +56,6 @@ public class LogFragment extends BaseFragment {
         });
 
     }
-
     private void showDialog() {
         AlertDialog.Builder bulider = new AlertDialog.Builder(getContext());
         bulider.setTitle("注册");
@@ -63,11 +63,9 @@ public class LogFragment extends BaseFragment {
         View view = LayoutInflater.from(getContext()).inflate(R.layout.logdialog, null);
         diglogUser = (EditText) view.findViewById(R.id.log_dialog_user);
         diglogKey = (EditText) view.findViewById(R.id.log_dialog_keys);
-
-
+        android.util.Log.d("LogFragment", "phoneNum.getText():" + phoneNum.getText());
+        diglogUser.setText(userNum);
         bulider.setNegativeButton("取消", null);
-
-
         bulider.setPositiveButton("注册", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
