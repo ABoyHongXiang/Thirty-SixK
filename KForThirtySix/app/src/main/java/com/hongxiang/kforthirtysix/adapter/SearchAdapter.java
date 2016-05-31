@@ -4,6 +4,8 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.TranslateAnimation;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -54,19 +56,24 @@ public class SearchAdapter extends BaseAdapter {
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-        String imageUrl=searchBean.getData().getData().get(position).getFeatureImg();
-        Picasso.with(context).load(imageUrl).resize(200,200).into(holder.img);
+        String imageUrl = searchBean.getData().getData().get(position).getFeatureImg();
+        Picasso.with(context).load(imageUrl).resize(200, 200).into(holder.img);
         holder.title.setText(searchBean.getData().getData().get(position).getTitle());
         holder.writer.setText(searchBean.getData().getData().get(position).getUser().getName());
         holder.type.setText(searchBean.getData().getData().get(position).getColumnName());
-
+        TranslateAnimation translateAnimation = new TranslateAnimation(
+                Animation.RELATIVE_TO_SELF, -1,
+                Animation.RELATIVE_TO_PARENT, 0f,
+                Animation.RELATIVE_TO_SELF, -1,
+                Animation.RELATIVE_TO_PARENT, 0f);
+        translateAnimation.setDuration(1000);
+        convertView.setAnimation(translateAnimation);
         return convertView;
     }
 
     class ViewHolder {
         private ImageView img;
         private TextView writer, title, type;
-
         public ViewHolder(View itemView) {
             img = (ImageView) itemView.findViewById(R.id.search_image);
             title = (TextView) itemView.findViewById(R.id.search_title);

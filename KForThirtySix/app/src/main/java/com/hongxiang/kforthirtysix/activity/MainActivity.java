@@ -35,14 +35,15 @@ public class MainActivity extends FragmentActivity {
     private TabLayout tabLayout;
     private MainAdapter mainAdapter;
     private List<Fragment> fragmentList;
-    private MyBroad myBroad;
-    private String user = "";
+
+
     public static boolean isForeground = false;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        overridePendingTransition(R.anim.anim_in, R.anim.anim_out);
         setContentView(R.layout.activity_main);
         viewPager = (ViewPager) findViewById(R.id.main_viewpager);
         tabLayout = (TabLayout) findViewById(R.id.main_tablayout);
@@ -52,23 +53,13 @@ public class MainActivity extends FragmentActivity {
         viewPager.setAdapter(mainAdapter);
         tabLayout.setupWithViewPager(viewPager);
         initTab();//设置tab的方法
-        myBroad = new MyBroad();
-        IntentFilter intentFilter = new IntentFilter();
-        intentFilter.addAction("LogBroad");
-        registerReceiver(myBroad, intentFilter);
+
         registerMessageReceiver();  // used for receive msg
-        Log.d("MyBroad----------", user);
+
     }
 
 
-    class MyBroad extends BroadcastReceiver {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            user = intent.getStringExtra("user");
-            Log.d("MyBroad", user);
 
-        }
-    }
 
     //添加四个Fragment的方法
     private void initFragment() {
@@ -76,15 +67,7 @@ public class MainActivity extends FragmentActivity {
         fragmentList.add(new NewsFragment());
         fragmentList.add(new InvestmentMainFragment());
         fragmentList.add(new FoundFragment());
-
-        if (user.length()> 0) {
-            fragmentList.add(new MineFragment(user));
-            Log.d("MainActivity", "user");
-        } else {
-            fragmentList.add(new MineFragment("未登录"));
-            Log.d("MainActivity", "未登录");
-        }
-
+        fragmentList.add(new MineFragment());
 
     }
 
@@ -120,9 +103,10 @@ public class MainActivity extends FragmentActivity {
     @Override
     protected void onDestroy() {
         unregisterReceiver(mMessageReceiver);
-        unregisterReceiver(myBroad);
         super.onDestroy();
+        overridePendingTransition(R.anim.anim_in, R.anim.anim_out);
     }
+
 
 
     //for receive customer msg from jpush server

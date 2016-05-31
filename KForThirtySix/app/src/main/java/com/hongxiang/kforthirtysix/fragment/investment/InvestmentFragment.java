@@ -6,7 +6,7 @@ import android.widget.ListView;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 
-import com.hongxiang.kforthirtysix.adapter.lol.InvestmentAdapter;
+import com.hongxiang.kforthirtysix.adapter.investment.InvestmentAdapter;
 import com.hongxiang.kforthirtysix.bean.InvestmentBean;
 import com.hongxiang.kforthirtysix.R;
 import com.hongxiang.kforthirtysix.fragment.BaseFragment;

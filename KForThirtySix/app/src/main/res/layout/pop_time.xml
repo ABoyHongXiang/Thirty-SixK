@@ -6,6 +6,7 @@
     android:orientation="vertical">
 
     <LinearLayout
+        android:id="@+id/recent_pop_all"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
@@ -24,6 +25,7 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/recent_pop_thisweekend"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
@@ -42,6 +44,7 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/recent_pop_thisweek"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
@@ -60,6 +63,7 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/recent_pop_nextweek"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"

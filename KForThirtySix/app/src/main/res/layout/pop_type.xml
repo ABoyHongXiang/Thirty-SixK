@@ -5,6 +5,25 @@
     android:background="#ffffff">
 
     <LinearLayout
+        android:id="@+id/recent_pop_idall"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="全部" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/go" />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/recent_pop_id1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
@@ -22,6 +41,7 @@
             android:src="@mipmap/go" />
     </LinearLayout>
     <LinearLayout
+        android:id="@+id/recent_pop_id4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
@@ -39,6 +59,7 @@
             android:src="@mipmap/go" />
     </LinearLayout>
     <LinearLayout
+        android:id="@+id/recent_pop_id5"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
@@ -56,6 +77,7 @@
             android:src="@mipmap/go" />
     </LinearLayout>
     <LinearLayout
+        android:id="@+id/recent_pop_id6"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
@@ -73,6 +95,7 @@
             android:src="@mipmap/go" />
     </LinearLayout>
     <LinearLayout
+        android:id="@+id/recent_pop_id7"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"

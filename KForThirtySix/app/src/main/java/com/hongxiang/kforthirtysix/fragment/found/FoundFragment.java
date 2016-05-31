@@ -64,6 +64,7 @@ public class FoundFragment extends BaseFragment implements View.OnClickListener 
         switch (v.getId()) {
             case R.id.foundfragment_search:
                 Intent intent = new Intent(getActivity(), SearchActivity.class);
+               getActivity().overridePendingTransition(R.anim.anim_in, R.anim.anim_out);
                 startActivity(intent);
                 break;
             //深度创业服务
@@ -97,6 +98,7 @@ public class FoundFragment extends BaseFragment implements View.OnClickListener 
             //近期活动
             case R.id.found_sv_two:
                 Intent intent2 = new Intent(getActivity(), NearPlayActivity.class);
+                getActivity().overridePendingTransition(R.anim.anim_in, R.anim.anim_out);
                 startActivity(intent2);
                 break;
             //36氪研究所
@@ -106,6 +108,7 @@ public class FoundFragment extends BaseFragment implements View.OnClickListener 
             //寻找投资人
             case R.id.found_sv_four:
                 Intent intent1 = new Intent(getActivity(), FoundPeopleActivity.class);
+                getActivity().overridePendingTransition(R.anim.anim_in, R.anim.anim_out);
                 startActivity(intent1);
                 break;
             //申请融资

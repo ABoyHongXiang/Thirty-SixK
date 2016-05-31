@@ -1,4 +1,4 @@
-package com.hongxiang.kforthirtysix.adapter.lol;
+package com.hongxiang.kforthirtysix.adapter.investment;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;

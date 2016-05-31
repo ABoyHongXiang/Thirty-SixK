@@ -23,22 +23,17 @@ public class MineFragment extends BaseFragment {
     private View logLayout, favoriteLayout;
     private String user = "";
     private TextView userTv;
+    private  MyBroad myBroad;
 
     @Override
     public void initView(View view) {
         favoriteLayout = view.findViewById(R.id.mine_favourite_layout);
         logLayout = view.findViewById(R.id.log_layout);
         userTv = (TextView) view.findViewById(R.id.mine_user);
-        if (user.length() > 0) {
-            userTv.setText(user);
-        }
+
 
     }
 
-    public MineFragment(String user) {
-        this.user = user;
-        Log.d("MineFragment", user);
-    }
 
     @Override
     public void initData() {
@@ -57,6 +52,10 @@ public class MineFragment extends BaseFragment {
                 startActivity(intent);
             }
         });
+        myBroad = new MyBroad();
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction("LogBroad");
+        getContext().registerReceiver(myBroad, intentFilter);
 
     }
 
@@ -66,5 +65,17 @@ public class MineFragment extends BaseFragment {
         return R.layout.fragment_mine;
     }
 
-
+    class MyBroad extends BroadcastReceiver {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            user = intent.getStringExtra("user");
+            Log.d("MyBroad", user);
+            userTv.setText(user);
+        }
+    }
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        getContext().unregisterReceiver(myBroad);
+    }
 }

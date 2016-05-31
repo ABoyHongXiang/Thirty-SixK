@@ -16,8 +16,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
+            android:padding="15dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/bg_edittext"
             android:hint="手机号/邮箱"
             android:singleLine="true" />
     </LinearLayout>
@@ -33,8 +34,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
+            android:padding="15dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/bg_edittext"
             android:hint="密码"
             android:password="true"
             android:singleLine="true" />

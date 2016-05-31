@@ -23,11 +23,12 @@
             android:layout_gravity="center"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="我收藏的文章"
+            android:textStyle="bold"
+            android:text="@string/favourite_text"
             android:textSize="15sp" />
     </LinearLayout>
 
-    <com.handmark.pulltorefresh.library.PullToRefreshListView
+    <ListView
         android:id="@+id/favourite_listview"
         android:layout_width="match_parent"
         android:layout_height="0dp"

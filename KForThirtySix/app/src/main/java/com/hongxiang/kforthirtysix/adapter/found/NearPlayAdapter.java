@@ -38,6 +38,7 @@ public class NearPlayAdapter extends BaseAdapter {
     public int getCount() {
 
         return nearPlayBean == null ? 0 : nearPlayBean.getData().getData().size();
+
     }
 
     @Override
@@ -60,11 +61,11 @@ public class NearPlayAdapter extends BaseAdapter {
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-        String title =nearPlayBean.getData().getData().get(position).getActivityName();
+        String title = nearPlayBean.getData().getData().get(position).getActivityName();
         String smalltitle = nearPlayBean.getData().getData().get(position).getActivityDesc();
         String type = nearPlayBean.getData().getData().get(position).getActivityStatus();
-        String  date = nearPlayBean.getData().getData().get(position).getActivityTime();
-        String city =nearPlayBean.getData().getData().get(position).getActivityCity();
+        String date = nearPlayBean.getData().getData().get(position).getActivityTime();
+        String city = nearPlayBean.getData().getData().get(position).getActivityCity();
         String url = nearPlayBean.getData().getData().get(position).getActivityImg();
         holder.city.setText(city);
         holder.date.setText(date);
@@ -84,14 +85,15 @@ public class NearPlayAdapter extends BaseAdapter {
 
     class ViewHolder {
         private ImageView imageView;
-          private TextView title,smalltitle,type,city,date;
+        private TextView title, smalltitle, type, city, date;
+
         public ViewHolder(View itemView) {
             imageView = (ImageView) itemView.findViewById(R.id.nearplay_img);
-            title  = (TextView) itemView.findViewById(R.id.nearplay_title);
+            title = (TextView) itemView.findViewById(R.id.nearplay_title);
             smalltitle = (TextView) itemView.findViewById(R.id.nearplay_smalltitle);
             type = (TextView) itemView.findViewById(R.id.nearplay_type);
             city = (TextView) itemView.findViewById(R.id.nearplay_city);
-            date= (TextView) itemView.findViewById(R.id.nearplay_date);
+            date = (TextView) itemView.findViewById(R.id.nearplay_date);
 
         }
 

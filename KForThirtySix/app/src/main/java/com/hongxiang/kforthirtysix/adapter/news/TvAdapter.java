@@ -102,6 +102,7 @@ public class TvAdapter extends BaseAdapter {
 
             }
         });
+        //动画效果
         TranslateAnimation translateAnimation = new TranslateAnimation(
                 Animation.RELATIVE_TO_SELF, -1,
                 Animation.RELATIVE_TO_PARENT, 0f,

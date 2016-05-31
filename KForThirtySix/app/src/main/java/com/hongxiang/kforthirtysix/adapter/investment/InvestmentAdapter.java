@@ -1,4 +1,4 @@
-package com.hongxiang.kforthirtysix.adapter.lol;
+package com.hongxiang.kforthirtysix.adapter.investment;
 
 import android.content.Context;
 import android.view.LayoutInflater;

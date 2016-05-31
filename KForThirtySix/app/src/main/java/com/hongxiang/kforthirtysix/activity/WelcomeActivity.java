@@ -46,6 +46,7 @@ public class WelcomeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        overridePendingTransition(R.anim.anim_in, R.anim.anim_out);
         setContentView(R.layout.activity_welcome);
         getSupportActionBar().hide();//隐藏标题栏
         imageView = (ImageView) findViewById(R.id.welcome_img);
@@ -67,6 +68,7 @@ public class WelcomeActivity extends AppCompatActivity {
             public void onTick(long millisUntilFinished) {
                 timeTv.setText(millisUntilFinished / 1000 + "s");
             }
+
             @Override
             public void onFinish() {
                 timeTv.setText("跳转");
@@ -88,5 +90,11 @@ public class WelcomeActivity extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
         JPushInterface.onPause(this);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        overridePendingTransition(R.anim.anim_in, R.anim.anim_out);
     }
 }

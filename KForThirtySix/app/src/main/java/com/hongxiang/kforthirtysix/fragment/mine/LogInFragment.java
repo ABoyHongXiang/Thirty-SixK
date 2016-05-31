@@ -71,7 +71,7 @@ public class LogInFragment extends BaseFragment implements View.OnClickListener 
                                     Toast.makeText(getContext(), "登录成功", Toast.LENGTH_SHORT).show();
                                     Intent broadIntent = new Intent("LogBroad");
                                     broadIntent.putExtra("user",user);
-                                    broadIntent.putExtra("finish", )
+                                    android.util.Log.d("LogInFragment", user);
                                     getContext().sendBroadcast(broadIntent);
 
 

@@ -77,6 +77,7 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();//使app标题栏消失
+        overridePendingTransition(R.anim.anim_in, R.anim.anim_out);
         setContentView(R.layout.avtivity_details);
         //数据库的对象
         favouriteTextDao = FavouritedaoSingle.getInstance().getFavouriteTextDao();
@@ -356,5 +357,9 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
 
     };
 
-
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        overridePendingTransition(R.anim.anim_in, R.anim.anim_out);
+    }
 }

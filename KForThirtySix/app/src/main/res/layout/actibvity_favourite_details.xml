@@ -14,9 +14,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:text="11111"
             android:textSize="20dp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:text="writer"/>
 
         <TextView
             android:id="@+id/favourite_details_writer"
@@ -25,7 +25,8 @@
             android:layout_alignParentRight="true"
             android:layout_below="@+id/favourite_details_title"
             android:layout_margin="10dp"
-            android:text="11111" />
+            android:text="sth"
+            />
     </RelativeLayout>
 
 
@@ -34,6 +35,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-
-        android:text="11111" />
+        android:text="details"
+         />
 </LinearLayout>

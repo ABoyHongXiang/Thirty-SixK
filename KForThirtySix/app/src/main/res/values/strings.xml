@@ -10,7 +10,7 @@
     <string name="found_sv_one">36氪指数</string>
     <string name="hello">Hello World, JPush!</string>
 
-    <string name="tag_hint">Tag为大小写字母，数字，下划线,中文， 多个用以逗号分隔</string>
+    <string name="tag_hint">Tag为大小写字母，数字，下划线,中文，多个用以逗号分隔</string>
     <string name="alias_hint">Alias为大小写字母，数字，下划线</string>
     <string name="style_hint">style为数字</string>
     <string name="error_style_empty">style不能为空</string>
@@ -40,5 +40,11 @@
     <string name="aty_search_content">搜索新闻/用户/公司</string>
     <string name="fragment_invest_title">股权投资</string>
     <string name="log_title">注册成为36氪用户,即享一站式创业服务</string>
+    <string name="favourite_text">我收藏的文章</string>
+    <string name="foundpeople">寻找投资人</string>
+    <string name="nearplay">近期活动</string>
+    <string name="play_type">近期活动</string>
+    <string name="play_time">近期活动</string>
+    <string name="log">注册</string>
 
 </resources>

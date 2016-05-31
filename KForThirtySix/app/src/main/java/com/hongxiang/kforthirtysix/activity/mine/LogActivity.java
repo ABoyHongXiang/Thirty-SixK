@@ -9,6 +9,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -30,6 +31,8 @@ public class LogActivity extends AppCompatActivity {
     private ViewPager viewpager;
     private TabLayout tabLayout;
     private ImageView finish;
+    private String broad;
+    private MyBroad myBroad;
 
 
     @Override
@@ -37,6 +40,7 @@ public class LogActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         //隐藏标题栏
         getSupportActionBar().hide();
+        overridePendingTransition(R.anim.anim_in, R.anim.anim_out);
         setContentView(R.layout.activity_log);
         //viewpager
         viewpager = (ViewPager) findViewById(R.id.log_viewpager);
@@ -60,7 +64,10 @@ public class LogActivity extends AppCompatActivity {
         //tablayout 设置自定义View
         tabLayout.getTabAt(0).setCustomView(R.layout.tablayout_viewone);
         tabLayout.getTabAt(1).setCustomView(R.layout.tablayout_viewtwo);
-
+        myBroad = new MyBroad();
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction("LogBroad");
+        registerReceiver(myBroad, intentFilter);
 
 
     }
@@ -73,5 +80,18 @@ public class LogActivity extends AppCompatActivity {
         fragmentList.add(new LogFragment());
     }
 
+    class MyBroad extends BroadcastReceiver {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            finish();
+            overridePendingTransition(R.anim.anim_in, R.anim.anim_out);
+        }
+    }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(myBroad);
+        overridePendingTransition(R.anim.anim_in, R.anim.anim_out);
+    }
 }

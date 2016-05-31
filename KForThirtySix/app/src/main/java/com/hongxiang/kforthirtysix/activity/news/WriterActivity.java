@@ -44,5 +44,12 @@ public class WriterActivity extends AppCompatActivity {
             }
         });
 
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        overridePendingTransition(R.anim.anim_in, R.anim.anim_out);
     }
 }

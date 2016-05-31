@@ -7,7 +7,7 @@ import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.ImageView;
 
-import com.hongxiang.kforthirtysix.adapter.lol.InvestmentMainAdapter;
+import com.hongxiang.kforthirtysix.adapter.investment.InvestmentMainAdapter;
 import com.hongxiang.kforthirtysix.R;
 import com.hongxiang.kforthirtysix.activity.SearchActivity;
 import com.hongxiang.kforthirtysix.fragment.BaseFragment;

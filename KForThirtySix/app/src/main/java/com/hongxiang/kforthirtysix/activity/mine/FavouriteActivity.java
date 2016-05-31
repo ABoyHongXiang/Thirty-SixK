@@ -36,10 +36,9 @@ public class FavouriteActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();
+        overridePendingTransition(R.anim.anim_in, R.anim.anim_out);
         setContentView(R.layout.activity_favourite);
-        pullToRefreshListView = (PullToRefreshListView) findViewById(R.id.favourite_listview);
-        pullToRefreshListView.setMode(PullToRefreshBase.Mode.BOTH);
-        listView = pullToRefreshListView.getRefreshableView();
+        listView = (ListView) findViewById(R.id.favourite_listview);
         back = (ImageView) findViewById(R.id.favourite_back);
         favouriteAdapter = new FavouriteAdapter(this);
         favouriteTexts = new ArrayList<>();
@@ -52,25 +51,6 @@ public class FavouriteActivity extends AppCompatActivity {
             public void onClick(View v) {
                 finish();
 
-            }
-        });
-        pullToRefreshListView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
-            @Override
-            public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
-
-                listView.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        listView.setAdapter(favouriteAdapter);
-                        pullToRefreshListView.onRefreshComplete();
-                    }
-                },2000);
-
-            }
-
-            @Override
-            public void onPullUpToRefresh(PullToRefreshBase<ListView> refreshView) {
-                pullToRefreshListView.onRefreshComplete();
             }
         });
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -86,5 +66,17 @@ public class FavouriteActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
 
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        favouriteTexts = favouriteTextDao.queryBuilder().list();
+        favouriteAdapter.setFavouriteTexts(favouriteTexts);
+
+    }
 }

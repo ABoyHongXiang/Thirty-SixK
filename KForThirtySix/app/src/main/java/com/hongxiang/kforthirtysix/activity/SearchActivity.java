@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -37,6 +38,7 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();
+
         setContentView(R.layout.activity_search);
         exitText = (EditText) findViewById(R.id.search_sth);
         exitTextview = (TextView) findViewById(R.id.search_exit);
@@ -73,7 +75,12 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
             public void onResponse(SearchBean response) {
                 searchBean = response;
                 searchAdapter.setSearchBean(searchBean);
-                listview.setAdapter(searchAdapter);
+                if (searchBean.getData().getData().size() < 1) {
+                    Toast.makeText(SearchActivity.this, "没有您想搜索的项", Toast.LENGTH_SHORT).show();
+                } else {
+                    listview.setAdapter(searchAdapter);
+                }
+
             }
         }, new Response.ErrorListener() {
             @Override
@@ -84,4 +91,9 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
 
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        overridePendingTransition(R.anim.anim_in, R.anim.anim_out);
+    }
 }
