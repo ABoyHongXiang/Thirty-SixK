@@ -90,14 +90,14 @@ public class NewsAllFragment extends BaseFragment {
             }
         });
         //适配器初始化
-        newsAdapter = new NewsAdapter(getContext());
+        newsAdapter = new NewsAdapter(getActivity());
         //ListView绑定适配器
         listView.setAdapter(newsAdapter);
         //点击事件
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(getContext(), DetailsActivity.class);
+                Intent intent = new Intent(getActivity(), DetailsActivity.class);
                 String feedId = newsBean.getData().getData().get(position - 2).getFeedId();
                 String imgurl = newsBean.getData().getData().get(position).getFeatureImg();
                 favouriteTexts = new ArrayList<>();
@@ -115,11 +115,11 @@ public class NewsAllFragment extends BaseFragment {
 
             }
         });
-        View view = LayoutInflater.from(getContext()).inflate(R.layout.news_header, null);
+        View view = LayoutInflater.from(getActivity()).inflate(R.layout.news_header, null);
         listView.addHeaderView(view);
         //轮播图
 
-        inflater = LayoutInflater.from(getContext());
+        inflater = LayoutInflater.from(getActivity());
         mviewPager = (ViewPager) view.findViewById(R.id.viewpager);
         dotLayout = (LinearLayout) view.findViewById(R.id.title_point);
         dotLayout.removeAllViews();
@@ -148,7 +148,7 @@ public class NewsAllFragment extends BaseFragment {
         dotViewList = new ArrayList<ImageView>();
         list = new ArrayList<ImageView>();
         for (int i = 0; i < imageviewBean.getData().getPics().size(); i++) {
-            ImageView dotView = new ImageView(getContext());
+            ImageView dotView = new ImageView(getActivity());
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(new Toolbar.LayoutParams(Toolbar.LayoutParams.WRAP_CONTENT, android.view.ViewGroup.LayoutParams.WRAP_CONTENT));
             params.leftMargin = 15;//设置小圆点的外边距
             params.rightMargin = 15;
@@ -169,7 +169,7 @@ public class NewsAllFragment extends BaseFragment {
 
         for (int i = 0; i < imageviewBean.getData().getPics().size(); i++) {
             ImageView img = (ImageView) inflater.inflate(R.layout.imageview, null);
-            Picasso.with(getContext()).load(imageviewBean.getData().getPics().get(i).getImgUrl()).into(img);
+            Picasso.with(getActivity()).load(imageviewBean.getData().getPics().get(i).getImgUrl()).into(img);
             list.add(img);
         }
         NewsHeadAdapter headAdapter = new NewsHeadAdapter((ArrayList) list);

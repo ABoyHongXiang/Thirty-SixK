@@ -49,7 +49,7 @@ public class LogFragment extends BaseFragment {
                     userNum= String.valueOf(phoneNum.getText());
                     showDialog();
                 } else {
-                    Toast.makeText(getContext(), "请输入正确的手机号", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "请输入正确的手机号", Toast.LENGTH_SHORT).show();
                 }
 
             }
@@ -57,10 +57,10 @@ public class LogFragment extends BaseFragment {
 
     }
     private void showDialog() {
-        AlertDialog.Builder bulider = new AlertDialog.Builder(getContext());
+        AlertDialog.Builder bulider = new AlertDialog.Builder(getActivity());
         bulider.setTitle("注册");
         bulider.setMessage("请填写您的注册信息");
-        View view = LayoutInflater.from(getContext()).inflate(R.layout.logdialog, null);
+        View view = LayoutInflater.from(getActivity()).inflate(R.layout.logdialog, null);
         diglogUser = (EditText) view.findViewById(R.id.log_dialog_user);
         diglogKey = (EditText) view.findViewById(R.id.log_dialog_keys);
         android.util.Log.d("LogFragment", "phoneNum.getText():" + phoneNum.getText());
@@ -77,23 +77,23 @@ public class LogFragment extends BaseFragment {
                     if (logList.size() < 1) {
                         Log a = new Log(user, key);
                         logdao.insert(a);
-                        Toast.makeText(getContext(), "注册成功", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), "注册成功", Toast.LENGTH_SHORT).show();
 
                     } else {
                         for (Log log1 : logList) {
                             if (log1.getUser().equals(user)) {
-                                Toast.makeText(getContext(), "该用户已经注册", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getActivity(), "该用户已经注册", Toast.LENGTH_SHORT).show();
                             } else {
                                 Log a = new Log(user, key);
                                 logdao.insert(a);
-                                Toast.makeText(getContext(), "注册成功", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getActivity(), "注册成功", Toast.LENGTH_SHORT).show();
                             }
                         }
                     }
 
 
                 } else {
-                    Toast.makeText(getContext(), "请输入正确的手机号和密码", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "请输入正确的手机号和密码", Toast.LENGTH_SHORT).show();
                 }
 
 

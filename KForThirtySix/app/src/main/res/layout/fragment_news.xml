@@ -25,7 +25,7 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:layout_centerVertical="true"
-            android:text="新闻"
+            android:text="@string/news"
             android:textSize="20dp"
             android:textStyle="bold" />
 

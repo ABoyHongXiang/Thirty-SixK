@@ -34,7 +34,7 @@ public class InvestmentFragment extends BaseFragment {
 
     @Override
     public void initData() {
-        investmentAdapter = new InvestmentAdapter(getContext());
+        investmentAdapter = new InvestmentAdapter(getActivity());
         VolleySingle.addRequest(START_URL + type + END_URL + 20, InvestmentBean.class, new Response.Listener<InvestmentBean>() {
             @Override
             public void onResponse(InvestmentBean response) {

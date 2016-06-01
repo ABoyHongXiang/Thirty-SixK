@@ -48,14 +48,14 @@ public class MineFragment extends BaseFragment {
         favoriteLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(), FavouriteActivity.class);
+                Intent intent = new Intent(getActivity(), FavouriteActivity.class);
                 startActivity(intent);
             }
         });
         myBroad = new MyBroad();
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction("LogBroad");
-        getContext().registerReceiver(myBroad, intentFilter);
+        getActivity().registerReceiver(myBroad, intentFilter);
 
     }
 
@@ -76,6 +76,6 @@ public class MineFragment extends BaseFragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        getContext().unregisterReceiver(myBroad);
+        getActivity().unregisterReceiver(myBroad);
     }
 }

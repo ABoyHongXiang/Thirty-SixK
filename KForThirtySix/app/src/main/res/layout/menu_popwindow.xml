@@ -21,7 +21,7 @@
             android:layout_marginRight="10dp"
             android:layout_marginTop="7dp"
             android:background="@drawable/pop_button"
-            android:text="早期项目" />
+            android:text="@string/recent_program" />
 
         <Button
             android:id="@+id/pop_tv"
@@ -32,7 +32,7 @@
             android:layout_marginRight="10dp"
             android:layout_marginTop="7dp"
             android:background="@drawable/pop_button"
-            android:text="氪TV" />
+            android:text="@string/tv" />
 
         <Button
             android:id="@+id/pop_all"
@@ -42,7 +42,7 @@
             android:layout_marginRight="10dp"
             android:layout_marginTop="7dp"
             android:background="@drawable/pop_button"
-            android:text="全部" />
+            android:text="@string/all" />
 
         <Button
             android:id="@+id/pop_exit"
@@ -54,7 +54,7 @@
             android:layout_marginTop="7dp"
             android:layout_marginBottom="7dp"
             android:background="@drawable/pop_exit_button"
-            android:text="取消" />
+            android:text="@string/exit" />
     </LinearLayout>
 
 

@@ -1,14 +1,5 @@
 <resources>
-    <string name="app_name">36氪</string>
-    <string name="search">搜索</string>
-    <string name="theDeepOfTheervices">深度服务项目</string>
-    <string name="startup">创业公司</string>
-    <string name="found_title_one">最具爆发力</string>
-    <string name="found_title_two">最新涌现</string>
-    <string name="found_title_three">项目动态</string>
-    <string name="found_title_four">投资人再看</string>
-    <string name="found_sv_one">36氪指数</string>
-    <string name="hello">Hello World, JPush!</string>
+
 
     <string name="tag_hint">Tag为大小写字母，数字，下划线,中文，多个用以逗号分隔</string>
     <string name="alias_hint">Alias为大小写字母，数字，下划线</string>
@@ -20,11 +11,28 @@
     <string name="error_network">网络连接异常,初始化失败 请检查网络！</string>
     <string name="logining">程序在后台执行, 请查看日志！</string>
     <string name="setting_su">设置成功</string>
+    <string name="hello">Hello World, JPush!</string>
+
+
+    <string name="app_name">36氪</string>
+    <string name="search">搜索</string>
+
+
+    //发现界面
+    <string name="theDeepOfTheervices">深度服务项目</string>
+    <string name="startup">创业公司</string>
+    <string name="found_title_one">最具爆发力</string>
+    <string name="found_title_two">最新涌现</string>
+    <string name="found_title_three">项目动态</string>
+    <string name="found_title_four">投资人再看</string>
+    <string name="found_sv_one">36氪指数</string>
     <string name="found_sv_two">近期活动</string>
     <string name="found_sv_three">36氪研究所</string>
     <string name="found_sv_four">寻找投资人</string>
     <string name="found_sv_five">申请融资</string>
     <string name="found_sv_six">氪空气报名</string>
+
+    //我的
     <string name="mine_sv_one">账号信息</string>
     <string name="mine_sv_two">跟投人认证</string>
     <string name="mine_sv_two_a">新人专享500元</string>
@@ -36,6 +44,8 @@
     <string name="mine_sv_seven_a">400-955-3636</string>
     <string name="mine_first">我的消息</string>
     <string name="mine_seconnd">我的订单</string>
+
+
     <string name="aty_search_search">取消</string>
     <string name="aty_search_content">搜索新闻/用户/公司</string>
     <string name="fragment_invest_title">股权投资</string>
@@ -46,5 +56,34 @@
     <string name="play_type">近期活动</string>
     <string name="play_time">近期活动</string>
     <string name="log">注册</string>
+    <string name="login">登录</string>
+
+
+
+    <string name="textallnum">文章总数</string>
+    <string name="textreadnum">总计浏览量</string>
+    <string name="newnews">最新新闻</string>
+    <string name="wechatfriend">微信好友</string>
+    <string name="wechatcricle">微信朋友圈</string>
+    <string name="weibofriend">微博好友</string>
+    <string name="qqfriend">qq好友</string>
+    <string name="alipayfriend">支付宝</string>
+    <string name="livingfriend">生活圈</string>
+    <string name="link">复制连接</string>
+    <string name="exit">取消</string>
+
+
+    <string name="all">全部</string>
+    <string name="Demoday">Demo Day</string>
+    <string name="keroom">氪空间</string>
+    <string name="investment">股权投资</string>
+    <string name="service">企业服务</string>
+    <string name="quickly">急速融资</string>
+    <string name="thisweekend">本周末</string>
+    <string name="thisweek">本周</string>
+    <string name="nextweek">下周</string>
+    <string name="tv">氪TV</string>
+    <string name="recent_program">早期项目</string>
+    <string name="news">新闻</string>
 
 </resources>

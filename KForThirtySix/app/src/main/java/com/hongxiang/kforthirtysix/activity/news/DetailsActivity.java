@@ -41,6 +41,10 @@ import com.hongxiang.kforthirtysix.adapter.news.WriterPopAdapter;
 import com.hongxiang.kforthirtysix.bean.DetailsBean;
 
 import com.hongxiang.kforthirtysix.bean.WriterBean;
+import com.umeng.socialize.ShareAction;
+import com.umeng.socialize.UMShareAPI;
+import com.umeng.socialize.UMShareListener;
+import com.umeng.socialize.bean.SHARE_MEDIA;
 
 
 import java.net.URL;
@@ -127,16 +131,6 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
         findViewById(R.id.bt_message).setOnClickListener(this);
         findViewById(R.id.bt_share).setOnClickListener(this);
         //标题的作者图片点击事件,跳转作者的详细信息界面.并发送一个作者id
-        writeImg.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int writerId = detailsBean.getData().getPostId();
-                Intent intent = new Intent(DetailsActivity.this, WriterActivity.class);
-                intent.putExtra("writerid", writerId);
-                startActivity(intent);
-
-            }
-        });
 
 
         //接收上一个界面传来的id ,拼接网址
@@ -308,17 +302,19 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
 
                 break;
             case R.id.bt_message:
-
+                new ShareAction(this).setDisplayList().open();
                 break;
             case R.id.bt_share:
+                new ShareAction(this).setDisplayList(SHARE_MEDIA.SINA,SHARE_MEDIA.QQ,SHARE_MEDIA.QZONE,SHARE_MEDIA.WEIXIN,SHARE_MEDIA.WEIXIN_CIRCLE,SHARE_MEDIA.WEIXIN_FAVORITE)
+                        .setCallback(umShareListener)
+                        .open();
                 //实例化SelectPicPopupWindow
-                sharepop = new MySharePopWindow(this, itemsOnClick);
+               /* sharepop = new MySharePopWindow(this, itemsOnClick);
                 //显示窗口
                 sharepop.showAtLocation(v, Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
                 linearLayout.setVisibility(View.INVISIBLE);
                 linearLayout.startAnimation(animation_out);
-
-                break;
+*/break;
 
         }
     }
@@ -361,5 +357,40 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
     protected void onDestroy() {
         super.onDestroy();
         overridePendingTransition(R.anim.anim_in, R.anim.anim_out);
+
+
+
     }
+
+
+
+    private UMShareListener umShareListener = new UMShareListener() {
+        @Override
+        public void onResult(SHARE_MEDIA platform) {
+            Log.d("plat","platform"+platform);
+            if(platform.name().equals("WEIXIN_FAVORITE")){
+                Toast.makeText(DetailsActivity.this,platform + " 收藏成功啦",Toast.LENGTH_SHORT).show();
+            }else{
+                Toast.makeText(DetailsActivity.this, platform + " 分享成功啦", Toast.LENGTH_SHORT).show();
+            }
+        }
+
+        @Override
+        public void onError(SHARE_MEDIA platform, Throwable t) {
+            Toast.makeText(DetailsActivity.this,platform + " 分享失败啦", Toast.LENGTH_SHORT).show();
+        }
+
+        @Override
+        public void onCancel(SHARE_MEDIA platform) {
+            Toast.makeText(DetailsActivity.this,platform + " 分享取消了", Toast.LENGTH_SHORT).show();
+        }
+    };
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        /** attention to this below ,must add this**/
+        UMShareAPI.get(this).onActivityResult(requestCode, resultCode, data);
+        Log.d("result","onActivityResult");
+    }
+
 }

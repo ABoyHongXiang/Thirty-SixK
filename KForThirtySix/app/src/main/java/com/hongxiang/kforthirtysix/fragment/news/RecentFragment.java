@@ -48,7 +48,7 @@ public class RecentFragment extends BaseFragment {
     @Override
     public void initData() {
         listView = pullToRefreshListView.getRefreshableView();
-        recentAdapter = new RecentAdapter(getContext());
+        recentAdapter = new RecentAdapter(getActivity());
         startVolley(20);
         pullToRefreshListView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
             @Override

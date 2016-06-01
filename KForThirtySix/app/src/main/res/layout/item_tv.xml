@@ -26,9 +26,9 @@
 
 
 
-    <VideoView
+    <com.hongxiang.kforthirtysix.util.CustomVideoView
         android:id="@+id/videoview"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="190dp"
         android:visibility="invisible" />
 </FrameLayout>

@@ -31,7 +31,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="文章总数"
+                android:text="@string/textallnum"
                 android:textColor="#ffffff"
                 android:textSize="10sp" />
 
@@ -59,7 +59,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="总计浏览量"
+                android:text="@string/textreadnum"
                 android:textColor="#ffffff"
                 android:textSize="10sp" />
         </LinearLayout>
@@ -82,8 +82,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:text="最新文章"
-            android:textColor="#ffffff" />
+            android:text="@string/newnews"
+            android:textColor="@color/white" />
 
         <TextView
             android:layout_width="0dp"
@@ -91,7 +91,7 @@
             android:layout_gravity="center"
             android:layout_margin="10dp"
             android:layout_weight="1"
-            android:background="#ffffff" />
+            android:background="@color/white" />
 
     </LinearLayout>
 

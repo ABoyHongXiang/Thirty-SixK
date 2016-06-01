@@ -15,7 +15,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="全部" />
+            android:text="@string/all" />
 
         <ImageView
             android:layout_width="wrap_content"
@@ -33,7 +33,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Demo Day" />
+            android:text="@string/Demoday" />
 
         <ImageView
             android:layout_width="wrap_content"
@@ -51,7 +51,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="氪空间" />
+            android:text="@string/keroom" />
 
         <ImageView
             android:layout_width="wrap_content"
@@ -69,7 +69,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="股权投资" />
+            android:text="@string/investment" />
 
         <ImageView
             android:layout_width="wrap_content"
@@ -87,7 +87,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="企业服务" />
+            android:text="@string/service" />
 
         <ImageView
             android:layout_width="wrap_content"
@@ -105,7 +105,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="急速融资" />
+            android:text="@string/quickly" />
 
         <ImageView
             android:layout_width="wrap_content"

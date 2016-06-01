@@ -16,7 +16,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="全部" />
+            android:text="@string/all" />
 
         <ImageView
             android:layout_width="wrap_content"
@@ -35,7 +35,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="本周末" />
+            android:text="@string/thisweekend" />
 
         <ImageView
             android:layout_width="wrap_content"
@@ -54,7 +54,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="本周" />
+            android:text="@string/thisweek" />
 
         <ImageView
             android:layout_width="wrap_content"
@@ -73,7 +73,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="下周" />
+            android:text="@string/nextweek" />
 
         <ImageView
             android:layout_width="wrap_content"

@@ -16,6 +16,7 @@ import android.widget.VideoView;
 
 import com.hongxiang.kforthirtysix.R;
 import com.hongxiang.kforthirtysix.bean.TvBean;
+import com.hongxiang.kforthirtysix.util.CustomVideoView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -83,10 +84,12 @@ public class TvAdapter extends BaseAdapter {
         holder.videoView.setVideoURI(Uri.parse(videoUri));
         holder.videoView.setMediaController(new android.widget.MediaController(context));
         final ViewHolder finalHolder = holder;
+
         //图片的点击事件
         holder.imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 isplay.set(position, true);
                 Log.d("TvAdapter", position + "现在是t");
                 if (isplay.get(position) == true) {
@@ -116,13 +119,13 @@ public class TvAdapter extends BaseAdapter {
 
 
     class ViewHolder {
-        private VideoView videoView;
+        private CustomVideoView videoView;
         private ImageView imageView;
         private TextView title;
 
 
         public ViewHolder(View itemView) {
-            videoView = (VideoView) itemView.findViewById(R.id.videoview);
+            videoView = (CustomVideoView) itemView.findViewById(R.id.videoview);
             imageView = (ImageView) itemView.findViewById(R.id.tv_imageview);
             title = (TextView) itemView.findViewById(R.id.tv_title);
 

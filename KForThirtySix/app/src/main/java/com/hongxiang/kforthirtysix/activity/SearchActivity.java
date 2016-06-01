@@ -1,19 +1,23 @@
 package com.hongxiang.kforthirtysix.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.hongxiang.kforthirtysix.R;
+import com.hongxiang.kforthirtysix.activity.news.DetailsActivity;
 import com.hongxiang.kforthirtysix.adapter.SearchAdapter;
 import com.hongxiang.kforthirtysix.bean.SearchBean;
 import com.hongxiang.kforthirtysix.util.VolleySingle;
@@ -25,7 +29,7 @@ import com.hongxiang.kforthirtysix.util.VolleySingle;
 public class SearchActivity extends AppCompatActivity implements View.OnClickListener {
     private static final String START_URL = "https://rong.36kr.com/api/mobi/news/search?keyword=";
     private static final String END_URL = "&page=1&pagesize=20";
-    private EditText exitText;
+    private EditText editText;
     private TextView exitTextview;
     private ImageView searchBtn, searchIcon;
     private SearchAdapter searchAdapter;
@@ -38,9 +42,8 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();
-
         setContentView(R.layout.activity_search);
-        exitText = (EditText) findViewById(R.id.search_sth);
+        editText = (EditText) findViewById(R.id.search_sth);
         exitTextview = (TextView) findViewById(R.id.search_exit);
         searchBtn = (ImageView) findViewById(R.id.search_imgbtn);
         searchIcon = (ImageView) findViewById(R.id.search_icon);
@@ -48,6 +51,15 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
         searchAdapter = new SearchAdapter(this);
         searchBtn.setOnClickListener(this);
         exitTextview.setOnClickListener(this);
+        listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent  = new Intent(SearchActivity.this, DetailsActivity.class);
+                String feedId = searchBean.getData().getData().get(position).getFeedId();
+                intent.putExtra("url",feedId);
+                startActivity(intent);
+            }
+        });
 
 
     }
@@ -62,7 +74,8 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
             //搜索按钮
             case R.id.search_imgbtn:
                 searchIcon.setVisibility(View.INVISIBLE);
-                String msth = String.valueOf(exitText.getText());
+                String msth = String.valueOf(editText.getText());
+
                 startVolley(msth);
                 break;
         }

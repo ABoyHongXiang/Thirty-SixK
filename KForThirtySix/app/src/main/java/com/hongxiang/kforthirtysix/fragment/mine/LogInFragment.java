@@ -61,31 +61,31 @@ public class LogInFragment extends BaseFragment implements View.OnClickListener 
                 user = String.valueOf(userNumEt.getText());
                 key = String.valueOf(keyEt.getText());
                 if (logList.size() < 1) {
-                    Toast.makeText(getContext(), "没注册", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "没注册", Toast.LENGTH_SHORT).show();
                 } else {
                     if (user.length() == 11 && key.length() > 6 && key.length() < 15) {
                         for (Log log : logList) {
                             if (log.getUser().equals(user)) {
                                 i = 2;
                                 if (log.getKey().equals(key)) {
-                                    Toast.makeText(getContext(), "登录成功", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getActivity(), "登录成功", Toast.LENGTH_SHORT).show();
                                     Intent broadIntent = new Intent("LogBroad");
                                     broadIntent.putExtra("user",user);
                                     android.util.Log.d("LogInFragment", user);
-                                    getContext().sendBroadcast(broadIntent);
+                                    getActivity().sendBroadcast(broadIntent);
 
 
 
                                 } else {
-                                    Toast.makeText(getContext(), "密码错误请重新输入", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getActivity(), "密码错误请重新输入", Toast.LENGTH_SHORT).show();
                                 }
                             }
                         }
                         if (i == 1) {
-                            Toast.makeText(getContext(), "该用户没有注册", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity(), "该用户没有注册", Toast.LENGTH_SHORT).show();
                         }
                     } else {
-                        Toast.makeText(getContext(), "请输入正确的手机号和密码", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), "请输入正确的手机号和密码", Toast.LENGTH_SHORT).show();
                     }
 
 

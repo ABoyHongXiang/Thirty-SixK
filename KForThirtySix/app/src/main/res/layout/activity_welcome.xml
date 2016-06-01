@@ -9,8 +9,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_margin="15dp"
-        android:text="跳转"
-        android:textSize="10dp"
+        android:textSize="15dp"
         />
 
     <ImageView
