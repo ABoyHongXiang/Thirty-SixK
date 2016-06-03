@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.view.animation.TranslateAnimation;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
@@ -24,7 +25,7 @@ import it.sephiroth.android.library.picasso.Picasso;
 public class FoundPeopleAdapter extends BaseAdapter {
     private FoundPeopleBean foundPeopleBean;
     private Context context;
-
+    private Animation left_in,right_in;
     public FoundPeopleAdapter(Context context) {
         this.context = context;
     }
@@ -94,13 +95,15 @@ public class FoundPeopleAdapter extends BaseAdapter {
             Picasso.with(context).load(imageUrl).transform(new PicassoCirclTransform()).resize(200, 200).centerCrop().error(R.mipmap.ic_launcher).into(holder.imageView);
         }
         holder.name.setText(name);
-        TranslateAnimation translateAnimation = new TranslateAnimation(
-                Animation.RELATIVE_TO_SELF, -1,
-                Animation.RELATIVE_TO_PARENT, 0f,
-                Animation.RELATIVE_TO_SELF, -1,
-                Animation.RELATIVE_TO_PARENT, 0f);
-        translateAnimation.setDuration(1000);
-        convertView.setAnimation(translateAnimation);
+        left_in= AnimationUtils.loadAnimation(context, R.anim.item_left);
+        right_in=AnimationUtils.loadAnimation(context, R.anim.item_right);
+        if (position % 2 == 0) {
+
+            convertView.setAnimation(left_in);
+        } else {
+
+            convertView.setAnimation(right_in);
+        }
         return convertView;
     }
 

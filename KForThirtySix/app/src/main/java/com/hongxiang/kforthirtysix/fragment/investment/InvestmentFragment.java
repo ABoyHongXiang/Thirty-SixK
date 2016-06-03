@@ -21,10 +21,13 @@ public class InvestmentFragment extends BaseFragment {
     private static final String START_URL = " https://rong.36kr.com/api/mobi/cf/actions/list?page=1&type=";
     private static final String END_URL = "&pageSize=";
     private InvestmentBean investmentBean;
-    private String type;
+    public String type;
 
     public InvestmentFragment(String type) {
         this.type = type;
+    }
+
+    public InvestmentFragment() {
     }
 
     @Override
@@ -34,7 +37,7 @@ public class InvestmentFragment extends BaseFragment {
 
     @Override
     public void initData() {
-        investmentAdapter = new InvestmentAdapter(getActivity());
+        investmentAdapter = new InvestmentAdapter(getContext());
         VolleySingle.addRequest(START_URL + type + END_URL + 20, InvestmentBean.class, new Response.Listener<InvestmentBean>() {
             @Override
             public void onResponse(InvestmentBean response) {

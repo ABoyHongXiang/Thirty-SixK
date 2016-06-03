@@ -38,7 +38,7 @@ public class TvFragment extends BaseFragment {
 
     @Override
     public void initData() {
-        tvAdapter = new TvAdapter(getActivity());
+        tvAdapter = new TvAdapter(getContext());
         startVolley(20);
         listView = pullToRefreshListView.getRefreshableView();
         pullToRefreshListView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {

@@ -12,8 +12,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.hongxiang.kforthirtysix.R;
+import com.hongxiang.kforthirtysix.activity.BaseActivity;
 import com.hongxiang.kforthirtysix.adapter.mine.LogAdapter;
 import com.hongxiang.kforthirtysix.fragment.mine.LogFragment;
 import com.hongxiang.kforthirtysix.fragment.mine.LogInFragment;
@@ -25,51 +27,53 @@ import java.util.List;
  * Created by dllo on 16/5/16.
  * 登录界面
  */
-public class LogActivity extends AppCompatActivity {
+public class LogActivity extends BaseActivity {
     private List<Fragment> fragmentList;
     private LogAdapter logAdapter;
     private ViewPager viewpager;
     private TabLayout tabLayout;
     private ImageView finish;
-    private String broad;
-    private MyBroad myBroad;
+
+   // private MyBroad myBroad;
+    private MyQQBroad myqqBroad;
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        //隐藏标题栏
+    protected int getLayout() {
+        return R.layout.activity_log;
+    }
+
+    @Override
+    protected void initView() {
         getSupportActionBar().hide();
-        overridePendingTransition(R.anim.anim_in, R.anim.anim_out);
-        setContentView(R.layout.activity_log);
-        //viewpager
         viewpager = (ViewPager) findViewById(R.id.log_viewpager);
-        //tablayout
         tabLayout = (TabLayout) findViewById(R.id.log_tablayout);
-        //返回键
         finish = (ImageView) findViewById(R.id.log_back);
-        //添加Fragment的方法 两个Fragment 一个是登录一个是注册
         addFrament();
+    }
+
+    @Override
+    protected void initData() {
         logAdapter = new LogAdapter(getSupportFragmentManager());
         logAdapter.setFragmentList(fragmentList);
         viewpager.setAdapter(logAdapter);
         tabLayout.setupWithViewPager(viewpager);
-        //返回键的监听
         finish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
             }
         });
-        //tablayout 设置自定义View
         tabLayout.getTabAt(0).setCustomView(R.layout.tablayout_viewone);
         tabLayout.getTabAt(1).setCustomView(R.layout.tablayout_viewtwo);
-        myBroad = new MyBroad();
-        IntentFilter intentFilter = new IntentFilter();
-        intentFilter.addAction("LogBroad");
-        registerReceiver(myBroad, intentFilter);
-
-
+        myqqBroad = new MyQQBroad();
+        //intentFilter.addAction("LogBroad");
+        //registerReceiver(myBroad, intentFilter)
+        //myBroad = new MyBroad();
+        //注册广播
+       IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction("QQLogBroad");
+        registerReceiver(myqqBroad, intentFilter);
     }
 
 
@@ -80,18 +84,38 @@ public class LogActivity extends AppCompatActivity {
         fragmentList.add(new LogFragment());
     }
 
-    class MyBroad extends BroadcastReceiver {
+//    class MyBroad extends BroadcastReceiver {
+//        @Override
+//        public void onReceive(Context context, Intent intent) {
+//            finish();
+//
+//        }
+//    }
+
+    /**
+     * 接到广播后执行的方法
+     * 一秒后让Activity finish
+     */
+    class MyQQBroad extends BroadcastReceiver {
         @Override
         public void onReceive(Context context, Intent intent) {
+            try {
+                Toast.makeText(context, "请稍后", Toast.LENGTH_SHORT).show();
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            Toast.makeText(context, "登陆成功", Toast.LENGTH_SHORT).show();
             finish();
-            overridePendingTransition(R.anim.anim_in, R.anim.anim_out);
+
         }
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        unregisterReceiver(myBroad);
-        overridePendingTransition(R.anim.anim_in, R.anim.anim_out);
+      //  unregisterReceiver(myBroad);
+        unregisterReceiver(myqqBroad);
+
     }
 }

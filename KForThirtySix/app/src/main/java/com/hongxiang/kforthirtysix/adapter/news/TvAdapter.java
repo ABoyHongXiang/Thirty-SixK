@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.view.animation.TranslateAnimation;
 import android.widget.BaseAdapter;
 import android.widget.FrameLayout;
@@ -31,7 +32,7 @@ public class TvAdapter extends BaseAdapter {
     private TvBean tvBean;
     private Context context;
     private List<Boolean> isplay;
-
+    private Animation left_in,right_in;
     public TvAdapter(Context context) {
         this.context = context;
     }
@@ -106,13 +107,15 @@ public class TvAdapter extends BaseAdapter {
             }
         });
         //动画效果
-        TranslateAnimation translateAnimation = new TranslateAnimation(
-                Animation.RELATIVE_TO_SELF, -1,
-                Animation.RELATIVE_TO_PARENT, 0f,
-                Animation.RELATIVE_TO_SELF, -1,
-                Animation.RELATIVE_TO_PARENT, 0f);
-        translateAnimation.setDuration(1000);
-        convertView.setAnimation(translateAnimation);
+        left_in= AnimationUtils.loadAnimation(context, R.anim.item_left);
+        right_in=AnimationUtils.loadAnimation(context, R.anim.item_right);
+        if (position % 2 == 0) {
+
+            convertView.setAnimation(left_in);
+        } else {
+
+            convertView.setAnimation(right_in);
+        }
 
         return convertView;
     }

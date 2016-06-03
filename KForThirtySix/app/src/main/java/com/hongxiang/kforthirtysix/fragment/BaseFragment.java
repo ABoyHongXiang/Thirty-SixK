@@ -1,6 +1,5 @@
 package com.hongxiang.kforthirtysix.fragment;
 
-import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -16,13 +15,11 @@ public abstract class BaseFragment extends Fragment {
     private Context mContext;
 
     //context 从依附的Activity 上获取 context 对象
-
     @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        mContext = activity;
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        context = mContext;
     }
-
     //  初始化视图
 
     @Nullable

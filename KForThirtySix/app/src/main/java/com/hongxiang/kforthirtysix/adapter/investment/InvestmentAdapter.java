@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.view.animation.TranslateAnimation;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
@@ -22,7 +23,7 @@ import it.sephiroth.android.library.picasso.Picasso;
 public class InvestmentAdapter extends BaseAdapter {
     private Context context;
     private InvestmentBean investmentBean;
-
+    private Animation left_in,right_in;
     public InvestmentAdapter(Context context) {
         this.context = context;
     }
@@ -67,13 +68,15 @@ public class InvestmentAdapter extends BaseAdapter {
         Picasso.with(context).load(company_logo_url).transform(new PicassoCirclTransform()).resize(100, 100).centerCrop().into(holder.company_logo);
         Picasso.with(context).load(file_list_img_url).into(holder.file_list_img);
 
-        TranslateAnimation translateAnimation = new TranslateAnimation(
-                Animation.RELATIVE_TO_SELF, -1,
-                Animation.RELATIVE_TO_PARENT, 0f,
-                Animation.RELATIVE_TO_SELF, -1,
-                Animation.RELATIVE_TO_PARENT, 0f);
-        translateAnimation.setDuration(1000);
-        convertView.setAnimation(translateAnimation);
+        left_in= AnimationUtils.loadAnimation(context, R.anim.item_left);
+        right_in=AnimationUtils.loadAnimation(context, R.anim.item_right);
+        if (position % 2 == 0) {
+
+            convertView.setAnimation(left_in);
+        } else {
+
+            convertView.setAnimation(right_in);
+        }
         return convertView;
     }
 

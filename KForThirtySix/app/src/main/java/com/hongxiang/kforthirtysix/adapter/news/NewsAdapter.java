@@ -6,7 +6,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
+import android.view.animation.AnimationSet;
+import android.view.animation.AnimationUtils;
 import android.view.animation.TranslateAnimation;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
@@ -25,6 +28,7 @@ public class NewsAdapter extends BaseAdapter {
     private Context context;
     private String title, writer, type, imageurl;
     private NewsBean newsBean;
+    private Animation left_in,right_in;
 
 
     public void setNewsBean(NewsBean newsBean) {
@@ -90,14 +94,15 @@ public class NewsAdapter extends BaseAdapter {
         holder.writer.setText(writer);
         holder.type.setText(type);
         //通过毕加索 传入自己的图片组件,传入图片的网址 即可完成替换
-        TranslateAnimation translateAnimation = new TranslateAnimation(
-                Animation.RELATIVE_TO_SELF, -1,
-                Animation.RELATIVE_TO_PARENT, 0f,
-                Animation.RELATIVE_TO_SELF, -1,
-                Animation.RELATIVE_TO_PARENT, 0f);
-        translateAnimation.setDuration(1000);
-        convertView.setAnimation(translateAnimation);
-        holder.imageView.startAnimation(translateAnimation);
+        left_in= AnimationUtils.loadAnimation(context, R.anim.item_left);
+        right_in=AnimationUtils.loadAnimation(context, R.anim.item_right);
+        if (position % 2 == 0) {
+
+            convertView.setAnimation(left_in);
+        } else {
+
+            convertView.setAnimation(right_in);
+        }
         Picasso.with(context).load(imageurl).into(holder.imageView);
         return convertView;
 

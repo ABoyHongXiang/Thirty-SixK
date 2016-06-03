@@ -12,6 +12,7 @@ import android.widget.ListView;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.hongxiang.kforthirtysix.R;
+import com.hongxiang.kforthirtysix.activity.BaseActivity;
 import com.hongxiang.kforthirtysix.activity.news.DetailsActivity;
 import com.hongxiang.kforthirtysix.adapter.mine.FavouriteAdapter;
 import com.hongxiang.kforthirtysix.favouritesql.FavouriteText;
@@ -23,23 +24,31 @@ import java.util.List;
 
 /**
  * Created by dllo on 16/5/25.
+ * <p>
+ * 收藏Activity
  */
-public class FavouriteActivity extends AppCompatActivity {
+public class FavouriteActivity extends BaseActivity {
     private ListView listView;
     private FavouriteAdapter favouriteAdapter;
     private List<FavouriteText> favouriteTexts;
     private FavouriteTextDao favouriteTextDao;
     private ImageView back;
-    private PullToRefreshListView pullToRefreshListView;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    protected int getLayout() {
+        return R.layout.activity_favourite;
+    }
+
+    @Override
+    protected void initView() {
         getSupportActionBar().hide();
-        overridePendingTransition(R.anim.anim_in, R.anim.anim_out);
-        setContentView(R.layout.activity_favourite);
         listView = (ListView) findViewById(R.id.favourite_listview);
         back = (ImageView) findViewById(R.id.favourite_back);
+
+    }
+
+    @Override
+    protected void initData() {
         favouriteAdapter = new FavouriteAdapter(this);
         favouriteTexts = new ArrayList<>();
         favouriteTextDao = FavouritedaoSingle.getInstance().getFavouriteTextDao();
@@ -53,6 +62,9 @@ public class FavouriteActivity extends AppCompatActivity {
 
             }
         });
+        //item的点击事件,跳转至详情
+        //url==>>用来详情界面的解析
+        //favourite==>>详情界面接受判断让收藏图标实心
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -63,15 +75,13 @@ public class FavouriteActivity extends AppCompatActivity {
             }
         });
 
-
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-
-    }
-
+    /**
+     * 在Restart里重新将数据库里的东西取出来传给适配器
+     * 实现了===>>在收藏界面进去的详情中,取消收藏,返回后收藏列表中该文章消失.
+     * 简单来说就是刷新.
+     */
     @Override
     protected void onRestart() {
         super.onRestart();

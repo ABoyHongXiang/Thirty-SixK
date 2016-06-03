@@ -35,11 +35,7 @@ public class MainActivity extends FragmentActivity {
     private TabLayout tabLayout;
     private MainAdapter mainAdapter;
     private List<Fragment> fragmentList;
-
-
     public static boolean isForeground = false;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,7 +49,6 @@ public class MainActivity extends FragmentActivity {
         viewPager.setAdapter(mainAdapter);
         tabLayout.setupWithViewPager(viewPager);
         initTab();//设置tab的方法
-
         registerMessageReceiver();  // used for receive msg
 
     }

@@ -58,7 +58,7 @@ public class NewsFragment extends BaseFragment implements View.OnClickListener {
             case R.id.fragmentnews_menu:
                 //动画
                 //实例化SelectPicPopupWindow
-                popupWindow = new MyMenuPopWindow(getActivity(), itemsOnClick);
+                popupWindow = new MyMenuPopWindow(getContext(), itemsOnClick);
                 //显示窗口
                 popupWindow.showAtLocation(v, Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0); //设置layout在PopupWindow中显示的位置
                 break;

@@ -1,0 +1,14 @@
+[
+    {
+        "merged": "/Users/dllo/Desktop/HongxiangBoy/Thirty-SixK/KForThirtySix/sample/build/intermediates/res/merged/debug/raw/reset_sound.mp3",
+        "source": "/Users/dllo/Desktop/HongxiangBoy/Thirty-SixK/KForThirtySix/sample/src/main/res/raw/reset_sound.mp3"
+    },
+    {
+        "merged": "/Users/dllo/Desktop/HongxiangBoy/Thirty-SixK/KForThirtySix/sample/build/intermediates/res/merged/debug/raw/refreshing_sound.mp3",
+        "source": "/Users/dllo/Desktop/HongxiangBoy/Thirty-SixK/KForThirtySix/sample/src/main/res/raw/refreshing_sound.mp3"
+    },
+    {
+        "merged": "/Users/dllo/Desktop/HongxiangBoy/Thirty-SixK/KForThirtySix/sample/build/intermediates/res/merged/debug/raw/pull_event.mp3",
+        "source": "/Users/dllo/Desktop/HongxiangBoy/Thirty-SixK/KForThirtySix/sample/src/main/res/raw/pull_event.mp3"
+    }
+]

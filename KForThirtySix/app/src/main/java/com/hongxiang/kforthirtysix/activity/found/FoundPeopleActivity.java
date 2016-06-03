@@ -12,6 +12,7 @@ import com.android.volley.VolleyError;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.hongxiang.kforthirtysix.R;
+import com.hongxiang.kforthirtysix.activity.BaseActivity;
 import com.hongxiang.kforthirtysix.util.VolleySingle;
 import com.hongxiang.kforthirtysix.adapter.found.FoundPeopleAdapter;
 import com.hongxiang.kforthirtysix.bean.FoundPeopleBean;
@@ -20,7 +21,7 @@ import com.hongxiang.kforthirtysix.bean.FoundPeopleBean;
  * Created by dllo on 16/5/16.
  * 寻找投资人
  */
-public class FoundPeopleActivity extends AppCompatActivity {
+public class FoundPeopleActivity extends BaseActivity {
     private final static String url = "https://rong.36kr.com/api/mobi/investor?page=1&pageSize=";
     private FoundPeopleBean foundPeopleBean;
     private FoundPeopleAdapter foundPeopleAdapter;
@@ -29,13 +30,22 @@ public class FoundPeopleActivity extends AppCompatActivity {
     private PullToRefreshListView pullToRefreshListView;
     private int n = 2;//刷新数据时候用的变量
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    protected int getLayout() {
+        return R.layout.activity_foundpeople;
+    }
+
+    @Override
+    protected void initView() {
         getSupportActionBar().hide();
-        setContentView(R.layout.activity_foundpeople);
+        startVolley(20);
         pullToRefreshListView = (PullToRefreshListView) findViewById(R.id.foundpeople_listview);
         pullToRefreshListView.setMode(PullToRefreshBase.Mode.BOTH);
-        startVolley(20);
+        listView = pullToRefreshListView.getRefreshableView();
+        back = (ImageView) findViewById(R.id.foundpeople_back);
+    }
+
+    @Override
+    protected void initData() {
         pullToRefreshListView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
             @Override
             public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
@@ -51,8 +61,6 @@ public class FoundPeopleActivity extends AppCompatActivity {
                 n = n + 1;
             }
         });
-        listView = pullToRefreshListView.getRefreshableView();
-        back = (ImageView) findViewById(R.id.foundpeople_back);
         foundPeopleAdapter = new FoundPeopleAdapter(this);
         listView.setAdapter(foundPeopleAdapter);
         back.setOnClickListener(new View.OnClickListener() {
@@ -83,8 +91,4 @@ public class FoundPeopleActivity extends AppCompatActivity {
         });
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-    }
 }

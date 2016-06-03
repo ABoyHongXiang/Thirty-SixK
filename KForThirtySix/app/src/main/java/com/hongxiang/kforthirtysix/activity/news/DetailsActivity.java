@@ -29,6 +29,7 @@ import android.widget.Toast;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.hongxiang.kforthirtysix.activity.BaseActivity;
 import com.hongxiang.kforthirtysix.favouritesql.FavouriteText;
 import com.hongxiang.kforthirtysix.favouritesql.FavouriteTextDao;
 import com.hongxiang.kforthirtysix.util.FavouritedaoSingle;
@@ -39,24 +40,18 @@ import com.hongxiang.kforthirtysix.R;
 import com.hongxiang.kforthirtysix.util.VolleySingle;
 import com.hongxiang.kforthirtysix.adapter.news.WriterPopAdapter;
 import com.hongxiang.kforthirtysix.bean.DetailsBean;
-
 import com.hongxiang.kforthirtysix.bean.WriterBean;
-import com.umeng.socialize.ShareAction;
-import com.umeng.socialize.UMShareAPI;
-import com.umeng.socialize.UMShareListener;
-import com.umeng.socialize.bean.SHARE_MEDIA;
-
-
 import java.net.URL;
 
-
+import cn.sharesdk.framework.ShareSDK;
+import cn.sharesdk.onekeyshare.OnekeyShare;
 import it.sephiroth.android.library.picasso.Picasso;
 
 /**
  * Created by dllo on 16/5/14.
  * 新闻的详情界面
  */
-public class DetailsActivity extends AppCompatActivity implements View.OnClickListener {
+public class DetailsActivity extends BaseActivity implements View.OnClickListener {
     private final static String START_URL = "https://rong.36kr.com/api/mobi/news/";
     private final static String END_URL = "/author-region";
     private DetailsBean detailsBean;//详情的数据类
@@ -77,20 +72,41 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
     private FavouriteTextDao favouriteTextDao;
     private int id;
 
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        getSupportActionBar().hide();//使app标题栏消失
-        overridePendingTransition(R.anim.anim_in, R.anim.anim_out);
-        setContentView(R.layout.avtivity_details);
-        //数据库的对象
-        favouriteTextDao = FavouritedaoSingle.getInstance().getFavouriteTextDao();
+    protected int getLayout() {
+
+        return R.layout.avtivity_details;
+
+    }
+
+    @Override
+    protected void initView() {
+        getSupportActionBar().hide();
         scrollView = (MyScrollView) findViewById(R.id.details_scrollview);
         linearLayout = (LinearLayout) findViewById(R.id.details_bottom_title);
         animation_in = AnimationUtils.loadAnimation(this, R.anim.anim_in);
         animation_out = AnimationUtils.loadAnimation(this, R.anim.anim_out);
+        writeline = (TextView) findViewById(R.id.details_line);
+        relativeLayout = (RelativeLayout) findViewById(R.id.writer_layout);
+        writer = (TextView) findViewById(R.id.details_writer_name);
+        writeImg = (ImageView) findViewById(R.id.writer_img);
+        menudown = (ImageView) findViewById(R.id.writer_menu_img);
+        heart = (ImageView) findViewById(R.id.bt_heart);
+        title = (TextView) findViewById(R.id.details_bigtitle);
+        secondTitle = (TextView) findViewById(R.id.details_smalltitle);
+        mcontext = (TextView) findViewById(R.id.details_context);
+        heart.setOnClickListener(this);
+        findViewById(R.id.bt_back).setOnClickListener(this);
+        findViewById(R.id.bt_message).setOnClickListener(this);
+        findViewById(R.id.bt_share).setOnClickListener(this);
+
+    }
+
+    @Override
+    protected void initData() {
+        favouriteTextDao = FavouritedaoSingle.getInstance().getFavouriteTextDao();
         ColorDrawable dw = new ColorDrawable(0x70000000);
-        //设置SelectPicPopupWindow弹出窗体的背景
         linearLayout.setBackgroundDrawable(dw);
         scrollView.setScrollListener(new MyScrollView.ScrollListener() {
             @Override
@@ -108,9 +124,6 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
 
         //内容的组件
         writerPopAdapter = new WriterPopAdapter(this);
-        title = (TextView) findViewById(R.id.details_bigtitle);
-        secondTitle = (TextView) findViewById(R.id.details_smalltitle);
-        mcontext = (TextView) findViewById(R.id.details_context);
         mcontext.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -118,21 +131,6 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
                 return false;
             }
         });
-        writeline = (TextView) findViewById(R.id.details_line);
-        //顶部标题的组件
-        relativeLayout = (RelativeLayout) findViewById(R.id.writer_layout);
-        writer = (TextView) findViewById(R.id.details_writer_name);
-        writeImg = (ImageView) findViewById(R.id.writer_img);
-        menudown = (ImageView) findViewById(R.id.writer_menu_img);
-        //底部标题栏组件
-        heart = (ImageView) findViewById(R.id.bt_heart);
-        heart.setOnClickListener(this);
-        findViewById(R.id.bt_back).setOnClickListener(this);
-        findViewById(R.id.bt_message).setOnClickListener(this);
-        findViewById(R.id.bt_share).setOnClickListener(this);
-        //标题的作者图片点击事件,跳转作者的详细信息界面.并发送一个作者id
-
-
         //接收上一个界面传来的id ,拼接网址
         Intent intent = getIntent();
         url = intent.getStringExtra("url");
@@ -143,10 +141,6 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
             heartBoolean = false;
         }
 
-        startVolleyDetails(url);//解析详情的方法
-        struct();//加载html的方法
-        startVolleyWriter();//解析作者的方法
-        showPop();//显示popupWindow
         //标题的点击事件,弹出一个popupwindow
         relativeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -160,6 +154,11 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
                 }
             }
         });
+        startVolleyDetails(url);//解析详情的方法
+        struct();//加载html的方法
+        startVolleyWriter();//解析作者的方法
+        showPop();//显示popupWindow
+
     }
 
     //解析作者===解析的是popupwindow的内容,下面解析的是界面的
@@ -185,7 +184,7 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
     //popupwindow具体的设置
     private void showPop() {
         View view = LayoutInflater.from(this).inflate(R.layout.popwindow_writer, null);
-        pop = new PopupWindow(view,ViewGroup.LayoutParams.FILL_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        pop = new PopupWindow(view, ViewGroup.LayoutParams.FILL_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         //绑定布局
         pop.setWidth(WindowManager.LayoutParams.MATCH_PARENT);
         ColorDrawable dw = new ColorDrawable(0x70000000);
@@ -302,19 +301,17 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
 
                 break;
             case R.id.bt_message:
-                new ShareAction(this).setDisplayList().open();
+
                 break;
             case R.id.bt_share:
-                new ShareAction(this).setDisplayList(SHARE_MEDIA.SINA,SHARE_MEDIA.QQ,SHARE_MEDIA.QZONE,SHARE_MEDIA.WEIXIN,SHARE_MEDIA.WEIXIN_CIRCLE,SHARE_MEDIA.WEIXIN_FAVORITE)
-                        .setCallback(umShareListener)
-                        .open();
-                //实例化SelectPicPopupWindow
-               /* sharepop = new MySharePopWindow(this, itemsOnClick);
-                //显示窗口
-                sharepop.showAtLocation(v, Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
-                linearLayout.setVisibility(View.INVISIBLE);
-                linearLayout.startAnimation(animation_out);
-*/break;
+                showShare();
+//                //实例化SelectPicPopupWindow
+//                sharepop = new MySharePopWindow(this, itemsOnClick);
+//                //显示窗口
+//                sharepop.showAtLocation(v, Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
+//                linearLayout.setVisibility(View.INVISIBLE);
+//                linearLayout.startAnimation(animation_out);
+                break;
 
         }
     }
@@ -359,38 +356,34 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
         overridePendingTransition(R.anim.anim_in, R.anim.anim_out);
 
 
-
     }
 
+    private void showShare() {
+        ShareSDK.initSDK(this);
+        OnekeyShare oks = new OnekeyShare();
+        //关闭sso授权
+        oks.disableSSOWhenAuthorize();
 
+// 分享时Notification的图标和文字  2.5.9以后的版本不调用此方法
+        //oks.setNotification(R.drawable.ic_launcher, getString(R.string.app_name));
+        // title标题，印象笔记、邮箱、信息、微信、人人网和QQ空间使用
+        //oks.setTitle(getString(R.string.share));
+        // titleUrl是标题的网络链接，仅在人人网和QQ空间使用
+        oks.setTitleUrl("http://sharesdk.cn");
+        // text是分享文本，所有平台都需要这个字段
+        oks.setText("我是分享文本");
+        // imagePath是图片的本地路径，Linked-In以外的平台都支持此参数
+        //oks.setImagePath("/sdcard/test.jpg");//确保SDcard下面存在此张图片
+        // url仅在微信（包括好友和朋友圈）中使用
+        oks.setUrl("http://sharesdk.cn");
+        // comment是我对这条分享的评论，仅在人人网和QQ空间使用
+        oks.setComment("我是测试评论文本");
+        // site是分享此内容的网站名称，仅在QQ空间使用
+        oks.setSite(getString(R.string.app_name));
+        // siteUrl是分享此内容的网站地址，仅在QQ空间使用
+        oks.setSiteUrl("http://sharesdk.cn");
 
-    private UMShareListener umShareListener = new UMShareListener() {
-        @Override
-        public void onResult(SHARE_MEDIA platform) {
-            Log.d("plat","platform"+platform);
-            if(platform.name().equals("WEIXIN_FAVORITE")){
-                Toast.makeText(DetailsActivity.this,platform + " 收藏成功啦",Toast.LENGTH_SHORT).show();
-            }else{
-                Toast.makeText(DetailsActivity.this, platform + " 分享成功啦", Toast.LENGTH_SHORT).show();
-            }
-        }
-
-        @Override
-        public void onError(SHARE_MEDIA platform, Throwable t) {
-            Toast.makeText(DetailsActivity.this,platform + " 分享失败啦", Toast.LENGTH_SHORT).show();
-        }
-
-        @Override
-        public void onCancel(SHARE_MEDIA platform) {
-            Toast.makeText(DetailsActivity.this,platform + " 分享取消了", Toast.LENGTH_SHORT).show();
-        }
-    };
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        /** attention to this below ,must add this**/
-        UMShareAPI.get(this).onActivityResult(requestCode, resultCode, data);
-        Log.d("result","onActivityResult");
+// 启动分享GUI
+        oks.show(this);
     }
-
 }

@@ -15,6 +15,7 @@ import com.android.volley.VolleyError;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.hongxiang.kforthirtysix.R;
+import com.hongxiang.kforthirtysix.activity.BaseActivity;
 import com.hongxiang.kforthirtysix.adapter.found.NearPlayAdapter;
 import com.hongxiang.kforthirtysix.bean.NearPlayBean;
 import com.hongxiang.kforthirtysix.util.VolleySingle;
@@ -23,7 +24,7 @@ import com.hongxiang.kforthirtysix.util.VolleySingle;
  * Created by dllo on 16/5/19.
  * 近期活动
  */
-public class NearPlayActivity extends AppCompatActivity implements View.OnClickListener {
+public class NearPlayActivity extends BaseActivity implements View.OnClickListener {
     private static String URL = "https://rong.36kr.com/api/mobi/activity/list?page=";
     private NearPlayBean nearPlayBean;
     private NearPlayAdapter nearPlayAdapter;
@@ -36,19 +37,37 @@ public class NearPlayActivity extends AppCompatActivity implements View.OnClickL
     private int i = 40, q = 40, w = 40, e = 40, r = 40;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    protected int getLayout() {
+        return R.layout.activity_nearaplay;
+    }
+    @Override
+    protected void initView() {
         getSupportActionBar().hide();
-        setContentView(R.layout.activity_nearaplay);
-        startVolley(1, "");
-        nearPlayAdapter = new NearPlayAdapter(this);
         pullToRefreshListView = (PullToRefreshListView) findViewById(R.id.nearplay_listview);
         pullToRefreshListView.setMode(PullToRefreshBase.Mode.BOTH);
         listView = pullToRefreshListView.getRefreshableView();
+        playTime = findViewById(R.id.play_time);
+        playType = findViewById(R.id.play_type);
+        playTimeTv = (TextView) findViewById(R.id.play_time_tv);
+        playTypeTv = (TextView) findViewById(R.id.play_type_tv);
+        playTime.setOnClickListener(this);
+        playType.setOnClickListener(this);
+       //两个popUpWindow
+        showTypePop();
+        showTimePop();
+
+
+    }
+
+    @Override
+    protected void initData() {
+        nearPlayAdapter = new NearPlayAdapter(this);
+        startVolley(1, "");
         pullToRefreshListView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
             @Override
             public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
                 switch (playTypeTv.getText().toString()) {
+                    //下拉刷新的监听,保证每次刷新的的当前类型的数据,并把上拉加载时候需要的变量变成初始值;
                     case "Demo Day":
                         startVolley(1, "&categoryId=1&pageSize=20");
                         i = 40;
@@ -76,43 +95,40 @@ public class NearPlayActivity extends AppCompatActivity implements View.OnClickL
                 }
 
             }
+
             @Override
             public void onPullUpToRefresh(PullToRefreshBase<ListView> refreshView) {
                 switch (playTypeTv.getText().toString()) {
+                    //上拉加载的监听,保证没次加载的都是当前类型的数据
                     case "Demo Day":
                         String sth1 = "&categoryId=1&pageSize=" + i;
                         pushVolley(1, sth1);
                         i = i + 20;
-                        listView.setAdapter(nearPlayAdapter);
+
                         break;
                     case "氪空间":
-                        String sth4 = "&categoryId=4&pageSize=" + i;
+                        String sth4 = "&categoryId=4&pageSize=" + q;
                         pushVolley(1, sth4);
                         q = q + 20;
-                        listView.setAdapter(nearPlayAdapter);
+
                         break;
                     case "股权投资":
-                        String sth5 = "&categoryId=5&pageSize=" + i;
+                        String sth5 = "&categoryId=5&pageSize=" + w;
                         pushVolley(1, sth5);
                         w = w + 20;
-                        listView.setAdapter(nearPlayAdapter);
-                        ;
                         break;
                     case "企业服务":
-                        String sth6 = "&categoryId=6&pageSize=" + i;
+                        String sth6 = "&categoryId=6&pageSize=" + e;
                         pushVolley(1, sth6);
                         e = e + 20;
-                        listView.setAdapter(nearPlayAdapter);
                         break;
                     case "极速融资":
-                        String sth7 = "&categoryId=7&pageSize=" + i;
+                        String sth7 = "&categoryId=7&pageSize=" + r;
                         pushVolley(1, sth7);
                         r = r + 20;
-                        listView.setAdapter(nearPlayAdapter);
                         break;
                     case "全部":
                         pushVolley(n, "");
-                        listView.setAdapter(nearPlayAdapter);
                         n = n + 1;
                         break;
                 }
@@ -120,25 +136,25 @@ public class NearPlayActivity extends AppCompatActivity implements View.OnClickL
 
             }
         });
-        playTime = findViewById(R.id.play_time);
-        playType = findViewById(R.id.play_type);
-        playTimeTv = (TextView) findViewById(R.id.play_time_tv);
-        playTypeTv = (TextView) findViewById(R.id.play_type_tv);
-        playTime.setOnClickListener(this);
-        playType.setOnClickListener(this);
-        showTypePop();
-        showTimePop();
-
 
     }
 
+    /**
+     * 刷新时候调用的解析方法,解析成功时向已有的数据类里加入新解析的数据类
+     * n是页数,即每次加载需要改变的值,除了全部类型需要改变n,其他类型一直是1, 因为全部类型的url和其他类型不同
+     * a是一小段网址,拼接后会是不同类型的接口
+     * @param n
+     * @param a
+     */
     private void pushVolley(int n, String a) {
         VolleySingle.addRequest(URL + n + a, NearPlayBean.class, new Response.Listener<NearPlayBean>() {
             @Override
             public void onResponse(NearPlayBean response) {
+
+                //解析成功时向已有的数据类里加入新解析的数据类
                 nearPlayBean.getData().getData().addAll(response.getData().getData());
                 nearPlayAdapter.setNearPlayBean(nearPlayBean);
-                pullToRefreshListView.onRefreshComplete();
+
             }
         }, new Response.ErrorListener() {
             @Override
@@ -146,16 +162,22 @@ public class NearPlayActivity extends AppCompatActivity implements View.OnClickL
 
             }
         });
+        listView.setAdapter(nearPlayAdapter);
+        pullToRefreshListView.onRefreshComplete();
     }
 
+    /**
+     * 与上方法一样,区别在于这只是解析数据的方法 只是没有加载新数据并添加到新的数据类;
+     * @param page
+     * @param sth
+     */
     private void startVolley(int page, String sth) {
         VolleySingle.addRequest(URL + page + sth, NearPlayBean.class, new Response.Listener<NearPlayBean>() {
             @Override
             public void onResponse(NearPlayBean response) {
                 nearPlayBean = response;
                 nearPlayAdapter.setNearPlayBean(nearPlayBean);
-                listView.setAdapter(nearPlayAdapter);
-                pullToRefreshListView.onRefreshComplete();
+
             }
         }, new Response.ErrorListener() {
             @Override
@@ -163,6 +185,8 @@ public class NearPlayActivity extends AppCompatActivity implements View.OnClickL
 
             }
         });
+        listView.setAdapter(nearPlayAdapter);
+        pullToRefreshListView.onRefreshComplete();
 
     }
 
@@ -171,18 +195,20 @@ public class NearPlayActivity extends AppCompatActivity implements View.OnClickL
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.play_time:
+                //其他window显示==>>其他消失==>>显示自己
+                //其他window不显示==>>显示自己
+                //自己window显示==>>消失
+                //自己window不显示==>>显示自己
                 if (typePop != null && typePop.isShowing()) {
                     typePop.dismiss();
                     if (timePop != null && timePop.isShowing()) {
                         timePop.dismiss();
-
                     } else {
                         timePop.showAsDropDown(playTime);
                     }
                 } else {
                     if (timePop != null && timePop.isShowing()) {
                         timePop.dismiss();
-
                     } else {
                         timePop.showAsDropDown(playTime);
                     }
@@ -190,23 +216,23 @@ public class NearPlayActivity extends AppCompatActivity implements View.OnClickL
 
                 break;
             case R.id.play_type:
+                //同上
                 if (timePop != null && timePop.isShowing()) {
                     timePop.dismiss();
                     if (typePop != null && typePop.isShowing()) {
                         typePop.dismiss();
-
                     } else {
                         typePop.showAsDropDown(playType);
                     }
                 } else {
                     if (typePop != null && typePop.isShowing()) {
                         typePop.dismiss();
-
                     } else {
                         typePop.showAsDropDown(playType);
                     }
                 }
                 break;
+            //点击,换文字,换接口,关window
             case R.id.recent_pop_all:
                 timePop.dismiss();
                 playTimeTv.setText("全部");
@@ -282,9 +308,5 @@ public class NearPlayActivity extends AppCompatActivity implements View.OnClickL
 
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
 
-    }
 }

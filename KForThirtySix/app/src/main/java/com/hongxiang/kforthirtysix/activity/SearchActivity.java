@@ -26,7 +26,7 @@ import com.hongxiang.kforthirtysix.util.VolleySingle;
  * Created by dllo on 16/5/10.
  * 搜索界面  点击放大镜就会跳转的页面
  */
-public class SearchActivity extends AppCompatActivity implements View.OnClickListener {
+public class SearchActivity extends BaseActivity implements View.OnClickListener {
     private static final String START_URL = "https://rong.36kr.com/api/mobi/news/search?keyword=";
     private static final String END_URL = "&page=1&pagesize=20";
     private EditText editText;
@@ -38,11 +38,13 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
 
 
     @Override
+    protected int getLayout() {
+        return R.layout.activity_search;
+    }
 
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    @Override
+    protected void initView() {
         getSupportActionBar().hide();
-        setContentView(R.layout.activity_search);
         editText = (EditText) findViewById(R.id.search_sth);
         exitTextview = (TextView) findViewById(R.id.search_exit);
         searchBtn = (ImageView) findViewById(R.id.search_imgbtn);
@@ -51,16 +53,21 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
         searchAdapter = new SearchAdapter(this);
         searchBtn.setOnClickListener(this);
         exitTextview.setOnClickListener(this);
+
+    }
+
+    @Override
+    protected void initData() {
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
+            //传一个url给详情界面解析
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent  = new Intent(SearchActivity.this, DetailsActivity.class);
+                Intent intent = new Intent(SearchActivity.this, DetailsActivity.class);
                 String feedId = searchBean.getData().getData().get(position).getFeedId();
-                intent.putExtra("url",feedId);
+                intent.putExtra("url", feedId);
                 startActivity(intent);
             }
         });
-
 
     }
 
@@ -75,12 +82,17 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
             case R.id.search_imgbtn:
                 searchIcon.setVisibility(View.INVISIBLE);
                 String msth = String.valueOf(editText.getText());
-
                 startVolley(msth);
                 break;
         }
     }
 
+    /**
+     * 解析的方法
+     * sth是搜索的内容,
+     * 进行拼接
+     * @param sth
+     */
     private void startVolley(String sth) {
         Log.d("SearchActivity", START_URL + sth + END_URL);
         VolleySingle.addRequest(START_URL + sth + END_URL, SearchBean.class, new Response.Listener<SearchBean>() {
@@ -104,9 +116,5 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
 
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        overridePendingTransition(R.anim.anim_in, R.anim.anim_out);
-    }
+
 }

@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,16 +13,13 @@ import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.Toolbar;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.hongxiang.kforthirtysix.R;
-import com.hongxiang.kforthirtysix.activity.MainActivity;
 import com.hongxiang.kforthirtysix.bean.ImageviewBean;
-import com.hongxiang.kforthirtysix.bean.InvestmentBean;
 import com.hongxiang.kforthirtysix.fragment.BaseFragment;
 import com.hongxiang.kforthirtysix.favouritesql.FavouriteText;
 import com.hongxiang.kforthirtysix.favouritesql.FavouriteTextDao;
@@ -67,11 +66,13 @@ public class NewsAllFragment extends BaseFragment {
     private int currentItem = 0;//当前页面
     boolean isAutoPlay = true;//是否自动轮播
     private ScheduledExecutorService scheduledExecutorService;
+
     @Override
     public void initView(View view) {
         pullToRefreshListView = (PullToRefreshListView) view.findViewById(R.id.news_listview);
         pullToRefreshListView.setMode(PullToRefreshBase.Mode.BOTH);
     }
+
     @Override
     public void initData() {
         startVolley(20);
@@ -90,19 +91,22 @@ public class NewsAllFragment extends BaseFragment {
             }
         });
         //适配器初始化
-        newsAdapter = new NewsAdapter(getActivity());
+        newsAdapter = new NewsAdapter(getContext());
         //ListView绑定适配器
         listView.setAdapter(newsAdapter);
         //点击事件
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(getActivity(), DetailsActivity.class);
+                Intent intent = new Intent(getContext(), DetailsActivity.class);
                 String feedId = newsBean.getData().getData().get(position - 2).getFeedId();
                 String imgurl = newsBean.getData().getData().get(position).getFeatureImg();
                 favouriteTexts = new ArrayList<>();
                 favouriteTextDao = FavouritedaoSingle.getInstance().getFavouriteTextDao();
                 favouriteTexts = favouriteTextDao.queryBuilder().list();
+                //数据库里所有的feedid,与Item的feedid比较,
+                //有相同的证明收藏过,跳转传ture,反之
+                //在详情页ture 显示实心,反之
                 for (FavouriteText favouriteText : favouriteTexts) {
                     if (favouriteText.getUrlid().equals(feedId)) {
                         intent.putExtra("favourite", true);
@@ -110,16 +114,16 @@ public class NewsAllFragment extends BaseFragment {
                 }
                 intent.putExtra("imageurl", imgurl);
                 intent.putExtra("url", feedId);
-                Log.d("NewsAllFragment", imgurl);
+
                 startActivity(intent);
 
             }
         });
-        View view = LayoutInflater.from(getActivity()).inflate(R.layout.news_header, null);
+        View view = LayoutInflater.from(getContext()).inflate(R.layout.news_header, null);
         listView.addHeaderView(view);
         //轮播图
 
-        inflater = LayoutInflater.from(getActivity());
+        inflater = LayoutInflater.from(getContext());
         mviewPager = (ViewPager) view.findViewById(R.id.viewpager);
         dotLayout = (LinearLayout) view.findViewById(R.id.title_point);
         dotLayout.removeAllViews();
@@ -133,7 +137,6 @@ public class NewsAllFragment extends BaseFragment {
             public void onResponse(ImageviewBean response) {
                 imageviewBean = response;
                 titleInitView();
-
             }
         }, new Response.ErrorListener() {
             @Override
@@ -148,8 +151,9 @@ public class NewsAllFragment extends BaseFragment {
         dotViewList = new ArrayList<ImageView>();
         list = new ArrayList<ImageView>();
         for (int i = 0; i < imageviewBean.getData().getPics().size(); i++) {
-            ImageView dotView = new ImageView(getActivity());
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(new Toolbar.LayoutParams(Toolbar.LayoutParams.WRAP_CONTENT, android.view.ViewGroup.LayoutParams.WRAP_CONTENT));
+            ImageView dotView = new ImageView(getContext());
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(new ActionBar.LayoutParams(ActionBar.LayoutParams.WRAP_CONTENT, android.view.ViewGroup.LayoutParams.WRAP_CONTENT));
+
             params.leftMargin = 15;//设置小圆点的外边距
             params.rightMargin = 15;
             params.height = 15;//设置小圆点的大小
@@ -169,7 +173,7 @@ public class NewsAllFragment extends BaseFragment {
 
         for (int i = 0; i < imageviewBean.getData().getPics().size(); i++) {
             ImageView img = (ImageView) inflater.inflate(R.layout.imageview, null);
-            Picasso.with(getActivity()).load(imageviewBean.getData().getPics().get(i).getImgUrl()).into(img);
+            Picasso.with(getContext()).load(imageviewBean.getData().getPics().get(i).getImgUrl()).into(img);
             list.add(img);
         }
         NewsHeadAdapter headAdapter = new NewsHeadAdapter((ArrayList) list);
@@ -204,10 +208,6 @@ public class NewsAllFragment extends BaseFragment {
 
         return R.layout.fragment_allnews;
     }
-
-
-
-
 
 
     @Override

@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.view.animation.TranslateAnimation;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
@@ -21,7 +22,7 @@ import it.sephiroth.android.library.picasso.Picasso;
 public class SearchAdapter extends BaseAdapter {
     private Context context;
     private SearchBean searchBean;
-
+    private Animation left_in,right_in;
     public SearchAdapter(Context context) {
         this.context = context;
     }
@@ -61,13 +62,15 @@ public class SearchAdapter extends BaseAdapter {
         holder.title.setText(searchBean.getData().getData().get(position).getTitle());
         holder.writer.setText(searchBean.getData().getData().get(position).getUser().getName());
         holder.type.setText(searchBean.getData().getData().get(position).getColumnName());
-        TranslateAnimation translateAnimation = new TranslateAnimation(
-                Animation.RELATIVE_TO_SELF, -1,
-                Animation.RELATIVE_TO_PARENT, 0f,
-                Animation.RELATIVE_TO_SELF, -1,
-                Animation.RELATIVE_TO_PARENT, 0f);
-        translateAnimation.setDuration(1000);
-        convertView.setAnimation(translateAnimation);
+        left_in= AnimationUtils.loadAnimation(context, R.anim.item_left);
+        right_in=AnimationUtils.loadAnimation(context, R.anim.item_right);
+        if (position % 2 == 0) {
+
+            convertView.setAnimation(left_in);
+        } else {
+
+            convertView.setAnimation(right_in);
+        }
         return convertView;
     }
 
